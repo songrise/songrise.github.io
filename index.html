@@ -97,6 +97,56 @@
                   </script>
                 </td>
 
+                <td style="padding:20px;width:75%;vertical-align:middle">
+
+                  <papertitle> AvatarCraft: Transforming Text into Neural Human Avatar with Parameterized Shape and Pose
+                    Control
+                  </papertitle>
+                  <br>
+                  <strong>Ruixiang Jiang</strong>,
+                  <a href="https://cassiepython.github.io">Can Wang
+                  </a>,
+
+                  <a href="">Jingbo ZHANG
+                  </a>,
+                  <a href="https://mlchai.com/">Menglei Chai</a>,
+
+                  <a href="https://mingminghe.com/">Mingming He</a>,
+                  <a href="https://www.dongdongchen.bid/">Dongdong Chen</a>,
+                  <a href="https://liaojing.github.io/html/">Jing Liao</a>
+                  <br>
+                  <em>under review</em>, 2023
+                  <br>
+
+                  <a href="https://avatar-craft.github.io">project page</a> /
+                  <a href="https://github.com/songrise/avatarcraft">code</a> /
+                  <a href="">arXiv</a>
+
+                  <p></p>
+                  <p>We leverage pretrained text-to-image diffusion model to generate neural avatar from text, which
+                    could be further reshaped and animated using SMPL parameters.</p>
+                </td>
+              </tr>
+
+              <tr onmouseout="toonnerf_stop()" onmouseover="nerfsuper_start()">
+                <td style="padding:20px;width:25%;vertical-align:middle">
+                  <div class="one">
+                    <div class="two" id='toonnerf'>
+                      <img src="images/toonnerf_start.jpg" width="160">
+                    </div>
+                    <img src='images/toonnerf_stop.png' width="160">
+                  </div>
+                  <script type="text/javascript">
+                    function nerfsuper_start() {
+                      document.getElementById('toonnerf').style.opacity = "1";
+                    }
+
+                    function toonnerf_stop() {
+                      document.getElementById('toonnerf').style.opacity = "0";
+                    }
+                    toonnerf_stop()
+                  </script>
+                </td>
 
 
                 <td style="padding:20px;width:75%;vertical-align:middle">
