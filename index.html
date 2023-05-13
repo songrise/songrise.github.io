@@ -84,6 +84,55 @@
             <tbody>
 
 
+              <!-- CLIP-Count -->
+              <tr onmouseout="clipcount_stop()" onmouseover="clipcount_start()">
+                <td style="padding:20px;width:25%;vertical-align:middle">
+                  <div class="one">
+                    <div class="two" id='clipcount_img'>
+                      <img src="images/clipcount_start.png" width="160">
+                      Your browser does not support the video tag.
+                      </video>
+                    </div>
+                    <img src='images/clipcount_stop.png' width="160">
+                  </div>
+                  <script type="text/javascript">
+                    function clipcount_start() {
+                      document.getElementById('clipcount_img').style.opacity = "1";
+                    }
+
+                    function clipcount_stop() {
+                      document.getElementById('clipcount_img').style.opacity = "0";
+                    }
+                    clipcount_stop()
+                  </script>
+                </td>
+
+                <td style="padding:20px;width:75%;vertical-align:middle">
+
+                  <papertitle> CLIP-Count: Towards Text-Guided Zero-Shot Object Counting
+                  </papertitle>
+                  <br>
+                  <strong>Ruixiang Jiang</strong>,
+                  <a href="https://lingboliu.com/">Lingbo Liu
+                  </a>,
+
+                  <a href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Changwen Chen
+                  </a>
+                  <br>
+                  <em>under review</em>, 2023
+                  <br>
+
+                  <a href="https://github.com/songrise/CLIP-Count">code</a> /
+                  <a href="">arXiv</a>
+
+                  <p></p>
+                  <p>We leverage pretrained text-to-image diffusion model to generate neural avatars from text, which
+                    could be further reshaped and animated using SMPL parameters.</p>
+                </td>
+              </tr>
+              <!-- end of CLIP-Count -->
+
+              <!-- avatar-craft -->
               <tr onmouseout="avatarcraft_stop()" onmouseover="avatarcraft_start()">
                 <td style="padding:20px;width:25%;vertical-align:middle">
                   <div class="one">
@@ -105,7 +154,6 @@
                   </script>
                 </td>
 
-                <!-- avatar-craft -->
                 <td style="padding:20px;width:75%;vertical-align:middle">
 
                   <papertitle> AvatarCraft: Transforming Text into Neural Human Avatars with Parameterized Shape and
@@ -130,7 +178,7 @@
 
                   <a href="https://avatar-craft.github.io">project page</a> /
                   <a href="https://github.com/songrise/avatarcraft">code</a> /
-                  <a href="">arXiv</a>
+                  <a href="https://arxiv.org/abs/2303.17606">arXiv</a>
 
                   <p></p>
                   <p>We leverage pretrained text-to-image diffusion model to generate neural avatars from text, which
@@ -139,6 +187,8 @@
               </tr>
 
               <!-- end of avatar-craft -->
+
+              <!-- nerf-art -->
               <tr onmouseout="nerfart_stop()" onmouseover="nerfart_start()">
                 <td style="padding:20px;width:25%;vertical-align:middle">
                   <div class="one">
@@ -186,7 +236,7 @@
                   <p>We stylize neural implicit scene to a specific art style by a text prompt.</p>
                 </td>
               </tr>
-
+              <!-- end of nerf-art -->
 
 
             </tbody>
@@ -354,11 +404,11 @@
               <tr>
                 <td style="padding:0px">
                   <br>
-                  <!-- <script type="text/javascript" id="clstr_globe"
-                    src="//clustrmaps.com/globe.js?d=Yf79oEmkQ3lIH59R5HWgUXTH84csWuG8SGfUH5FNDBw"></script> -->
+                  <script type="text/javascript" id="clstr_globe"
+                    src="//clustrmaps.com/globe.js?d=Yf79oEmkQ3lIH59R5HWgUXTH84csWuG8SGfUH5FNDBw"></script>
                   <hr>
                   <p style="text-align:center;font-size:small;">
-                    Last updated: Mar 27, 2023,
+                    Last updated: May 13, 2023,
                     <br>
                   <p style="text-align:center;font-size:small;">
                     Theme from <a href=http://jonbarron.info> jonbarron </a>'s website,
