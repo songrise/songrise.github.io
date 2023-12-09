@@ -34,17 +34,20 @@
                       Polytechnic University (PolyU)</a>, mentored by <a
                       href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Prof. Chen Changwen</a>.
                     I have just
-                    obtained my undergraduate degree at PolyU with
+                    obtained my Bsc. degree at PolyU with
                     first class honor, and my major is
                     Computer Science </a>.
                   </p>
 
                   <p>
-                    My research interests primarily lie in <b>Computer Graphics, Computer Vision,</b> and the
+                    My research interests primarily lie in Computer Graphics, Computer Vision and the
                     intersection
-                    between them, with a focus on neural rendering and
-                    3D content generation. Besides, I am also interested in <b>Multimodal AI</b>, especially in
-                    vision-language models (VLMs).
+                    between them, with a focus on <b>neural rendering and
+                      3D content generation</b>. Besides, I am also interested in <b>Multimodal AI</b>,
+                    especially
+                    in
+                    vision-language models (VLMs). My goal is to build AI systems that understand and manipulate 3D
+                    content with natural language.
                   </p>
 
                   <p>
@@ -95,6 +98,52 @@
             style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
 
+              <!-- conditional prompt -->
+              <tr onmouseout="condprompt_stop()" onmouseover="condprompt_start()">
+                <td style="padding:20px;width:25%;vertical-align:middle">
+                  <div class="one">
+                    <div class="two" id='condprompt_img'>
+                      <img src="images/condprompt_on.png" width="160">
+                      </video>
+                    </div>
+                    <img src='images/condprompt_off.png' width="160">
+                  </div>
+                  <script type="text/javascript">
+                    function condprompt_start() {
+                      document.getElementById('condprompt_img').style.opacity = "1";
+                    }
+
+                    function condprompt_stop() {
+                      document.getElementById('condprompt_img').style.opacity = "0";
+                    }
+                    clipcount_stop()
+                  </script>
+                </td>
+
+                <td style="padding:20px;width:75%;vertical-align:middle">
+
+                  <papertitle> Conditional Prompt Tuning for Multimodal Fusion
+                  </papertitle>
+                  <br>
+                  <strong>Ruixiang Jiang</strong>,
+                  <a href="https://lingboliu.com/">Lingbo Liu
+                  </a>,
+
+                  <a href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Changwen Chen
+                  </a>
+                  <br>
+                  <em>under review</em>, 2023
+                  <br>
+
+                  <a href="https://github.com/songrise/ConditionalPrompt">code</a> /
+                  <a href="https://arxiv.org/abs/2312.03734">arXiv</a>
+                  <!-- <a href="https://dl.acm.org/doi/10.1145/3581783.3611789">paper</a> -->
+                  <p></p>
+                  <p>We design a prompt-tuning method for multimodal fusion, achieving similar result with fine-tuning
+                    while only require 0.7% trainable parameters.</p>
+                </td>
+              </tr>
+              <!-- end of conditional prompt -->
 
               <!-- CLIP-Count -->
               <tr onmouseout="clipcount_stop()" onmouseover="clipcount_start()">
@@ -433,7 +482,7 @@
                     src="//clustrmaps.com/globe.js?d=Yf79oEmkQ3lIH59R5HWgUXTH84csWuG8SGfUH5FNDBw"></script> -->
                   <hr>
                   <p style="text-align:center;font-size:small;">
-                    Last updated: Oct 30, 2023,
+                    Last updated: Dec 9, 2023,
                     <br>
                   <p style="text-align:center;font-size:small;">
                     Theme from <a href=http://jonbarron.info> jonbarron </a>'s website,
