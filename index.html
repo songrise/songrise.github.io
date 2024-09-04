@@ -12,6 +12,34 @@
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+
+  <style>
+    .gradient-text {
+      font-size: 48px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #e54d27, #f37312, #3160b6, #08837b, #8b0f7c);
+      background-size: 500% 800%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      animation: gradientAnimation 20s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
 </head>
 
 
@@ -27,31 +55,28 @@
             <tbody>
               <tr style="padding:0px">
                 <td style="padding:2.5%;width:63%;vertical-align:middle">
-                  <p style="text-align:center">
+                  <p style="text-align:center" class="gradient-text">
                     <name>Jiang Ruixiang (江睿翔)</name>
                   </p>
-                  <p> Currently I am a research assistant at <a href="https://www.polyu.edu.hk/comp/"> The Hong Kong
-                      Polytechnic University (PolyU)</a>, mentored by <a
-                      href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Prof. Chen Changwen</a>.
-                    I have just
-                    obtained my Bsc. degree at PolyU with
-                    first class honor, and my major is
-                    Computer Science </a>.
+                  <p> I am currently a phd candidate <a href="https://chenlab.comp.polyu.edu.hk/"> ChenLAB </a>,<a
+                      href="https://www.polyu.edu.hk/comp/"> The Hong Kong
+                      Polytechnic University (PolyU)</a>. My supervisor by <a
+                      href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Prof. Chen Changwen</a>, and I am
+                    honored to receive the <a
+                      href="https://www.polyu.edu.hk/gs/prospective-students/fellowship-scholarship-schemes/"> PPPFS
+                      scholarship </a>.
+                    I obtained my Bsc. degree at PolyU with
+                    first class honor, and my major is Computer Science </a>.
                   </p>
 
                   <p>
-                    My research interests primarily lie in Computer Graphics, Computer Vision and the
-                    intersection
-                    between them, with a focus on <b>neural rendering and
-                      3D content generation</b>. Besides, I am also interested in <b>Multimodal AI</b>,
-                    especially
-                    in
-                    vision-language models (VLMs). My goal is to build AI systems that understand and manipulate 3D
-                    content with natural language.
+                    My research interests primarily lie in the intersection between Computer Graphics and Computer
+                    Vision. Currently I focusing on building AI systems that aligns with human aesthetic preference for
+                    image generation.
                   </p>
 
                   <p>
-                    Currently, I am looking for phd positions starting from 2023/2024.
+
                   <p style="font-family:Verdana, Geneva, Tahoma, sans-serif;"> Email: rui-x [d] jiang [AT]
                     connect
                     [d] polyu [d]
@@ -98,15 +123,62 @@
             style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
 
+
+              <!-- artist -->
+              <tr onmouseout="artist_stop()" onmouseover="artist_start()">
+                <td style="padding:20px;width:25%;vertical-align:middle">
+                  <div class="one">
+                    <div class="two" id='artist_img'>
+                      <img src="images/artist_start.png" width="160">
+                    </div>
+
+                    <img src='images/artist_stop.png' width="160">
+                  </div>
+                  <script type="text/javascript">
+                    function artist_start() {
+                      document.getElementById('artist_img').style.opacity = "1";
+                    }
+
+                    function artist_stop() {
+                      document.getElementById('artist_img').style.opacity = "0";
+                    }
+                    artist_stop()
+                  </script>
+                </td>
+
+                <td style="padding:20px;width:75%;vertical-align:middle">
+
+                  <papertitle> Artist: Aesthetically Controllable Text-Driven Stylization without Training
+                  </papertitle>
+                  <br>
+                  <strong>Ruixiang Jiang</strong>,
+
+                  <a href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Changwen Chen
+                  </a>
+                  <br>
+                  <em>arxiv</em>, 2024
+                  <br>
+                  <a href="https://diffusionartist.github.io/"> Website</a> /
+                  <a href="https://huggingface.co/spaces/fffiloni/Artist"> Huggingface</a> /
+                  <a href="https://github.com/songrise/ConditionalPrompt">Code</a> /
+                  <a href="https://arxiv.org/abs/2407.15842">arXiv</a>
+                  <!-- <a href="https://dl.acm.org/doi/10.1145/3581783.3611789">paper</a> -->
+                  <p></p>
+                  <p>We propose a training-free method that stylize image with a style prompts, achieving high aesthetic
+                    controllability.</p>
+                </td>
+              </tr>
+              <!-- end of artist -->
+
               <!-- conditional prompt -->
               <tr onmouseout="condprompt_stop()" onmouseover="condprompt_start()">
                 <td style="padding:20px;width:25%;vertical-align:middle">
                   <div class="one">
                     <div class="two" id='condprompt_img'>
-                      <img src="images/condprompt_on.png" width="160">
-                      </video>
+                      <img src="images/mope_start.png" width="160">
+
                     </div>
-                    <img src='images/condprompt_off.png' width="160">
+                    <img src='images/mope_stop.png' width="160">
                   </div>
                   <script type="text/javascript">
                     function condprompt_start() {
@@ -122,7 +194,7 @@
 
                 <td style="padding:20px;width:75%;vertical-align:middle">
 
-                  <papertitle> Conditional Prompt Tuning for Multimodal Fusion
+                  <papertitle> MoPE: Parameter-Efficient and Scalable Multimodal Fusion via Mixture of Prompt Experts
                   </papertitle>
                   <br>
                   <strong>Ruixiang Jiang</strong>,
@@ -132,15 +204,15 @@
                   <a href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Changwen Chen
                   </a>
                   <br>
-                  <em>under review</em>, 2023
+                  <em>arxiv</em>, 2024
                   <br>
 
                   <a href="https://github.com/songrise/ConditionalPrompt">code</a> /
-                  <a href="https://arxiv.org/abs/2312.03734">arXiv</a>
+                  <a href="https://arxiv.org/abs/2403.10568">arXiv</a>
                   <!-- <a href="https://dl.acm.org/doi/10.1145/3581783.3611789">paper</a> -->
                   <p></p>
-                  <p>We design a prompt-tuning method for multimodal fusion, achieving similar result with fine-tuning
-                    while only require 0.7% trainable parameters.</p>
+                  <p>We design a prompt-based multimodal fusion method, achieving similar result with fine-tuning
+                    while only require 0.8% trainable parameters.</p>
                 </td>
               </tr>
               <!-- end of conditional prompt -->
@@ -179,11 +251,11 @@
                   <a href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Changwen Chen
                   </a>
                   <br>
-                  <em>ACM MM 2023</em>, 2023
+                  <em>ACM Multimedia</em>, 2023
                   <br>
 
                   <a href="https://github.com/songrise/CLIP-Count">code</a> /
-                  <a href="https://arxiv.org/abs/2305.07304">arXiv</a>
+                  <a href="https://arxiv.org/abs/2305.07304">arXiv</a> /
                   <a href="https://dl.acm.org/doi/10.1145/3581783.3611789">paper</a>
                   <p></p>
                   <p>We propose the first end-to-end object counting model that count anything using text prompt.</p>
@@ -231,7 +303,7 @@
                   <a href="https://www.dongdongchen.bid/">Dongdong Chen</a>,
                   <a href="https://liaojing.github.io/html/">Jing Liao</a>
                   <br>
-                  <em>Accepted (ICCV 2023)</em>, 2023
+                  <em>IEEE ICCV</em>, 2023
                   <br>
 
                   <a href="https://avatar-craft.github.io">project page</a> /
@@ -482,7 +554,7 @@
                     src="//clustrmaps.com/globe.js?d=Yf79oEmkQ3lIH59R5HWgUXTH84csWuG8SGfUH5FNDBw"></script> -->
                   <hr>
                   <p style="text-align:center;font-size:small;">
-                    Last updated: Dec 9, 2023,
+                    Last updated: Sep 4, 2024,
                     <br>
                   <p style="text-align:center;font-size:small;">
                     Theme from <a href=http://jonbarron.info> jonbarron </a>'s website,
