@@ -1,0 +1,502 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>Jiang Ruixiang - Homepage</title>
+
+  <meta name="author" content="Jiang Ruixiang">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+</head>
+
+
+<body>
+
+  <table
+    style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+    <tbody>
+      <tr style="padding:0px">
+        <td style="padding:0px">
+          <table
+            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <tbody>
+              <tr style="padding:0px">
+                <td style="padding:2.5%;width:63%;vertical-align:middle">
+                  <p style="text-align:center">
+                    <name>Jiang Ruixiang (江睿翔)</name>
+                  </p>
+                  <p> Currently I am a research assistant at <a href="https://www.polyu.edu.hk/comp/"> The Hong Kong
+                      Polytechnic University (PolyU)</a>, mentored by <a
+                      href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Prof. Chen Changwen</a>.
+                    I have just
+                    obtained my Bsc. degree at PolyU with
+                    first class honor, and my major is
+                    Computer Science </a>.
+                  </p>
+
+                  <p>
+                    My research interests primarily lie in Computer Graphics, Computer Vision and the
+                    intersection
+                    between them, with a focus on <b>neural rendering and
+                      3D content generation</b>. Besides, I am also interested in <b>Multimodal AI</b>,
+                    especially
+                    in
+                    vision-language models (VLMs). My goal is to build AI systems that understand and manipulate 3D
+                    content with natural language.
+                  </p>
+
+                  <p>
+                    Currently, I am looking for phd positions starting from 2023/2024.
+                  <p style="font-family:Verdana, Geneva, Tahoma, sans-serif;"> Email: rui-x [d] jiang [AT]
+                    connect
+                    [d] polyu [d]
+                    hk. </p>
+                  <!-- <p>
+                    I did my research intern at <a href="https://www.cityu.edu.hk/">CityU, Hong Kong</a> with <a
+                      href="https://cassiepython.github.io"> Mr. WANG Can</a>
+                    under the supervision of <a href="https://liaojing.github.io/html/index.html">Dr. LIAO Jing</a> on
+                    3D stylization from 2022 to 2023. Currently, I am looking for phd positions starting from 2023.
+                  </p> -->
+
+                  <p style="text-align:center">
+                    <a href="mailto:rui-x.jiang@connect.polyu.hk">Email</a> &nbsp/&nbsp
+                    <a href="data/CV.pdf">CV</a> &nbsp/&nbsp
+
+                    <a href="https://github.com/songrise/">Github</a> &nbsp/&nbsp
+                    <a href="https://scholar.google.com/citations?user=e34K_QoAAAAJ&hl=en">Google Scholar</a>
+                  </p>
+                </td>
+                <td style="padding:2.5%;width:40%;max-width:40%">
+                  <a href="images/rxj.png"><img style="width:100%;max-width:100%" alt="photo" src="images/rxj.png"
+                      class="hoverZoomLink"></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table
+            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <tbody>
+              <tr>
+                <td style="padding:20px;width:100%;vertical-align:middle">
+                  <heading>Publications and Preprints</heading>
+                  <p>
+
+
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table
+            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <tbody>
+
+              <!-- conditional prompt -->
+              <tr onmouseout="condprompt_stop()" onmouseover="condprompt_start()">
+                <td style="padding:20px;width:25%;vertical-align:middle">
+                  <div class="one">
+                    <div class="two" id='condprompt_img'>
+                      <img src="images/condprompt_on.png" width="160">
+                      </video>
+                    </div>
+                    <img src='images/condprompt_off.png' width="160">
+                  </div>
+                  <script type="text/javascript">
+                    function condprompt_start() {
+                      document.getElementById('condprompt_img').style.opacity = "1";
+                    }
+
+                    function condprompt_stop() {
+                      document.getElementById('condprompt_img').style.opacity = "0";
+                    }
+                    clipcount_stop()
+                  </script>
+                </td>
+
+                <td style="padding:20px;width:75%;vertical-align:middle">
+
+                  <papertitle> Conditional Prompt Tuning for Multimodal Fusion
+                  </papertitle>
+                  <br>
+                  <strong>Ruixiang Jiang</strong>,
+                  <a href="https://lingboliu.com/">Lingbo Liu
+                  </a>,
+
+                  <a href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Changwen Chen
+                  </a>
+                  <br>
+                  <em>under review</em>, 2023
+                  <br>
+
+                  <a href="https://github.com/songrise/ConditionalPrompt">code</a> /
+                  <a href="https://arxiv.org/abs/2312.03734">arXiv</a>
+                  <!-- <a href="https://dl.acm.org/doi/10.1145/3581783.3611789">paper</a> -->
+                  <p></p>
+                  <p>We design a prompt-tuning method for multimodal fusion, achieving similar result with fine-tuning
+                    while only require 0.7% trainable parameters.</p>
+                </td>
+              </tr>
+              <!-- end of conditional prompt -->
+
+              <!-- CLIP-Count -->
+              <tr onmouseout="clipcount_stop()" onmouseover="clipcount_start()">
+                <td style="padding:20px;width:25%;vertical-align:middle">
+                  <div class="one">
+                    <div class="two" id='clipcount_img'>
+                      <img src="images/clipcount_start.png" width="160">
+                      </video>
+                    </div>
+                    <img src='images/clipcount_stop.png' width="160">
+                  </div>
+                  <script type="text/javascript">
+                    function clipcount_start() {
+                      document.getElementById('clipcount_img').style.opacity = "1";
+                    }
+
+                    function clipcount_stop() {
+                      document.getElementById('clipcount_img').style.opacity = "0";
+                    }
+                    clipcount_stop()
+                  </script>
+                </td>
+
+                <td style="padding:20px;width:75%;vertical-align:middle">
+
+                  <papertitle> CLIP-Count: Towards Text-Guided Zero-Shot Object Counting
+                  </papertitle>
+                  <br>
+                  <strong>Ruixiang Jiang</strong>,
+                  <a href="https://lingboliu.com/">Lingbo Liu
+                  </a>,
+
+                  <a href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Changwen Chen
+                  </a>
+                  <br>
+                  <em>ACM MM 2023</em>, 2023
+                  <br>
+
+                  <a href="https://github.com/songrise/CLIP-Count">code</a> /
+                  <a href="https://arxiv.org/abs/2305.07304">arXiv</a>
+                  <a href="https://dl.acm.org/doi/10.1145/3581783.3611789">paper</a>
+                  <p></p>
+                  <p>We propose the first end-to-end object counting model that count anything using text prompt.</p>
+                </td>
+              </tr>
+              <!-- end of CLIP-Count -->
+
+              <!-- avatar-craft -->
+              <tr onmouseout="avatarcraft_stop()" onmouseover="avatarcraft_start()">
+                <td style="padding:20px;width:25%;vertical-align:middle">
+                  <div class="one">
+                    <div class="two" id='avatarcraft_img'><video width=100% height=100% muted autoplay loop>
+                        <source src="images/avatarcraft_start.mp4" type="video/mp4">
+                      </video></div>
+                    <img src='images/avatarcraft_stop.gif' width="160">
+                  </div>
+                  <script type="text/javascript">
+                    function avatarcraft_start() {
+                      document.getElementById('avatarcraft_img').style.opacity = "1";
+                    }
+
+                    function avatarcraft_stop() {
+                      document.getElementById('avatarcraft_img').style.opacity = "0";
+                    }
+                    avatarcraft_stop()
+                  </script>
+                </td>
+
+                <td style="padding:20px;width:75%;vertical-align:middle">
+
+                  <papertitle> AvatarCraft: Transforming Text into Neural Human Avatars with Parameterized Shape and
+                    Pose
+                    Control
+                  </papertitle>
+                  <br>
+                  <strong>Ruixiang Jiang</strong>,
+                  <a href="https://cassiepython.github.io">Can Wang
+                  </a>,
+
+                  <a href="https://eckertzhang.github.io/">Jingbo Zhang
+                  </a>,
+                  <a href="https://mlchai.com/">Menglei Chai</a>,
+
+                  <a href="https://mingminghe.com/">Mingming He</a>,
+                  <a href="https://www.dongdongchen.bid/">Dongdong Chen</a>,
+                  <a href="https://liaojing.github.io/html/">Jing Liao</a>
+                  <br>
+                  <em>Accepted (ICCV 2023)</em>, 2023
+                  <br>
+
+                  <a href="https://avatar-craft.github.io">project page</a> /
+                  <a href="https://github.com/songrise/avatarcraft">code</a> /
+                  <a href="https://arxiv.org/abs/2303.17606">arXiv</a>
+                  <a
+                    href="https://openaccess.thecvf.com/content/ICCV2023/html/Jiang_AvatarCraft_Transforming_Text_into_Neural_Human_Avatars_with_Parameterized_Shape_ICCV_2023_paper.html">paper</a>
+
+                  <p></p>
+                  <p>We propose the first complete pipeline for creating, editing and animating neural human avatars.
+                  </p>
+                </td>
+              </tr>
+
+              <!-- end of avatar-craft -->
+
+              <!-- nerf-art -->
+              <tr onmouseout="nerfart_stop()" onmouseover="nerfart_start()">
+                <td style="padding:20px;width:25%;vertical-align:middle">
+                  <div class="one">
+                    <div class="two" id='nerfart_img'><video width=100% height=100% muted autoplay loop>
+                        <source src="images/nerfart_start.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video></div>
+                    <img src='images/nerfart_stop.png' width="160">
+                  </div>
+                  <script type="text/javascript">
+                    function nerfart_start() {
+                      document.getElementById('nerfart_img').style.opacity = "1";
+                    }
+
+                    function nerfart_stop() {
+                      document.getElementById('nerfart_img').style.opacity = "0";
+                    }
+                    nerfart_stop()
+                  </script>
+                </td>
+
+                <td style="padding:20px;width:75%;vertical-align:middle">
+
+                  <papertitle> Nerf-Art: Text-Driven Neural Radiance Fields Stylization
+                  </papertitle>
+                  <br>
+                  <a href="https://cassiepython.github.io">Can Wang
+                  </a>,
+                  <strong>Ruixiang Jiang</strong>,
+
+                  <a href="https://mlchai.com/">Menglei Chai</a>,
+
+                  <a href="https://mingminghe.com/">Mingming He</a>,
+                  <a href="https://www.dongdongchen.bid/">Dongdong Chen</a>,
+                  <a href="https://liaojing.github.io/html/">Jing Liao</a>
+                  <br>
+                  <em>IEEE TVCG</em>, 2023
+                  <br>
+
+                  <a href="https://cassiepython.github.io/nerfart/index.html">project page</a> /
+                  <a href="https://github.com/cassiePython/NeRF-Art">code</a> /
+                  <a href="https://arxiv.org/abs/2212.08070">arXiv</a> /
+                  <a href="https://ieeexplore.ieee.org/abstract/document/10144678">paper</a>
+                  <p></p>
+                  <p>We stylize neural implicit scene to a specific art style by a text prompt.</p>
+                </td>
+              </tr>
+              <!-- end of nerf-art -->
+
+
+            </tbody>
+          </table>
+
+          <table
+            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <tbody>
+              <tr>
+                <td style="padding:20px;width:100%;vertical-align:middle">
+                  <heading>Other Projects</heading>
+                  <p>
+
+
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table
+            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <tbody>
+
+              <tr onmouseout="toonnerf_stop()" onmouseover="nerfsuper_start()">
+                <td style="padding:20px;width:25%;vertical-align:middle">
+                  <div class="one">
+                    <div class="two" id='toonnerf'>
+                      <img src="images/toonnerf_start.jpg" width="160">
+                    </div>
+                    <img src='images/toonnerf_stop.png' width="160">
+                  </div>
+                  <script type="text/javascript">
+                    function nerfsuper_start() {
+                      document.getElementById('toonnerf').style.opacity = "1";
+                    }
+
+                    function toonnerf_stop() {
+                      document.getElementById('toonnerf').style.opacity = "0";
+                    }
+                    toonnerf_stop()
+                  </script>
+                </td>
+
+                <td style="padding:20px;width:75%;vertical-align:middle">
+
+                  <papertitle> Leaning a Neural Radiance Field for Stylized Scene
+                  </papertitle>
+
+                  <br>
+                  <a href="https://www.polyu.edu.hk/gs/ug-research/uris/projects/">
+                    <em>Undergraduate Research and Innovation Project</em>, </a> 2022
+
+                  <br>
+                  <p></p>
+                  <p> We propose to leverage toon-shading and model outlining priors to better encode non-photorealistic
+                    scene with neural implicit fields.</p>
+                </td>
+              </tr>
+
+              <tr onmouseout="hatch_stop()" onmouseover="hatch_start()">
+                <td style="padding:20px;width:25%;vertical-align:middle">
+                  <div class="one">
+                    <div class="two" id='hatch_img'><video width=100% height=100% muted autoplay loop>
+                        <source src="images/hatch_start.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video></div>
+                    <img src='images/hatch_stop.png' width="160">
+                    <script type="text/javascript">
+                      function hatch_start() {
+                        document.getElementById('hatch_img').style.opacity = "1";
+                      }
+
+                      function hatch_stop() {
+                        document.getElementById('hatch_img').style.opacity = "0";
+                      }
+                      hatch_stop()
+                    </script>
+                </td>
+
+                <td style="padding:20px;width:75%;vertical-align:middle">
+
+                  <papertitle> Realtime Hatching Rendering
+                  </papertitle>
+
+                  <br>
+
+                  <em>Course Project</em>, 2021
+
+                  <br>
+                  <a href="https://github.com/songrise/Unity-Sketch-Style-Shader"> Github
+                  </a>
+                  <p></p>
+                  <p> A pencil-sketch (a.k.a. hatching) style shader for Unity.</p>
+                </td>
+              </tr>
+
+
+            </tbody>
+          </table>
+
+
+          <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+            <tbody>
+              <tr>
+                <td>
+                  <heading>Misc</heading>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table width="100%" align="center" border="0" cellpadding="20">
+            <tbody>
+
+              <tr>
+                <td style="padding:20px;width:25%;vertical-align:middle"><img src="images/polyu_logo.png" , width="200"
+                    , height="40"></td>
+                <td width="75%" valign="center">
+                  Research Assistant
+                  <br>
+                  The Hong Kong Polytechnic University
+                  <em>
+                    <br>
+                    Full time, Sep 2023 - Now
+                  </em>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:20px;width:25%;vertical-align:middle"><img src="images/cityulogo.jpeg" , width="200"
+                    , height="130"></td>
+                <td width="75%" valign="center">
+                  Research Internship
+                  <br>
+                  City University of Hong Kong
+                  <em>
+                    <br>
+                    Full time, Jun 2022 - Aug 2022
+                    <br>
+                    Part time, Sep 2022 - Now
+                  </em>
+                </td>
+              </tr>
+
+
+
+              <tr>
+                <td align="center" style="padding:20px;width:25%;vertical-align:middle">
+                  <heading>Awards</heading>
+                </td>
+                <td width="75%" valign="middle">
+                  <a href="data/uris.pdf">Undergraduate Research and Innovation Scholarship, 2021</a>
+
+                  <br>
+
+                  <a href="data/dean_21.jpeg">
+
+                    Dean's List of Outstanding Students, 2021-2022
+                  </a>
+                  <br>
+
+                  Dean's List of Outstanding Students, 2022-2023
+                  <br>
+
+                  <a href="data/sholarship_polyu.pdf">
+                    The Hong Kong Polytechnic University Scholarship, 2022
+                  </a>
+                </td>
+              </tr>
+
+
+
+            </tbody>
+
+          </table>
+          <table
+            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <tbody>
+              <tr>
+                <td style="padding:0px">
+                  <br>
+                  <!-- <script type="text/javascript" id="clstr_globe"
+                    src="//clustrmaps.com/globe.js?d=Yf79oEmkQ3lIH59R5HWgUXTH84csWuG8SGfUH5FNDBw"></script> -->
+                  <hr>
+                  <p style="text-align:center;font-size:small;">
+                    Last updated: Dec 9, 2023,
+                    <br>
+                  <p style="text-align:center;font-size:small;">
+                    Theme from <a href=http://jonbarron.info> jonbarron </a>'s website,
+
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </td>
+      </tr>
+  </table>
+
+</body>
+
+</html>

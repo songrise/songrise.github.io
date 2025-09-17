@@ -1,502 +1,402 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruixiang Jiang | Phd Candidate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap" rel="stylesheet">
 
-  <title>Jiang Ruixiang - Homepage</title>
+    <style>
+        /* Optimized CSS */
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+            font-family: 'Sixtyfour', sans-serif;
+            color: white;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            min-height: 100vh;
+            padding: 120px;
+            box-sizing: border-box;
+            font-variation-settings: "BLED" 0, "SCAN" -20;
+            /* GPU acceleration */
+            will-change: transform;
+        }
 
-  <meta name="author" content="Jiang Ruixiang">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+        canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            /* GPU acceleration for canvas */
+            will-change: contents;
+        }
 
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+        .text-container {
+            position: relative;
+            z-index: 2;
+            width: 1000px;
+            max-width: 90vw;
+            text-align: right;
+            /* GPU acceleration */
+            will-change: transform;
+        }
+
+        .title {
+            font-size: 74px;
+            font-weight: 400;
+            margin: 0 0 20px 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            line-height: 1.1;
+            /* Optimized text-shadow - fewer layers for better performance */
+            text-shadow:
+                0 0 2px rgba(255, 255, 255, 0.8),
+                0 0 6px rgba(255, 255, 255, 0.4),
+                0 0 12px rgba(255, 255, 255, 0.2),
+                0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .content {
+            font-size: 22px;
+            line-height: 1.6;
+            font-weight: 300;
+            margin: 0;
+            letter-spacing: 1.3px;
+            /* Optimized text-shadow - fewer layers */
+            text-shadow:
+                0 0 1px rgba(255, 255, 255, 0.7),
+                0 0 4px rgba(255, 255, 255, 0.3),
+                0 0 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .content a {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            transition: color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+            /* GPU acceleration for hover effects */
+            will-change: color;
+        }
+
+        .content a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            transition: height 0.2s ease-in-out;
+            z-index: -1;
+            /* GPU acceleration */
+            will-change: height;
+        }
+
+        .content a:hover {
+            color: black;
+            text-shadow: none;
+        }
+
+        .content a:hover::before {
+            height: 100%;
+        }
+
+        .separator {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 1em;
+            line-height: 1;
+            transform: translateY(-8px);
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            body {
+                padding: 60px 30px;
+            }
+
+            .title {
+                font-size: 48px;
+            }
+
+            .content {
+                font-size: 18px;
+            }
+
+            .text-container {
+                width: 100%;
+            }
+
+            /* Reduce text-shadow on mobile for better performance */
+            .title {
+                text-shadow:
+                    0 0 2px rgba(255, 255, 255, 0.8),
+                    0 0 8px rgba(255, 255, 255, 0.3);
+            }
+
+            .content {
+                text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        /* Fallback for older browsers */
+        @supports not (text-shadow: 0 0 2px rgba(255, 255, 255, 0.8)) {
+
+            .title,
+            .content {
+                text-shadow: 0 0 4px white;
+            }
+        }
+    </style>
 </head>
 
-
 <body>
-
-  <table
-    style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-    <tbody>
-      <tr style="padding:0px">
-        <td style="padding:0px">
-          <table
-            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr style="padding:0px">
-                <td style="padding:2.5%;width:63%;vertical-align:middle">
-                  <p style="text-align:center">
-                    <name>Jiang Ruixiang (江睿翔)</name>
-                  </p>
-                  <p> Currently I am a research assistant at <a href="https://www.polyu.edu.hk/comp/"> The Hong Kong
-                      Polytechnic University (PolyU)</a>, mentored by <a
-                      href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Prof. Chen Changwen</a>.
-                    I have just
-                    obtained my Bsc. degree at PolyU with
-                    first class honor, and my major is
-                    Computer Science </a>.
-                  </p>
-
-                  <p>
-                    My research interests primarily lie in Computer Graphics, Computer Vision and the
-                    intersection
-                    between them, with a focus on <b>neural rendering and
-                      3D content generation</b>. Besides, I am also interested in <b>Multimodal AI</b>,
-                    especially
-                    in
-                    vision-language models (VLMs). My goal is to build AI systems that understand and manipulate 3D
-                    content with natural language.
-                  </p>
-
-                  <p>
-                    Currently, I am looking for phd positions starting from 2023/2024.
-                  <p style="font-family:Verdana, Geneva, Tahoma, sans-serif;"> Email: rui-x [d] jiang [AT]
-                    connect
-                    [d] polyu [d]
-                    hk. </p>
-                  <!-- <p>
-                    I did my research intern at <a href="https://www.cityu.edu.hk/">CityU, Hong Kong</a> with <a
-                      href="https://cassiepython.github.io"> Mr. WANG Can</a>
-                    under the supervision of <a href="https://liaojing.github.io/html/index.html">Dr. LIAO Jing</a> on
-                    3D stylization from 2022 to 2023. Currently, I am looking for phd positions starting from 2023.
-                  </p> -->
-
-                  <p style="text-align:center">
-                    <a href="mailto:rui-x.jiang@connect.polyu.hk">Email</a> &nbsp/&nbsp
-                    <a href="data/CV.pdf">CV</a> &nbsp/&nbsp
-
-                    <a href="https://github.com/songrise/">Github</a> &nbsp/&nbsp
-                    <a href="https://scholar.google.com/citations?user=e34K_QoAAAAJ&hl=en">Google Scholar</a>
-                  </p>
-                </td>
-                <td style="padding:2.5%;width:40%;max-width:40%">
-                  <a href="images/rxj.png"><img style="width:100%;max-width:100%" alt="photo" src="images/rxj.png"
-                      class="hoverZoomLink"></a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <table
-            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:20px;width:100%;vertical-align:middle">
-                  <heading>Publications and Preprints</heading>
-                  <p>
-
-
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <table
-            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-
-              <!-- conditional prompt -->
-              <tr onmouseout="condprompt_stop()" onmouseover="condprompt_start()">
-                <td style="padding:20px;width:25%;vertical-align:middle">
-                  <div class="one">
-                    <div class="two" id='condprompt_img'>
-                      <img src="images/condprompt_on.png" width="160">
-                      </video>
-                    </div>
-                    <img src='images/condprompt_off.png' width="160">
-                  </div>
-                  <script type="text/javascript">
-                    function condprompt_start() {
-                      document.getElementById('condprompt_img').style.opacity = "1";
-                    }
-
-                    function condprompt_stop() {
-                      document.getElementById('condprompt_img').style.opacity = "0";
-                    }
-                    clipcount_stop()
-                  </script>
-                </td>
-
-                <td style="padding:20px;width:75%;vertical-align:middle">
-
-                  <papertitle> Conditional Prompt Tuning for Multimodal Fusion
-                  </papertitle>
-                  <br>
-                  <strong>Ruixiang Jiang</strong>,
-                  <a href="https://lingboliu.com/">Lingbo Liu
-                  </a>,
-
-                  <a href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Changwen Chen
-                  </a>
-                  <br>
-                  <em>under review</em>, 2023
-                  <br>
-
-                  <a href="https://github.com/songrise/ConditionalPrompt">code</a> /
-                  <a href="https://arxiv.org/abs/2312.03734">arXiv</a>
-                  <!-- <a href="https://dl.acm.org/doi/10.1145/3581783.3611789">paper</a> -->
-                  <p></p>
-                  <p>We design a prompt-tuning method for multimodal fusion, achieving similar result with fine-tuning
-                    while only require 0.7% trainable parameters.</p>
-                </td>
-              </tr>
-              <!-- end of conditional prompt -->
-
-              <!-- CLIP-Count -->
-              <tr onmouseout="clipcount_stop()" onmouseover="clipcount_start()">
-                <td style="padding:20px;width:25%;vertical-align:middle">
-                  <div class="one">
-                    <div class="two" id='clipcount_img'>
-                      <img src="images/clipcount_start.png" width="160">
-                      </video>
-                    </div>
-                    <img src='images/clipcount_stop.png' width="160">
-                  </div>
-                  <script type="text/javascript">
-                    function clipcount_start() {
-                      document.getElementById('clipcount_img').style.opacity = "1";
-                    }
-
-                    function clipcount_stop() {
-                      document.getElementById('clipcount_img').style.opacity = "0";
-                    }
-                    clipcount_stop()
-                  </script>
-                </td>
-
-                <td style="padding:20px;width:75%;vertical-align:middle">
-
-                  <papertitle> CLIP-Count: Towards Text-Guided Zero-Shot Object Counting
-                  </papertitle>
-                  <br>
-                  <strong>Ruixiang Jiang</strong>,
-                  <a href="https://lingboliu.com/">Lingbo Liu
-                  </a>,
-
-                  <a href="http://www4.comp.polyu.edu.hk/~chencw/Biography.html">Changwen Chen
-                  </a>
-                  <br>
-                  <em>ACM MM 2023</em>, 2023
-                  <br>
-
-                  <a href="https://github.com/songrise/CLIP-Count">code</a> /
-                  <a href="https://arxiv.org/abs/2305.07304">arXiv</a>
-                  <a href="https://dl.acm.org/doi/10.1145/3581783.3611789">paper</a>
-                  <p></p>
-                  <p>We propose the first end-to-end object counting model that count anything using text prompt.</p>
-                </td>
-              </tr>
-              <!-- end of CLIP-Count -->
-
-              <!-- avatar-craft -->
-              <tr onmouseout="avatarcraft_stop()" onmouseover="avatarcraft_start()">
-                <td style="padding:20px;width:25%;vertical-align:middle">
-                  <div class="one">
-                    <div class="two" id='avatarcraft_img'><video width=100% height=100% muted autoplay loop>
-                        <source src="images/avatarcraft_start.mp4" type="video/mp4">
-                      </video></div>
-                    <img src='images/avatarcraft_stop.gif' width="160">
-                  </div>
-                  <script type="text/javascript">
-                    function avatarcraft_start() {
-                      document.getElementById('avatarcraft_img').style.opacity = "1";
-                    }
-
-                    function avatarcraft_stop() {
-                      document.getElementById('avatarcraft_img').style.opacity = "0";
-                    }
-                    avatarcraft_stop()
-                  </script>
-                </td>
-
-                <td style="padding:20px;width:75%;vertical-align:middle">
-
-                  <papertitle> AvatarCraft: Transforming Text into Neural Human Avatars with Parameterized Shape and
-                    Pose
-                    Control
-                  </papertitle>
-                  <br>
-                  <strong>Ruixiang Jiang</strong>,
-                  <a href="https://cassiepython.github.io">Can Wang
-                  </a>,
-
-                  <a href="https://eckertzhang.github.io/">Jingbo Zhang
-                  </a>,
-                  <a href="https://mlchai.com/">Menglei Chai</a>,
-
-                  <a href="https://mingminghe.com/">Mingming He</a>,
-                  <a href="https://www.dongdongchen.bid/">Dongdong Chen</a>,
-                  <a href="https://liaojing.github.io/html/">Jing Liao</a>
-                  <br>
-                  <em>Accepted (ICCV 2023)</em>, 2023
-                  <br>
-
-                  <a href="https://avatar-craft.github.io">project page</a> /
-                  <a href="https://github.com/songrise/avatarcraft">code</a> /
-                  <a href="https://arxiv.org/abs/2303.17606">arXiv</a>
-                  <a
-                    href="https://openaccess.thecvf.com/content/ICCV2023/html/Jiang_AvatarCraft_Transforming_Text_into_Neural_Human_Avatars_with_Parameterized_Shape_ICCV_2023_paper.html">paper</a>
-
-                  <p></p>
-                  <p>We propose the first complete pipeline for creating, editing and animating neural human avatars.
-                  </p>
-                </td>
-              </tr>
-
-              <!-- end of avatar-craft -->
-
-              <!-- nerf-art -->
-              <tr onmouseout="nerfart_stop()" onmouseover="nerfart_start()">
-                <td style="padding:20px;width:25%;vertical-align:middle">
-                  <div class="one">
-                    <div class="two" id='nerfart_img'><video width=100% height=100% muted autoplay loop>
-                        <source src="images/nerfart_start.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                      </video></div>
-                    <img src='images/nerfart_stop.png' width="160">
-                  </div>
-                  <script type="text/javascript">
-                    function nerfart_start() {
-                      document.getElementById('nerfart_img').style.opacity = "1";
-                    }
-
-                    function nerfart_stop() {
-                      document.getElementById('nerfart_img').style.opacity = "0";
-                    }
-                    nerfart_stop()
-                  </script>
-                </td>
-
-                <td style="padding:20px;width:75%;vertical-align:middle">
-
-                  <papertitle> Nerf-Art: Text-Driven Neural Radiance Fields Stylization
-                  </papertitle>
-                  <br>
-                  <a href="https://cassiepython.github.io">Can Wang
-                  </a>,
-                  <strong>Ruixiang Jiang</strong>,
-
-                  <a href="https://mlchai.com/">Menglei Chai</a>,
-
-                  <a href="https://mingminghe.com/">Mingming He</a>,
-                  <a href="https://www.dongdongchen.bid/">Dongdong Chen</a>,
-                  <a href="https://liaojing.github.io/html/">Jing Liao</a>
-                  <br>
-                  <em>IEEE TVCG</em>, 2023
-                  <br>
-
-                  <a href="https://cassiepython.github.io/nerfart/index.html">project page</a> /
-                  <a href="https://github.com/cassiePython/NeRF-Art">code</a> /
-                  <a href="https://arxiv.org/abs/2212.08070">arXiv</a> /
-                  <a href="https://ieeexplore.ieee.org/abstract/document/10144678">paper</a>
-                  <p></p>
-                  <p>We stylize neural implicit scene to a specific art style by a text prompt.</p>
-                </td>
-              </tr>
-              <!-- end of nerf-art -->
-
-
-            </tbody>
-          </table>
-
-          <table
-            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:20px;width:100%;vertical-align:middle">
-                  <heading>Other Projects</heading>
-                  <p>
-
-
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <table
-            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-
-              <tr onmouseout="toonnerf_stop()" onmouseover="nerfsuper_start()">
-                <td style="padding:20px;width:25%;vertical-align:middle">
-                  <div class="one">
-                    <div class="two" id='toonnerf'>
-                      <img src="images/toonnerf_start.jpg" width="160">
-                    </div>
-                    <img src='images/toonnerf_stop.png' width="160">
-                  </div>
-                  <script type="text/javascript">
-                    function nerfsuper_start() {
-                      document.getElementById('toonnerf').style.opacity = "1";
-                    }
-
-                    function toonnerf_stop() {
-                      document.getElementById('toonnerf').style.opacity = "0";
-                    }
-                    toonnerf_stop()
-                  </script>
-                </td>
-
-                <td style="padding:20px;width:75%;vertical-align:middle">
-
-                  <papertitle> Leaning a Neural Radiance Field for Stylized Scene
-                  </papertitle>
-
-                  <br>
-                  <a href="https://www.polyu.edu.hk/gs/ug-research/uris/projects/">
-                    <em>Undergraduate Research and Innovation Project</em>, </a> 2022
-
-                  <br>
-                  <p></p>
-                  <p> We propose to leverage toon-shading and model outlining priors to better encode non-photorealistic
-                    scene with neural implicit fields.</p>
-                </td>
-              </tr>
-
-              <tr onmouseout="hatch_stop()" onmouseover="hatch_start()">
-                <td style="padding:20px;width:25%;vertical-align:middle">
-                  <div class="one">
-                    <div class="two" id='hatch_img'><video width=100% height=100% muted autoplay loop>
-                        <source src="images/hatch_start.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                      </video></div>
-                    <img src='images/hatch_stop.png' width="160">
-                    <script type="text/javascript">
-                      function hatch_start() {
-                        document.getElementById('hatch_img').style.opacity = "1";
-                      }
-
-                      function hatch_stop() {
-                        document.getElementById('hatch_img').style.opacity = "0";
-                      }
-                      hatch_stop()
-                    </script>
-                </td>
-
-                <td style="padding:20px;width:75%;vertical-align:middle">
-
-                  <papertitle> Realtime Hatching Rendering
-                  </papertitle>
-
-                  <br>
-
-                  <em>Course Project</em>, 2021
-
-                  <br>
-                  <a href="https://github.com/songrise/Unity-Sketch-Style-Shader"> Github
-                  </a>
-                  <p></p>
-                  <p> A pencil-sketch (a.k.a. hatching) style shader for Unity.</p>
-                </td>
-              </tr>
-
-
-            </tbody>
-          </table>
-
-
-          <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-            <tbody>
-              <tr>
-                <td>
-                  <heading>Misc</heading>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table width="100%" align="center" border="0" cellpadding="20">
-            <tbody>
-
-              <tr>
-                <td style="padding:20px;width:25%;vertical-align:middle"><img src="images/polyu_logo.png" , width="200"
-                    , height="40"></td>
-                <td width="75%" valign="center">
-                  Research Assistant
-                  <br>
-                  The Hong Kong Polytechnic University
-                  <em>
-                    <br>
-                    Full time, Sep 2023 - Now
-                  </em>
-                </td>
-              </tr>
-
-              <tr>
-                <td style="padding:20px;width:25%;vertical-align:middle"><img src="images/cityulogo.jpeg" , width="200"
-                    , height="130"></td>
-                <td width="75%" valign="center">
-                  Research Internship
-                  <br>
-                  City University of Hong Kong
-                  <em>
-                    <br>
-                    Full time, Jun 2022 - Aug 2022
-                    <br>
-                    Part time, Sep 2022 - Now
-                  </em>
-                </td>
-              </tr>
-
-
-
-              <tr>
-                <td align="center" style="padding:20px;width:25%;vertical-align:middle">
-                  <heading>Awards</heading>
-                </td>
-                <td width="75%" valign="middle">
-                  <a href="data/uris.pdf">Undergraduate Research and Innovation Scholarship, 2021</a>
-
-                  <br>
-
-                  <a href="data/dean_21.jpeg">
-
-                    Dean's List of Outstanding Students, 2021-2022
-                  </a>
-                  <br>
-
-                  Dean's List of Outstanding Students, 2022-2023
-                  <br>
-
-                  <a href="data/sholarship_polyu.pdf">
-                    The Hong Kong Polytechnic University Scholarship, 2022
-                  </a>
-                </td>
-              </tr>
-
-
-
-            </tbody>
-
-          </table>
-          <table
-            style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:0px">
-                  <br>
-                  <!-- <script type="text/javascript" id="clstr_globe"
-                    src="//clustrmaps.com/globe.js?d=Yf79oEmkQ3lIH59R5HWgUXTH84csWuG8SGfUH5FNDBw"></script> -->
-                  <hr>
-                  <p style="text-align:center;font-size:small;">
-                    Last updated: Dec 9, 2023,
-                    <br>
-                  <p style="text-align:center;font-size:small;">
-                    Theme from <a href=http://jonbarron.info> jonbarron </a>'s website,
-
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-        </td>
-      </tr>
-  </table>
-
+    <canvas id="canvas"></canvas>
+
+    <div class="text-container">
+        <h2 class="title">Ruixiang JIANG</h2>
+        <p class="content">
+            Phd Candidate @ PolyU<br>
+            Computational Aesthetics & Generative Art <br>
+            <a href="https://scholar.google.com/citations?user=e34K_QoAAAAJ"> Google Scholar</a><span class="separator">
+                /
+            </span><a href="https://github.com/songrise">Github</a>
+        </p>
+    </div>
+
+    <script>
+        // Initialize WebGL
+        const canvas = document.getElementById('canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+        if (!gl) {
+            alert('WebGL not supported in your browser');
+        }
+
+        // Vertex shader
+        const vertexShaderSource = `
+            attribute vec2 a_position;
+            void main() {
+                gl_Position = vec4(a_position, 0.0, 1.0);
+            }
+        `;
+
+        // Fragment shader with improved 3D-like fluid forms
+        const fragmentShaderSource = `
+            precision highp float;
+            
+            uniform vec2 u_resolution;
+            uniform float u_time;
+            
+            // Improved noise functions for better 3D-like forms
+            vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+            vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+            vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
+            
+            // Simplex noise (simulated)
+            float snoise(vec2 v) {
+                const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+                                    -0.577350269189626, 0.024390243902439);
+                vec2 i  = floor(v + dot(v, C.yy));
+                vec2 x0 = v -   i + dot(i, C.xx);
+                vec2 i1;
+                i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+                vec4 x12 = x0.xyxy + C.xxzz;
+                x12.xy -= i1;
+                i = mod289(i);
+                vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+                vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.0);
+                m = m*m;
+                m = m*m;
+                vec3 x = 2.0 * fract(p * C.www) - 1.0;
+                vec3 h = abs(x) - 0.5;
+                vec3 ox = floor(x + 0.5);
+                vec3 a0 = x - ox;
+                m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+                vec3 g;
+                g.x = a0.x * x0.x + h.x * x0.y;
+                g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+                return 130.0 * dot(m, g);
+            }
+            
+            // Domain warping for fluid-like distortion
+            vec2 warp(vec2 p, float time) {
+                // Slowed down by multiplying time by 0.7
+                float slowTime = time * 0.7;
+                float d1 = snoise(p * 0.5 + vec2(slowTime * 0.1, slowTime * 0.08));
+                float d2 = snoise(p * 0.4 + vec2(-slowTime * 0.082, slowTime * 0.06) + vec2(d1));
+                return p + vec2(d1, d2) * 0.4;
+            }
+            
+            // Random function for grain 
+            float rand(vec2 co) {
+                return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
+            }
+            
+            void main() {
+                // Normalized coordinates with aspect ratio correction
+                vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                float aspect = u_resolution.x / u_resolution.y;
+                vec2 p = uv * 2.0 - 1.0;
+                p.x *= aspect;
+                
+                // Slow down animation by multiplying time by 0.7
+                float slowTime = u_time * 0.7;
+                
+                // Apply warping for organic 3D-like forms
+                vec2 warped = warp(p * 0.7, slowTime);
+                
+                // Generate base shape with multiple layers for more sculptural feel
+                float shape1 = snoise(warped * 0.9 + vec2(slowTime * 0.05, 0.0));
+                float shape2 = snoise(warped * 1.2 + vec2(-slowTime * 0.06, slowTime * 0.04));
+                float shape3 = snoise(warped * 0.5 + vec2(slowTime * 0.03, -slowTime * 0.07));
+                
+                // Combine layers with different weights for more depth
+                float combinedShape = shape1 * 0.5 + shape2 * 0.3 + shape3 * 0.2;
+                
+                // Apply contrast and shape adjustments
+                float finalShape = smoothstep(-0.1, 0.6, combinedShape);
+                
+                // Further enhance contrast for more defined forms
+                finalShape = pow(finalShape, 1.1);
+                
+                // Add a second light source effect for more dimensionality
+                float dist = length(warped + vec2(sin(slowTime * 0.1), cos(slowTime * 0.13)) * 0.5);
+                float glow = smoothstep(1.0, 0.2, dist);
+                finalShape = mix(finalShape, 1.0, glow * 0.4);
+                
+                // Base grayscale color with good contrast
+                vec3 color = vec3(finalShape);
+                
+                // Add film grain with better temporal variation to avoid patterns
+                // Create a more complex time seed that doesn't repeat easily
+                float timeSeed = slowTime * 0.3 + sin(slowTime * 0.5) * 0.1 + cos(slowTime * 0.7) * 0.05;
+                vec2 grainCoord = gl_FragCoord.xy / u_resolution.xy + vec2(timeSeed);
+                float grain = (rand(grainCoord) - 0.5) * 0.7;
+                color += vec3(grain);
+                
+                // Final contrast adjustment
+                color = smoothstep(0.15, 0.95, color);
+                
+                // Ensure values are in valid range
+                color = clamp(color, 0.05, 0.7);
+                
+                gl_FragColor = vec4(color, 1.0);
+            }
+        `;
+
+        // Create and compile shaders
+        function createShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error('Shader compilation error:', gl.getShaderInfoLog(shader));
+                gl.deleteShader(shader);
+                return null;
+            }
+
+            return shader;
+        }
+
+        const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+        const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+        // Create program and link shaders
+        const program = gl.createProgram();
+        gl.attachShader(program, vertexShader);
+        gl.attachShader(program, fragmentShader);
+        gl.linkProgram(program);
+
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            console.error('Program linking error:', gl.getProgramInfoLog(program));
+        }
+
+        // Get attribute and uniform locations
+        const positionAttributeLocation = gl.getAttribLocation(program, 'a_position');
+        const resolutionUniformLocation = gl.getUniformLocation(program, 'u_resolution');
+        const timeUniformLocation = gl.getUniformLocation(program, 'u_time');
+
+        // Create position buffer for a full-screen quad
+        const positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+
+        // Two triangles that cover the entire canvas
+        const positions = [
+            -1.0, -1.0,
+            1.0, -1.0,
+            -1.0, 1.0,
+            -1.0, 1.0,
+            1.0, -1.0,
+            1.0, 1.0
+        ];
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+
+        // Handle canvas resize
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            gl.viewport(0, 0, canvas.width, canvas.height);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Frame rate limiting setup
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const targetFPS = isMobile ? 40 : 90;
+        const frameInterval = 1000 / targetFPS;
+        let lastTime = 0;
+
+        // Start animation
+        const startTime = Date.now();
+
+        function render(currentTime) {
+            // Frame rate limiting
+            if (currentTime - lastTime >= frameInterval) {
+                // Calculate actual time for animation
+                const time = (Date.now() - startTime) / 1000;
+
+                // Clear canvas
+                gl.clearColor(0, 0, 0, 1);
+                gl.clear(gl.COLOR_BUFFER_BIT);
+
+                // Use shader program
+                gl.useProgram(program);
+
+                // Set uniforms
+                gl.uniform2f(resolutionUniformLocation, canvas.width, canvas.height);
+                gl.uniform1f(timeUniformLocation, time);
+
+                // Set up position attribute
+                gl.enableVertexAttribArray(positionAttributeLocation);
+                gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+                gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+
+                // Draw
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+                lastTime = currentTime;
+            }
+
+            // Continue animation loop
+            requestAnimationFrame(render);
+        }
+
+        render();
+    </script>
 </body>
 
 </html>
