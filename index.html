@@ -21,11 +21,23 @@
             align-items: flex-end;
             justify-content: flex-end;
             min-height: 100vh;
-            padding: 120px;
+            padding: 140px;
             box-sizing: border-box;
             font-variation-settings: "BLED" 0, "SCAN" -20;
             /* GPU acceleration */
             will-change: transform;
+
+            /* Disable text selection */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            /* Disable iOS touch callout */
+            -webkit-touch-callout: none;
+
+            /* Disable highlighting */
+            -webkit-tap-highlight-color: transparent;
         }
 
         canvas {
@@ -49,6 +61,11 @@
             text-align: right;
             /* GPU acceleration */
             will-change: transform;
+            /* Additional text selection prevention */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         .title {
@@ -90,6 +107,17 @@
             transition: color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
             /* GPU acceleration for hover effects */
             will-change: color;
+
+            /* Allow selection on links for accessibility, but prevent accidental selection */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            /* Better touch targets */
+            display: inline-block;
+            padding: 2px 2px;
+            margin: 0 2px;
         }
 
         .content a::before {
