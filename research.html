@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | Ruixiang Jiang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --panel-bg: rgba(96, 96, 96, 0.1);
+            --panel-border: rgba(255, 255, 255, 0.14);
+            --text-main: rgba(255, 255, 255, 0.94);
+            --text-muted: rgba(255, 255, 255, 0.72);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 88px 24px;
+            background-color: #000;
+            color: var(--text-main);
+            overflow-x: hidden;
+            overflow-y: auto;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        canvas {
+            display: block;
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            will-change: contents;
+            filter: blur(0.1px);
+        }
+
+        .page {
+            position: relative;
+            z-index: 2;
+            width: min(1120px, 100%);
+        }
+
+        .hero,
+        .research-panel {
+            position: relative;
+            padding: clamp(24px, 3vw, 36px);
+            border-radius: 28px;
+            border: 1px solid var(--panel-border);
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            margin: 0;
+            font-family: 'Sixtyfour', sans-serif;
+            font-size: clamp(28px, 5vw, 54px);
+            line-height: 1.15;
+            font-weight: 400;
+            text-transform: uppercase;
+            text-shadow:
+                0 0 3px rgba(255, 255, 255, 0.9),
+                0 0 6px rgba(255, 255, 255, 0.55),
+                0 0 12px rgba(255, 255, 255, 0.25);
+        }
+
+        .hero-copy {
+            margin: 20px auto 0;
+            max-width: 620px;
+            font-size: clamp(14px, 1.9vw, 18px);
+            line-height: 1.7;
+            color: var(--text-muted);
+            letter-spacing: 0.03em;
+        }
+
+        .hero-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--text-main);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+            padding-bottom: 2px;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .hero-link:hover {
+            color: #000;
+            border-color: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .research-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .research-entry {
+            display: grid;
+            grid-template-columns: minmax(260px, 0.95fr) minmax(0, 1.7fr);
+            gap: clamp(20px, 3vw, 42px);
+            padding: clamp(22px, 2.6vw, 32px) 0;
+            align-items: start;
+        }
+
+        .research-entry + .research-entry {
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .research-entry h2 {
+            margin: 0 0 12px;
+            font-size: clamp(20px, 2.6vw, 30px);
+            line-height: 1.3;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .research-entry p {
+            margin: 0;
+            font-size: clamp(14px, 1.9vw, 17px);
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 64px 16px;
+            }
+
+            .hero,
+            .research-panel {
+                border-radius: 22px;
+            }
+
+            .research-entry {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+    <main class="page">
+        <section class="hero">
+            <h1 class="hero-title">Research</h1>
+            <p class="hero-copy">
+                A focused selection of work across multimodal learning, neural rendering, and computational aesthetics.
+                This page keeps the same visual atmosphere as the landing page while bringing the publications into a
+                readable local archive.
+            </p>
+            <a class="hero-link" href="./">Back Home</a>
+        </section>
+
+        <section class="research-panel" aria-label="Research highlights">
+            <article class="research-entry">
+                <h2>Conditional Prompt Tuning for Multimodal Fusion</h2>
+                <p>
+                    A parameter-efficient prompt-tuning approach for multimodal fusion that reaches fine-tuning-level
+                    performance while updating only a small fraction of the model parameters.
+                </p>
+            </article>
+
+            <article class="research-entry">
+                <h2>CLIP-Count: Towards Text-Guided Zero-Shot Object Counting</h2>
+                <p>
+                    An end-to-end object counting framework that uses text prompts to count arbitrary categories
+                    without category-specific supervision.
+                </p>
+            </article>
+
+            <article class="research-entry">
+                <h2>AvatarCraft: Transforming Text into Neural Human Avatars with Parameterized Shape and Pose Control</h2>
+                <p>
+                    A full pipeline for creating, editing, and animating neural human avatars directly from text while
+                    keeping explicit control over body shape and pose.
+                </p>
+            </article>
+
+            <article class="research-entry">
+                <h2>Nerf-Art: Text-Driven Neural Radiance Fields Stylization</h2>
+                <p>
+                    A text-guided stylization method for neural radiance fields that turns implicit 3D scenes into
+                    coherent artistic renderings with a target visual style.
+                </p>
+            </article>
+
+            <article class="research-entry">
+                <h2>Learning a Neural Radiance Field for Stylized Scene</h2>
+                <p>
+                    Early exploration into stylized scene generation with neural radiance fields, focused on bridging
+                    expressive artistic control and 3D scene representation.
+                </p>
+            </article>
+
+            <article class="research-entry">
+                <h2>Realtime Hatching Rendering</h2>
+                <p>
+                    A non-photorealistic rendering study centered on interactive hatching effects, emphasizing visual
+                    rhythm, legibility, and painterly structure in real-time graphics.
+                </p>
+            </article>
+        </section>
+    </main>
+
+    <script src="background-shader.js"></script>
+</body>
+
+</html>

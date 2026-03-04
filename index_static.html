@@ -366,8 +366,10 @@
             }
             
             // Random function for grain 
-            float rand(vec2 co) {
-                return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
+            float rand(vec2 co, float seed) {
+                vec2 seeded = co + vec2(seed, seed * 1.61803398875);
+                vec2 basis = vec2(12.9898 + seed * 0.17, 78.233 + seed * 0.11);
+                return fract(sin(dot(seeded, basis)) * (43758.5453 + seed * 101.3579));
             }
             
             void main() {
@@ -408,8 +410,8 @@
                 // Add film grain with better temporal variation to avoid patterns
                 // Create a more complex time seed that doesn't repeat easily
                 float timeSeed = slowTime * 0.3 + sin(slowTime * 0.5) * 0.1 + cos(slowTime * 0.7) * 0.05;
-                vec2 grainCoord = gl_FragCoord.xy / u_resolution.xy + vec2(timeSeed);
-                float grain = (rand(grainCoord) - 0.5) * 0.7;
+                vec2 grainCoord = gl_FragCoord.xy / u_resolution.xy;
+                float grain = (rand(grainCoord, timeSeed) - 0.5) * 0.7;
                 color += vec3(grain);
                 
                 // Final contrast adjustment
