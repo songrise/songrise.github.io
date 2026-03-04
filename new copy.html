@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruixiang Jiang, Phd Candidate</title>
+    <title>StudioSixty</title>
     <style>
         * {
             margin: 0;
@@ -67,10 +67,10 @@
         }
 
         h1 {
-            font-size: clamp(4rem, 8.6vw, 8rem);
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
             font-weight: 700;
             color: #111;
-            letter-spacing: -1px;
+            letter-spacing: -2px;
             line-height: 1.1;
             position: relative;
         }
@@ -78,7 +78,7 @@
         h1::after {
             content: '';
             position: absolute;
-            bottom: -9px;
+            bottom: -4px;
             left: 0;
             right: 0;
             height: 6px;
@@ -88,7 +88,7 @@
 
         .subtitle {
             margin-top: 18px;
-            font-size: clamp(1.6rem, 3vw, 2.45rem);
+            font-size: clamp(1.2rem, 2.2vw, 1.7rem);
             color: #444;
             cursor: pointer;
             display: inline-block;
@@ -104,7 +104,7 @@
             display: block;
             color: #c0392b;
             margin-top: 8px;
-            font-size: 1.85rem;
+            font-size: 1.4rem;
             animation: bob 1.6s ease-in-out infinite;
         }
 
@@ -130,23 +130,14 @@
             overflow: hidden;
         }
 
-        .scene.expanded .cards {
-            pointer-events: auto;
-        }
-
-        .scene.detail-active .cards {
-            z-index: 80;
-        }
-
         /* ──────── Single card ──────── */
         .card {
-            --card-width: 230px;
-            --card-height: 354px;
-            --card-corner-radius: 14px;
+            --card-width: 190px;
+            --card-height: 292px;
             position: absolute;
             width: var(--card-width-current, var(--card-width));
             height: var(--card-height-current, var(--card-height));
-            border-radius: var(--card-corner-radius);
+            border-radius: 14px;
             overflow: hidden;
 
             /* anchor at viewport centre */
@@ -154,6 +145,7 @@
             top: calc(50% - (var(--card-height-current, var(--card-height)) / 2));
 
             transform-origin: bottom center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .12);
             backface-visibility: hidden;
 
             pointer-events: none;
@@ -164,23 +156,23 @@
             transition:
                 transform .72s cubic-bezier(.22, 1, .36, 1),
                 opacity .65s ease,
+                filter .8s ease,
                 width .72s cubic-bezier(.22, 1, .36, 1),
                 height .72s cubic-bezier(.22, 1, .36, 1),
-                border-radius .4s ease;
+                border-radius .4s ease,
+                box-shadow .3s ease;
 
+            filter: brightness(.96) saturate(.82);
             perspective: 1100px;
             perspective-origin: center center;
             transform-style: preserve-3d;
-            transform:
-                translateX(var(--fan-x, 0px)) translateY(var(--fan-y, 0px)) rotateY(var(--fan-rotate-y, 0deg)) rotateZ(var(--fan-rotate-z, 0deg)) scale(var(--fan-scale, 1));
-            z-index: var(--fan-z, 1);
-            opacity: var(--fan-opacity, 1);
         }
 
         .scene.expanded .card {
             pointer-events: auto;
             cursor: pointer;
-            overflow: visible;
+            filter: brightness(1) saturate(1);
+            box-shadow: none;
             transition-delay: 0s;
             transform:
                 translateX(var(--detail-x, 0px)) translateY(var(--detail-y, 28vh)) rotateZ(var(--detail-rotate, 0deg)) translateY(var(--hover-lift, 0px)) scale(var(--detail-scale, 1.98)) scale(var(--hover-scale, 1));
@@ -188,9 +180,8 @@
             opacity: 1;
         }
 
-        .card:focus,
-        .card:focus-visible {
-            outline: none;
+        .scene.expanded .card:hover {
+            filter: brightness(1.06) saturate(1.12);
         }
 
         .scene.expanded .card.is-hovered {
@@ -206,6 +197,7 @@
         .scene.detail-active .card:not(.is-active) {
             pointer-events: none;
             cursor: default;
+            filter: brightness(.78) saturate(.82);
             opacity: 1;
             transform:
                 translateX(var(--stack-x, 0px)) translateY(var(--stack-y, 42vh)) rotateZ(var(--stack-rotate, 0deg)) scale(var(--stack-scale, .82));
@@ -220,7 +212,7 @@
             transform-origin: center center;
             transform:
                 translateX(var(--focus-x, 0px)) translateY(var(--focus-y, -56px)) rotateZ(90deg) scale(1);
-            --card-corner-radius: 0px;
+            border-radius: 0;
             z-index: 120;
         }
 
@@ -260,8 +252,7 @@
             align-items: center;
             text-align: center;
             background: var(--card-background, transparent);
-            border-radius: var(--card-corner-radius);
-            overflow: hidden;
+            border-radius: inherit;
             transform:
                 rotateY(0deg) rotateY(var(--hover-tilt-y, 0deg)) rotateX(var(--hover-tilt-x, 0deg));
             transition:
@@ -269,15 +260,11 @@
                 filter .22s cubic-bezier(.22, 1, .36, 1);
             transform-style: preserve-3d;
             will-change: transform;
-            filter: brightness(.96) saturate(.82) drop-shadow(0 10px 26px rgba(0, 0, 0, .14));
-        }
-
-        .scene.expanded .card .card-front {
-            filter: brightness(1) saturate(1) drop-shadow(0 10px 26px rgba(0, 0, 0, .14));
+            filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .14));
         }
 
         .scene.detail-active .card:not(.is-active) .card-front {
-            filter: brightness(.78) saturate(.82) drop-shadow(0 10px 20px rgba(0, 0, 0, .08));
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, .08));
         }
 
         .card-back {
@@ -292,23 +279,20 @@
             pointer-events: none;
         }
 
-        .scene.detail-active .card.is-active .card-back {
-            pointer-events: auto;
-        }
-
         .card-back-panel {
             width: 100%;
             height: 100%;
             display: flex;
-            align-items: stretch;
-            justify-content: space-between;
-            gap: 24px;
-            padding: 34px 40px 30px;
-            color: #172033;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 26px 30px 28px;
+            color: inherit;
             text-align: left;
-            border-radius: 28px;
+            border-radius: 24px;
             background:
-                linear-gradient(135deg, rgba(255, 255, 255, .92), rgba(242, 246, 252, .96));
+                linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .01)),
+                var(--card-background, transparent);
             box-shadow: 0 26px 54px rgba(0, 0, 0, .28);
             overflow: hidden;
         }
@@ -317,23 +301,12 @@
             pointer-events: auto;
         }
 
-        .detail-layout {
-            position: relative;
-            display: grid;
-            grid-template-columns: minmax(0, 1.15fr) minmax(220px, .85fr);
-            width: 100%;
-            height: 100%;
-            min-height: 0;
-            gap: 20px;
-            pointer-events: auto;
-        }
-
         .scene.expanded .card:hover .card-front {
-            filter: brightness(1.06) saturate(1.12) drop-shadow(0 18px 42px rgba(0, 0, 0, .22));
+            filter: drop-shadow(0 18px 42px rgba(0, 0, 0, .22));
         }
 
         .scene.expanded .card.is-hovered .card-front {
-            filter: brightness(1.06) saturate(1.12) drop-shadow(0 28px 62px rgba(0, 0, 0, .28));
+            filter: drop-shadow(0 28px 62px rgba(0, 0, 0, .28));
         }
 
         .scene.detail-active .card.is-active:hover .card-back-panel {
@@ -355,38 +328,32 @@
         }
 
         .card-back-title {
-            max-width: 100%;
-            font-size: clamp(1.9rem, 3.5vw, 3rem);
+            max-width: 72%;
+            font-size: clamp(1.55rem, 3vw, 2.3rem);
             font-weight: 700;
-            line-height: 1.02;
-            letter-spacing: -.025em;
+            line-height: 1.05;
+            letter-spacing: -.03em;
         }
 
-        .detail-main {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            max-width: 100%;
-            pointer-events: auto;
-        }
-
-        .detail-meta-group {
-            margin-top: 22px;
-            display: grid;
-            gap: 10px;
+        .card-back-subtitle {
+            max-width: 72%;
+            margin-top: 12px;
+            font-size: .78rem;
+            line-height: 1.55;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            opacity: .82;
         }
 
         .detail-copy {
-            max-width: 92%;
-            margin-top: 34px;
+            width: min(66%, 440px);
+            margin-top: auto;
             opacity: 0;
             transform: translateY(14px);
             transition:
                 opacity .26s ease,
                 transform .42s cubic-bezier(.22, 1, .36, 1);
-            pointer-events: auto;
+            pointer-events: none;
         }
 
         .scene.detail-active .card.is-active .detail-copy {
@@ -395,119 +362,20 @@
             transition-delay: .14s;
         }
 
-        .detail-field {
-            font-size: 1.04rem;
-            line-height: 1.65;
-            color: rgba(23, 32, 51, .84);
-        }
-
-        .detail-field strong {
-            display: inline-block;
-            margin-right: 8px;
+        .detail-meta {
+            font-size: .46rem;
             font-weight: 700;
-            font-size: .95rem;
-            color: #172033;
-        }
-
-        .detail-field a {
-            display: inline-block;
-            color: inherit;
-            padding: .08em .28em;
-            border-radius: 0;
-            text-decoration: none;
-            cursor: pointer;
-            pointer-events: auto;
-            background-image: linear-gradient(#1f5f8f, #1f5f8f);
-            background-repeat: no-repeat;
-            background-position: 0 100%;
-            background-size: 100% 0%;
-            transition:
-                color .24s ease,
-                background-size .24s ease;
-        }
-
-        .detail-field a:hover {
-            color: #f5f5f3;
-            background-size: 100% 100%;
-        }
-
-        .detail-field a.author-highlight {
-            color: #1f5f8f;
-            font-weight: 700;
+            letter-spacing: 2.8px;
+            text-transform: uppercase;
+            opacity: .72;
         }
 
         .detail-body {
-            font-size: clamp(1.08rem, 1.45vw, 1.32rem);
-            line-height: 1.78;
-            color: rgba(23, 32, 51, .9);
-        }
-
-        .detail-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px;
-            margin-top: auto;
-            padding-top: 26px;
-            position: relative;
-            z-index: 3;
-        }
-
-        .detail-link {
-            display: inline-block;
-            color: #172033;
-            font-size: 1.02rem;
-            font-weight: 600;
-            letter-spacing: .02em;
-            padding: .26em .62em;
-            border-radius: 0;
-            text-decoration: none;
-            cursor: pointer;
-            pointer-events: auto;
-            background-image: linear-gradient(#1f5f8f, #1f5f8f);
-            background-repeat: no-repeat;
-            background-position: 0 100%;
-            background-size: 100% 0%;
-            transition:
-                color .24s ease,
-                background-size .24s ease;
-        }
-
-        .detail-link:hover {
-            color: #f5f5f3;
-            background-size: 100% 100%;
-        }
-
-        .detail-visual {
-            position: relative;
-            min-width: 0;
-            min-height: 100%;
-            border-radius: 22px;
-            overflow: hidden;
-            background:
-                linear-gradient(135deg, rgba(169, 196, 255, .12), rgba(130, 167, 245, .28));
-        }
-
-        .detail-visual img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            opacity: .98;
-            filter: saturate(.98) contrast(1.02);
-            mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .28) 18%, rgba(0, 0, 0, .96) 58%);
-            -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .28) 18%, rgba(0, 0, 0, .96) 58%);
-        }
-
-        .detail-visual::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(90deg, rgba(242, 246, 252, .94) 0%, rgba(242, 246, 252, .2) 24%, rgba(242, 246, 252, 0) 44%),
-                linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, 0));
-            pointer-events: none;
+            margin-top: 14px;
+            font-size: .8rem;
+            line-height: 1.62;
+            letter-spacing: .01em;
+            opacity: .92;
         }
 
         /* =============================================
@@ -516,31 +384,52 @@
      ============================================= */
 
         .card:nth-child(1) {
+            transform: translateX(-285px) translateY(10px) rotateY(24deg) rotateZ(0deg) scale(.92);
+            z-index: 1;
+            opacity: .72;
             transition-delay: .24s;
         }
 
         .card:nth-child(2) {
+            transform: translateX(-155px) translateY(2px) rotateY(56deg) rotateZ(0deg) scale(.9);
+            z-index: 2;
+            opacity: .6;
             transition-delay: .16s;
         }
 
         .card:nth-child(3) {
+            transform: translateX(-42px) translateY(-2px) rotateY(84deg) rotateZ(0deg) scale(.86);
+            z-index: 3;
+            opacity: .5;
             transition-delay: .08s;
         }
 
         /* centre card — edge-on (90 °) → invisible */
         .card:nth-child(4) {
+            transform: translateX(0px) translateY(0px) rotateY(90deg) rotateZ(0deg) scale(1);
+            z-index: 0;
+            opacity: 0;
             transition-delay: 0s;
         }
 
         .card:nth-child(5) {
+            transform: translateX(42px) translateY(-2px) rotateY(-84deg) rotateZ(0deg) scale(.86);
+            z-index: 3;
+            opacity: .5;
             transition-delay: .08s;
         }
 
         .card:nth-child(6) {
+            transform: translateX(155px) translateY(2px) rotateY(-56deg) rotateZ(0deg) scale(.9);
+            z-index: 2;
+            opacity: .6;
             transition-delay: .16s;
         }
 
         .card:nth-child(7) {
+            transform: translateX(285px) translateY(10px) rotateY(-24deg) rotateZ(0deg) scale(.92);
+            z-index: 1;
+            opacity: .72;
             transition-delay: .24s;
         }
 
@@ -645,53 +534,6 @@
             pointer-events: none;
             transform: translateY(10px);
         }
-
-        .sort-toggle {
-            position: fixed;
-            left: 50%;
-            bottom: 28px;
-            transform: translateX(-50%) translateY(10px);
-            padding: 8px 14px;
-            border: 1px solid rgba(17, 17, 17, .18);
-            border-radius: 999px;
-            background: transparent;
-            color: #111;
-            font: inherit;
-            font-size: .62rem;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            cursor: pointer;
-            opacity: 0;
-            pointer-events: none;
-            transition:
-                opacity .35s ease,
-                transform .35s ease,
-                background .25s ease,
-                border-color .25s ease;
-            z-index: 210;
-        }
-
-        .sort-toggle:hover {
-            border-color: rgba(17, 17, 17, .34);
-        }
-
-        .sort-toggle.is-on {
-            background: rgba(17, 17, 17, .9);
-            border-color: rgba(17, 17, 17, .9);
-            color: #f5f5f3;
-        }
-
-        .scene.expanded~.sort-toggle {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .scene.detail-active~.sort-toggle {
-            opacity: 0;
-            pointer-events: none;
-            transform: translateX(-50%) translateY(10px);
-        }
     </style>
 </head>
 
@@ -701,9 +543,9 @@
 
         <!-- title + radial overlay -->
         <div class="title-area">
-            <h1>Ruixiang Jiang</h1>
+            <h1>TitleTitleTitle</h1>
             <div class="subtitle" id="trigger">
-                Phd candidate, Computational Aesthetics.
+                Sub-titles
                 <span class="arrow">↓</span>
             </div>
         </div>
@@ -711,72 +553,57 @@
         <!-- 3-D card book -->
         <div class="cards">
 
-            <div class="card" data-card-id="diff-artist" data-time-order="5"
-                style="background:linear-gradient(145deg,#222,#000)">
-                <div class="card-face">
-                    <div class="icon">Diff-Artist</div>
-                    <div class="label">We study how AI can generate non-representational art.</div>
-                </div>
-            </div>
-
-
-            <!-- centre card (invisible in book view) -->
-            <div class="card" data-card-id="mope" data-time-order="4"
-                style="background:linear-gradient(145deg,#14142e,#1e2a4a)">
-                <div class="card-face">
-                    <div class="icon">MoPE</div>
-                    <div class="label">We study how different modals can be efficiently fused.</div>
-                </div>
-            </div>
-
-            <div class="card" data-card-id="clip-count" data-time-order="3"
-                style="background:linear-gradient(145deg,#1a1a1a,#333)">
-                <div class="card-face">
-                    <div class="icon">CLIP-Count</div>
-                    <div class="label">We study how AI model can count like humans.</div>
-                </div>
-            </div>
-
-            <div class="card" data-card-id="artcot" data-time-order="6"
-                style="background:linear-gradient(145deg,#c0c8d8,#e2e2e2)">
-                <div class="card-face" style="color:#111">
-                    <div class="icon">ArtCoT</div>
-                    <div class="label">We study how AI can reason about beauty.</div>
-                </div>
-            </div>
-
-            <div class="card" data-card-id="avatar-craft" data-time-order="2"
-                style="background:linear-gradient(145deg,#4a4a5a,#8a8a9a)">
-                <div class="card-face">
-                    <div class="icon">Avatar Craft</div>
-                    <div class="label">We study how AI can generate 3D human avatars from text.</div>
-                </div>
-            </div>
-
-
-
-
-
-            <div class="card" data-card-id="sem-judge" data-time-order="7"
-                style="background:linear-gradient(145deg,#355c7d,#6c5b7b)">
-                <div class="card-face">
-                    <div class="icon">Sem-Judge</div>
-                    <div class="label">We study how artistic interpretation can be achieved using semiotics theory.
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" data-card-id="nerf-art" data-time-order="1"
-                style="background:linear-gradient(145deg,#3a3a3a,#707070)">
+            <div class="card" style="background:linear-gradient(145deg,#3a3a3a,#707070)">
                 <div class="card-face">
                     <div class="icon">Nerf-Art</div>
-                    <div class="label">We study how 3D objects can be stylized from text prompts.</div>
+                    <div class="label">Text-Driven Neural Radiance Fields Stylization</div>
                 </div>
             </div>
 
+            <div class="card" style="background:linear-gradient(145deg,#4a4a5a,#8a8a9a)">
+                <div class="card-face">
+                    <div class="icon">Avatar Craft</div>
+                    <div class="label">Transforming Text into Neural Human Avatars with Parameterized Shape and Pose
+                        Control</div>
+                </div>
+            </div>
 
+            <div class="card" style="background:linear-gradient(145deg,#1a1a1a,#333)">
+                <div class="card-face">
+                    <div class="icon">CLIP-Count</div>
+                    <div class="label">Transforming Text into Neural Human Avatars with Parameterized Shape and Pose
+                        Control</div>
+                </div>
+            </div>
 
+            <!-- centre card (invisible in book view) -->
+            <div class="card" style="background:linear-gradient(145deg,#14142e,#1e2a4a)">
+                <div class="card-face">
+                    <div class="icon">MoPE</div>
+                    <div class="label">Conditional Prompt Tuning for Multimodal Fusion</div>
+                </div>
+            </div>
 
+            <div class="card" style="background:linear-gradient(145deg,#222,#000)">
+                <div class="card-face">
+                    <div class="icon">DiffArtist</div>
+                    <div class="label">Visual System</div>
+                </div>
+            </div>
+
+            <div class="card" style="background:linear-gradient(145deg,#c0c8d8,#e2e2e2)">
+                <div class="card-face" style="color:#111">
+                    <div class="icon">DiffArtist</div>
+                    <div class="label">DiffArtist DiffArtist DiffArtist DiffArtist</div>
+                </div>
+            </div>
+
+            <div class="card" style="background:linear-gradient(145deg,#355c7d,#6c5b7b)">
+                <div class="card-face">
+                    <div class="icon">60</div>
+                    <div class="label">Photography</div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -785,7 +612,6 @@
     <button class="back-btn" id="backBtn">← Back</button>
     <button class="nav-btn nav-left" id="rotateLeftBtn" aria-label="Rotate cards left">←</button>
     <button class="nav-btn nav-right" id="rotateRightBtn" aria-label="Rotate cards right">→</button>
-    <button class="sort-toggle" id="sortToggleBtn" aria-label="Toggle time sorting">Sort with Time</button>
 
     <script>
         const scene = document.getElementById('scene');
@@ -794,122 +620,46 @@
         const backBtn = document.getElementById('backBtn');
         const rotateLeftBtn = document.getElementById('rotateLeftBtn');
         const rotateRightBtn = document.getElementById('rotateRightBtn');
-        const sortToggleBtn = document.getElementById('sortToggleBtn');
         const cards = [...document.querySelectorAll('.card')];
         const ENABLE_CARD_TILT = true;
-        const DETAIL_IMAGE_SRC = 'images/toonNerf.png';
         const hoverTimers = new WeakMap();
-        const PROJECT_DETAILS = {
-            'nerf-art': {
-                venue: 'TVCG 2023',
-                authors: [
-                    { name: 'Can Wang', href: 'https://cassiepython.github.io' },
-                    { name: 'Ruixiang Jiang', href: 'index.html' },
-                    { name: 'Menglei Chai', href: 'https://mlchai.com/' },
-                    { name: 'Mingming He', href: 'https://mingminghe.com/' },
-                    { name: 'Dongdong Chen', href: 'https://www.dongdongchen.bid/' },
-                    { name: 'Jing Liao', href: 'https://liaojing.github.io/html/' }
-                ],
-                body: 'We present the first method for stylizing 3D objects using text prompts, which leverages the powerful knowledge of multi-modal models to achieve high-quality stylization with flexible control over the stylization process.',
-                links: [
-                    { label: 'Project Page', href: 'https://cassiepython.github.io/nerfart/index.html' },
-                    { label: 'GitHub', href: 'https://github.com/cassiePython/NeRF-Art' },
-                    { label: 'arXiv', href: 'https://arxiv.org/abs/2212.08070' },
-                    { label: 'Paper', href: 'https://ieeexplore.ieee.org/abstract/document/10144678' }
-                ]
+        const PROJECT_DETAILS = [
+            {
+                meta: 'Research Highlight',
+                body: 'A stylization workflow for neural radiance fields that keeps scene geometry stable while translating text prompts into coherent visual language across views.'
             },
-            'avatar-craft': {
-                venue: 'ICCV 2023',
-                authors: [
-                    { name: 'Ruixiang Jiang', href: 'index.html' },
-                    { name: 'Can Wang', href: 'https://cassiepython.github.io' },
-                    { name: 'Jingbo Zhang', href: 'https://eckertzhang.github.io/' },
-                    { name: 'Menglei Chai', href: 'https://mlchai.com/' },
-                    { name: 'Mingming He', href: 'https://mingminghe.com/' },
-                    { name: 'Dongdong Chen', href: 'https://www.dongdongchen.bid/' },
-                    { name: 'Jing Liao', href: 'https://liaojing.github.io/html/' }
-                ],
-                body: 'We propose a comprehensive pipeline that transforms text prompts into high-quality 3D human avatars with parameterized shape and pose control, enabling users to create and animated personalized avatars.',
-                links: [
-                    { label: 'Project Page', href: 'https://avatar-craft.github.io' },
-                    { label: 'GitHub', href: 'https://github.com/songrise/avatarcraft' },
-                    { label: 'arXiv', href: 'https://arxiv.org/abs/2303.17606' },
-                    { label: 'Paper', href: 'https://openaccess.thecvf.com/content/ICCV2023/html/Jiang_AvatarCraft_Transforming_Text_into_Neural_Human_Avatars_with_Parameterized_Shape_ICCV_2023_paper.html' }
-                ]
+            {
+                meta: 'Embodied Generation',
+                body: 'A controllable avatar system that maps text to a full human representation with explicit shape and pose handles, aimed at iteration instead of one-shot output.'
             },
-            'clip-count': {
-                venue: 'ACM MM 2023',
-                authors: [
-                    { name: 'Ruixiang Jiang', href: 'index.html' },
-                    { name: 'Lingbo Liu', href: 'https://lingboliu.com/' },
-                    { name: 'Changwen Chen', href: 'http://www4.comp.polyu.edu.hk/~chencw/Biography.html' }
-                ],
-                body: 'Existing object counting models need to be trained on specific object categories and often fail to generalize to unseen categories. CLIP-Count tackles this by leveraging CLIP\'s open-vocabulary capabilities to count objects based on arbitrary text prompts, without requiring category-specific training.',
-                links: [
-                    { label: 'GitHub', href: 'https://github.com/songrise/CLIP-Count' },
-                    { label: 'arXiv', href: 'https://arxiv.org/abs/2305.07304' },
-                    { label: 'Paper', href: 'https://dl.acm.org/doi/10.1145/3581783.3611789' }
-                ]
+            {
+                meta: 'Vision-Language',
+                body: 'A counting interface built around CLIP-style supervision, tuned for compositional prompts, dense scenes, and a tighter feedback loop during evaluation.'
             },
-            'mope': {
-                venue: 'TMM 2025',
-                authors: [
-                    { name: 'Ruixiang Jiang', href: 'index.html' },
-                    { name: 'Lingbo Liu', href: 'https://lingboliu.com/' },
-                    { name: 'Changwen Chen', href: 'http://www4.comp.polyu.edu.hk/~chencw/Biography.html' }
-                ],
-                body: 'A prompt tuning setup for multimodal fusion that focuses on selective conditioning, preserving task-specific cues without overfitting every modality path.',
-                links: [
-                    { label: 'GitHub', href: 'https://github.com/songrise/ConditionalPrompt' },
-                    { label: 'arXiv', href: 'https://arxiv.org/abs/2312.03734' }
-                ]
+            {
+                meta: 'Multimodal Prompting',
+                body: 'A prompt tuning setup for multimodal fusion that focuses on selective conditioning, preserving task-specific cues without overfitting every modality path.'
             },
-            'diff-artist': {
-                venue: 'ACM MM 2025',
-                authors: [
-                    { name: 'Ruixiang Jiang', href: 'index.html' },
-                    { name: 'Changwen Chen', href: 'http://www4.comp.polyu.edu.hk/~chencw/Biography.html' }
-                ],
-                body: 'Existing neural stylization methods predominantly focus on stylizing the appearance of image. In this work, we explore how diffusion models can be used to stylize the structure of an image in a controllable way.',
-                links: [
-                    { label: 'Paper', href: 'https://dl.acm.org/doi/10.1145/3746027.3755010' },
-                    { label: 'GitHub', href: 'https://github.com/songrise/artist' },
-                    { label: 'Project Page', href: 'https://diffusionartist.github.io/' }
-                ]
+            {
+                meta: 'Creative Tools',
+                body: 'An authoring concept for visual systems work, centered on controllable style transfer, faster iteration, and a stronger relationship between edits and outputs.'
             },
-            'artcot': {
-                venue: 'ACM MM 2025',
-                authors: [
-                    { name: 'Ruixiang Jiang', href: 'index.html' },
-                    { name: 'Changwen Chen', href: 'http://www4.comp.polyu.edu.hk/~chencw/Biography.html' }
-                ],
-                body: 'Existing aesthetic computational models often focus on surface-level features and lack a deeper understanding of artistic principles. In this work, we propose ArtCoT that deeply reasons about the aesthetic of images beyond visual appeal.',
-                links: [
-                    { label: 'Paper', href: 'https://arxiv.org/abs/2501.09012' },
-                    { label: 'GitHub', href: 'https://github.com/songrise/MLLM4Art' },
-                    { label: 'Hugging Face', href: 'https://huggingface.co/datasets/Ruixiang/FineArtBench' }
-                ]
+            {
+                meta: 'Generative Art',
+                body: 'A broader exploration of diffusion-driven composition studies, using repeated motif control and layout-aware prompting to keep results intentional.'
             },
-            'sem-judge': {
-                venue: 'Preprint 2026',
-                authors: [
-                    { name: 'Ruixiang Jiang', href: 'index.html' }, { name: 'Changwen Chen', href: 'http://www4.comp.polyu.edu.hk/~chencw/Biography.html' }
-                ],
-                body: 'Interpretation is essential to art, yet existing computational models only access the looks of an artwork and fail to capture the underlying meaning. This work explores a semiotics-theoretic framework that evaluates art interpretation through the lens of Peirce\'s semiosis.',
-                links: [
-                    { label: 'Coming Soon', href: '#' },
-                ]
+            {
+                meta: 'Image Practice',
+                body: 'A lightweight photography collection presented as a visual side track, used here as a counterpoint to the more technical project cards.'
             }
-        };
+        ];
         let detailOffsetSteps = 0;
         let activeCardIndex = null;
-        let isTimeSortEnabled = false;
 
         cards.forEach((card, index) => {
             const frontFace = card.querySelector('.card-face');
             const inlineBackground = card.style.background;
-            const cardId = card.dataset.cardId;
-            const detail = cardId ? PROJECT_DETAILS[cardId] : null;
+            const detail = PROJECT_DETAILS[index];
 
             if (frontFace && inlineBackground) {
                 card.style.setProperty('--card-background', inlineBackground);
@@ -926,36 +676,17 @@
             const labelText = frontFace.querySelector('.label')?.textContent?.trim() || '';
             const shell = document.createElement('div');
             const backFace = document.createElement('div');
-            const detailAuthors = (detail.authors || [])
-                .map((author) => {
-                    const highlightClass = author.name === 'Ruixiang Jiang' ? ' class="author-highlight"' : '';
-                    return `<a href="${author.href}"${highlightClass}>${author.name}</a>`;
-                })
-                .join(', ');
-            const detailLinks = (detail.links || [])
-                .map((link) => `<a class="detail-link" href="${link.href}">${link.label}</a>`)
-                .join('');
 
             shell.className = 'card-shell';
             frontFace.classList.add('card-front');
             backFace.className = 'card-face card-back';
             backFace.innerHTML = `
                 <div class="card-back-panel">
-                    <div class="detail-layout">
-                        <div class="detail-main">
-                            <div class="card-back-title">${iconText}</div>
-                            <div class="detail-meta-group">
-                                <div class="detail-field"><strong>Venue</strong>${detail.venue}</div>
-                                <div class="detail-field"><strong>Authors</strong>${detailAuthors}</div>
-                            </div>
-                            <div class="detail-copy">
-                                <p class="detail-body">${detail.body}</p>
-                            </div>
-                            <div class="detail-links">${detailLinks}</div>
-                        </div>
-                        <div class="detail-visual" aria-hidden="true">
-                            <img src="${DETAIL_IMAGE_SRC}" alt="">
-                        </div>
+                    <div class="card-back-title">${iconText}</div>
+                    <div class="card-back-subtitle">${labelText}</div>
+                    <div class="detail-copy">
+                        <div class="detail-meta">${detail.meta}</div>
+                        <p class="detail-body">${detail.body}</p>
                     </div>
                 </div>
             `;
@@ -964,27 +695,7 @@
             shell.append(frontFace, backFace);
             card.setAttribute('role', 'button');
             card.setAttribute('tabindex', '0');
-
-            backFace.querySelectorAll('a').forEach((link) => {
-                link.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                });
-            });
         });
-
-        function getSortedCardIndices() {
-            if (!isTimeSortEnabled) {
-                return cards.map((_, index) => index);
-            }
-
-            return cards
-                .map((card, index) => ({
-                    index,
-                    order: Number(card.dataset.timeOrder || index + 1)
-                }))
-                .sort((a, b) => a.order - b.order)
-                .map((entry) => entry.index);
-        }
 
         function getDetailedLayoutConfig() {
             const width = window.innerWidth;
@@ -999,19 +710,14 @@
             const hiddenWidth = Math.max(0, fullSpan - availableSpan);
             const maxOffsetSteps = Math.ceil(hiddenWidth / (2 * step));
             const yOffset = `${Math.round(Math.max(height * 0.22, 155))}px`;
-            const sortedIndices = getSortedCardIndices();
             const middleIndex = (cards.length - 1) / 2;
-            const slots = new Array(cards.length);
-
-            sortedIndices.forEach((cardIndex, visualIndex) => {
-                slots[cardIndex] = {
-                    x: Math.round((visualIndex - middleIndex) * step),
-                    y: yOffset,
-                    rotate: `${rotations[visualIndex]}deg`,
-                    scale: scales[visualIndex],
-                    z: layers[visualIndex]
-                };
-            });
+            const slots = cards.map((_, index) => ({
+                x: Math.round((index - middleIndex) * step),
+                y: yOffset,
+                rotate: `${rotations[index]}deg`,
+                scale: scales[index],
+                z: layers[index]
+            }));
 
             return { maxOffsetSteps, slots, step };
         }
@@ -1019,29 +725,6 @@
         function updateNavState(maxOffsetSteps) {
             rotateLeftBtn.classList.toggle('is-disabled', detailOffsetSteps <= -maxOffsetSteps);
             rotateRightBtn.classList.toggle('is-disabled', detailOffsetSteps >= maxOffsetSteps);
-        }
-
-        function applyInitialFanLayout() {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            const offsets = [-3, -2, -1, 0, 1, 2, 3];
-            const rotateY = [28, 58, 84, 90, -84, -58, -28];
-            const scales = [1.06, 1.01, .96, 1, .96, 1.01, 1.06];
-            const layers = [1, 2, 3, 0, 3, 2, 1];
-            const opacities = [.78, .66, .56, 0, .56, .66, .78];
-            const step = Math.min(230, Math.max(118, Math.round(width * 0.115)));
-            const arcLift = Math.min(42, Math.max(12, Math.round(height * 0.025)));
-            const yOffsets = [arcLift, Math.round(arcLift * 0.42), -Math.round(arcLift * 0.18), 0, -Math.round(arcLift * 0.18), Math.round(arcLift * 0.42), arcLift];
-
-            cards.forEach((card, index) => {
-                card.style.setProperty('--fan-x', `${offsets[index] * step}px`);
-                card.style.setProperty('--fan-y', `${yOffsets[index]}px`);
-                card.style.setProperty('--fan-rotate-y', `${rotateY[index]}deg`);
-                card.style.setProperty('--fan-rotate-z', '0deg');
-                card.style.setProperty('--fan-scale', String(scales[index]));
-                card.style.setProperty('--fan-z', String(layers[index]));
-                card.style.setProperty('--fan-opacity', String(opacities[index]));
-            });
         }
 
         function applyDetailedLayout() {
@@ -1069,10 +752,6 @@
             backBtn.textContent = activeCardIndex === null ? '← Back' : 'Close';
         }
 
-        function updateSortToggleLabel() {
-            sortToggleBtn.classList.toggle('is-on', isTimeSortEnabled);
-        }
-
         function clearCardHoverState() {
             cards.forEach((card) => {
                 const timerId = hoverTimers.get(card);
@@ -1094,9 +773,9 @@
             const height = window.innerHeight;
             const compactStep = Math.min(92, Math.max(50, Math.round(width * 0.06)));
             const stackY = `${Math.round(Math.max(height * 0.39, 235))}px`;
-            const focusWidth = Math.min(Math.max((width - 28) * 1.3, 546), 1170);
-            const focusHeight = Math.min(Math.max((height * 0.44) * 1.3, 390), 598);
-            const focusY = `-${Math.round(Math.min(132, Math.max(54, height * 0.15)))}px`;
+            const focusWidth = Math.min(Math.max(width - 48, 320), 720);
+            const focusHeight = Math.min(Math.max(height * 0.34, 240), 360);
+            const focusY = `-${Math.round(Math.min(110, Math.max(40, height * 0.12)))}px`;
 
             cards.forEach((card, index) => {
                 if (index === activeCardIndex) {
@@ -1158,30 +837,11 @@
             updateBackButtonLabel();
         }
 
-        function toggleSortMode() {
-            if (!scene.classList.contains('expanded') || activeCardIndex !== null) return;
-
-            isTimeSortEnabled = !isTimeSortEnabled;
-            detailOffsetSteps = 0;
-            applyDetailedLayout();
-            updateSortToggleLabel();
-        }
-
         function exitExpandedView() {
             closeCardDetail();
             detailOffsetSteps = 0;
             scene.classList.remove('expanded');
-            applyInitialFanLayout();
             updateBackButtonLabel();
-        }
-
-        function enterExpandedView() {
-            if (scene.classList.contains('expanded')) return;
-
-            scene.classList.add('expanded');
-            applyDetailedLayout();
-            updateBackButtonLabel();
-            updateSortToggleLabel();
         }
 
         function shiftDetailedView(stepDelta) {
@@ -1232,7 +892,10 @@
         }
 
         trigger.addEventListener('click', () => {
-            enterExpandedView();
+            if (scene.classList.contains('expanded')) return;
+            scene.classList.add('expanded');
+            applyDetailedLayout();
+            updateBackButtonLabel();
         });
 
         detailScrim.addEventListener('click', () => closeCardDetail());
@@ -1250,19 +913,13 @@
         rotateRightBtn.addEventListener('click', () => {
             if (scene.classList.contains('expanded') && activeCardIndex === null) shiftDetailedView(1);
         });
-        sortToggleBtn.addEventListener('click', () => toggleSortMode());
         window.addEventListener('resize', () => {
             if (activeCardIndex !== null) {
                 applyFocusLayout();
                 return;
             }
 
-            if (scene.classList.contains('expanded')) {
-                applyDetailedLayout();
-                return;
-            }
-
-            applyInitialFanLayout();
+            if (scene.classList.contains('expanded')) applyDetailedLayout();
         });
         window.addEventListener('keydown', (event) => {
             if (event.key !== 'Escape') return;
@@ -1274,27 +931,9 @@
 
             if (scene.classList.contains('expanded')) exitExpandedView();
         });
-        window.addEventListener('wheel', (event) => {
-            if (Math.abs(event.deltaY) < 10) return;
-
-            if (event.deltaY > 0) {
-                enterExpandedView();
-                return;
-            }
-
-            if (scene.classList.contains('expanded')) exitExpandedView();
-        }, { passive: true });
-        document.addEventListener('click', (event) => {
-            if (activeCardIndex === null) return;
-            if (event.target.closest('.card.is-active')) return;
-            if (event.target.closest('.back-btn, .nav-btn, .sort-toggle')) return;
-
-            closeCardDetail();
-        });
 
         cards.forEach((c, i) => {
-            c.addEventListener('click', (event) => {
-                if (event.target.closest('a')) return;
+            c.addEventListener('click', () => {
                 if (!scene.classList.contains('expanded')) return;
                 if (activeCardIndex !== null) return;
                 openCardDetail(i);
@@ -1316,7 +955,7 @@
                     c.classList.add('is-hovered');
                     hoverTimers.delete(c);
                     resetCardTilt(c);
-                }, 250);
+                }, 400);
 
                 hoverTimers.set(c, timerId);
             });
@@ -1335,9 +974,6 @@
 
             attachCardTilt(c);
         });
-
-        applyInitialFanLayout();
-        updateSortToggleLabel();
     </script>
 </body>
 
