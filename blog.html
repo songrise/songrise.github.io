@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Short notes from Ruixiang Jiang's research projects.">
+  <title>Blog — Ruixiang Jiang</title>
+  <style>
+    :root {
+      --paper: #f4f0e8;
+      --ink: #1e1b17;
+      --muted: #70695f;
+      --line: #cfc6ba;
+      --accent: #ae4e2b;
+      --content: min(1220px, calc(100% - 64px));
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--paper); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; margin: 0; min-width: 320px; }
+    a { color: inherit; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .site-header { align-items: center; border-bottom: 1px solid var(--line); display: flex; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; justify-content: space-between; letter-spacing: .06em; margin: 0 auto; max-width: var(--content); padding: 22px 0 17px; text-transform: uppercase; }
+    .site-header a { text-decoration: none; }
+    .site-header a:hover { color: var(--accent); }
+    .slash { color: var(--accent); }
+    .header-actions { display: flex; gap: 8px; }
+    .header-actions a { border: 1px solid var(--ink); padding: 7px 10px; transition: background .2s ease, color .2s ease; }
+    .header-actions a:hover { background: var(--ink); color: var(--paper); }
+    main, .site-footer { margin: 0 auto; max-width: var(--content); }
+    .hero { max-width: 900px; padding: clamp(100px, 16vw, 210px) 0 clamp(90px, 13vw, 170px); }
+    .eyebrow, .note-meta { color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; letter-spacing: .075em; text-transform: uppercase; }
+    .eyebrow { margin: 0 0 18px; }
+    h1 { font-size: clamp(58px, 9vw, 132px); font-weight: 400; letter-spacing: -.065em; line-height: .87; margin: 0; }
+    .accent { color: var(--accent); font-style: italic; }
+    .hero-copy { border-left: 1px solid var(--line); color: var(--muted); font-size: clamp(18px, 1.7vw, 23px); line-height: 1.42; margin: 43px 0 0; max-width: 565px; padding-left: 25px; }
+    .notes { border-top: 1px solid var(--ink); padding-top: 15px; }
+    h2 { font-size: clamp(29px, 3vw, 44px); font-weight: 400; letter-spacing: -.04em; margin: 55px 0 28px; }
+    .note { display: grid; gap: 28px; grid-template-columns: 95px minmax(0, 1fr) minmax(220px, .65fr); padding: 34px 0; }
+    .note + .note { border-top: 1px solid var(--line); }
+    .note-index { color: var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; letter-spacing: .075em; padding-top: 7px; }
+    .note h3 { font-size: clamp(28px, 3.4vw, 52px); font-weight: 400; letter-spacing: -.052em; line-height: .95; margin: 0 0 14px; }
+    .note-title { color: var(--muted); font-size: clamp(17px, 1.6vw, 21px); font-style: italic; line-height: 1.25; margin: 0; }
+    .note-copy { align-self: start; color: var(--muted); font-size: 16px; line-height: 1.45; margin: 0; }
+    .coming { color: var(--accent); display: block; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; letter-spacing: .07em; margin-top: 17px; text-transform: uppercase; }
+    .site-footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; font-size: 14px; justify-content: space-between; margin-top: clamp(90px, 14vw, 180px); padding: 18px 0 30px; }
+    @media (max-width: 760px) { :root { --content: min(100% - 40px, 1220px); } .site-header { padding-top: 18px; } .hero { padding: 100px 0 110px; } .note { grid-template-columns: 1fr; gap: 15px; } .note-index { padding: 0; } .site-footer { flex-direction: column; gap: 15px; } }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <a href="index.html">Ruixiang Jiang <span class="slash">/</span> PhD Candidate</a>
+    <nav class="header-actions" aria-label="Site navigation">
+      <a href="index.html#publications">Research</a>
+      <a href="blog.html" aria-current="page">Blog</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">Blog · work in progress</p>
+      <h1 id="page-title">Short stories <span class="accent">from</span> the work.</h1>
+      <p class="hero-copy">Occasional notes on the questions, experiments, and unexpected turns behind selected research projects.</p>
+    </section>
+    <section class="notes" aria-labelledby="notes-title">
+      <h2 id="notes-title">Notes to come</h2>
+      <article class="note">
+        <div class="note-index">01 / 2026</div>
+        <div><h3>Before the Shutter</h3><p class="note-title">Planning a photograph before it is taken.</p></div>
+        <p class="note-copy">How the project reframes portrait photography as an aesthetic planning problem in a 3D scene.<span class="coming">Story forthcoming</span></p>
+      </article>
+      <article class="note">
+        <div class="note-index">02 / 2026</div>
+        <div><h3>Sem-Judge</h3><p class="note-title">What does it mean for a machine to interpret art?</p></div>
+        <p class="note-copy">A short account of using semiotics to move past surface quality when evaluating generative art.<span class="coming">Story forthcoming</span></p>
+      </article>
+      <article class="note">
+        <div class="note-index">03 / 2025</div>
+        <div><h3>Diff-Artist</h3><p class="note-title">Making structure an artistic material.</p></div>
+        <p class="note-copy">Notes on controllable diffusion and the search for an image language beyond representation.<span class="coming">Story forthcoming</span></p>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer"><span>Ruixiang Jiang</span><span>Computational aesthetics &amp; generative art</span></footer>
+</body>
+</html>

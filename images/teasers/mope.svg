@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="title desc">
+  <title id="title">MoPE teaser</title><desc id="desc">Three flowing routes merge through a shared prompt expert.</desc>
+  <rect width="480" height="300" fill="#e5e5d8"/>
+  <path d="M-18 67C100 51 101 184 227 156S370 50 507 79" fill="none" stroke="#315a60" stroke-width="43"/>
+  <path d="M-15 153C98 119 129 56 222 133S363 242 505 197" fill="none" stroke="#ca7449" stroke-width="39"/>
+  <path d="M-8 238C103 224 143 134 235 183S371 252 496 112" fill="none" stroke="#d0aa60" stroke-width="36"/>
+  <circle cx="236" cy="155" r="38" fill="#4d7475"/><circle cx="236" cy="155" r="14" fill="#e5e5d8"/>
+</svg>

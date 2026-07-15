@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="title desc">
+  <title id="title">CLIP-Count teaser</title><desc id="desc">Abstract repeated forms within an open frame.</desc>
+  <rect width="480" height="300" fill="#ece5d9"/><rect x="35" y="38" width="302" height="210" fill="none" stroke="#293c37" stroke-width="16"/><circle cx="119" cy="104" r="30" fill="#c24f3d"/><circle cx="194" cy="104" r="30" fill="#d3ae63"/><circle cx="269" cy="104" r="30" fill="#738b78"/><circle cx="156" cy="176" r="30" fill="#738b78"/><circle cx="231" cy="176" r="30" fill="#c24f3d"/><circle cx="306" cy="176" r="30" fill="#d3ae63"/><path d="M362 250L443 79L464 250Z" fill="#293c37"/><rect x="381" y="49" width="68" height="14" fill="#c24f3d"/>
+</svg>

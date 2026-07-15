@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="title desc">
+  <title id="title">ArtCoT teaser</title><desc id="desc">Abstract reasoning frame and aesthetic composition.</desc>
+  <rect width="480" height="300" fill="#e5e3d7"/><rect x="42" y="43" width="252" height="196" fill="none" stroke="#203c52" stroke-width="18"/><rect x="72" y="73" width="192" height="136" fill="#d6aa58"/><circle cx="169" cy="140" r="43" fill="#ae4e2b"/><path d="M72 209L171 93L264 209Z" fill="#70857e"/><rect x="326" y="42" width="95" height="95" fill="#203c52" transform="rotate(23 326 42)"/><circle cx="374" cy="90" r="24" fill="#e5e3d7"/><rect x="318" y="215" width="112" height="16" fill="#ae4e2b"/>
+</svg>

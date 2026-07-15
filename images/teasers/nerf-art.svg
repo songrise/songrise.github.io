@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="title desc">
+  <title id="title">NeRF-Art teaser</title><desc id="desc">Abstract stylized three dimensional radiance field.</desc>
+  <rect width="480" height="300" fill="#e8e3d6"/><path d="M29 257L130 40L242 257Z" fill="#1f2424"/><path d="M130 40L293 84L242 257Z" fill="#b9513b"/><path d="M242 257L293 84L425 237Z" fill="#71877d"/><circle cx="294" cy="125" r="54" fill="#d6a861"/><circle cx="294" cy="125" r="24" fill="#e8e3d6"/><rect x="38" y="51" width="98" height="16" fill="#b9513b" transform="rotate(-17 38 51)"/><rect x="337" y="245" width="92" height="13" fill="#1f2424"/>
+</svg>

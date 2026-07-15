@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="title desc">
+  <title id="title">Sem-Judge teaser</title><desc id="desc">Three linked abstract signs form a chain of interpretation.</desc>
+  <rect width="480" height="300" fill="#e9e2dc"/>
+  <path d="M131 155H211C240 155 242 115 270 115H357" fill="none" stroke="#b55c74" stroke-width="19" stroke-linecap="round"/>
+  <circle cx="89" cy="155" r="57" fill="#382b49"/><circle cx="89" cy="155" r="22" fill="#e9e2dc"/>
+  <circle cx="171" cy="155" r="15" fill="#e9e2dc" stroke="#b55c74" stroke-width="9"/>
+  <rect x="247" y="63" width="112" height="112" fill="#706178" transform="rotate(45 247 63)"/>
+  <circle cx="270" cy="115" r="15" fill="#e9e2dc" stroke="#b55c74" stroke-width="9"/>
+  <path d="M358 244L454 82L470 244Z" fill="#d4a765"/>
+  <rect x="43" y="56" width="104" height="14" fill="#b55c74"/>
+</svg>
