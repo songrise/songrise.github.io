@@ -86,12 +86,13 @@
       letter-spacing: .075em;
       text-transform: uppercase;
     }
-    .eyebrow { color: var(--muted); margin: 0 0 18px; }
+    .eyebrow { color: var(--muted); line-height: 1.45; margin: 0 0 18px; }
+    .eyebrow span + span::before { content: ' · '; }
     h1 {
       font-size: clamp(54px, 8.2vw, 126px);
       font-weight: 400;
       letter-spacing: -.065em;
-      line-height: .88;
+      line-height: .98;
       margin: 0;
       max-width: 950px;
     }
@@ -129,6 +130,7 @@
       line-height: .95;
       margin: 0 0 18px;
     }
+    .intro-description { color: #766e64; font-size: .9em; }
     .intro > p:not(.intro-name) { margin: 0; }
     .intro-links {
       display: flex;
@@ -267,14 +269,37 @@
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } .scroll-cue span, .accent { animation: none; } }
     @media (max-width: 760px) {
       :root { --content: min(100% - 40px, 1220px); }
-      .site-header { padding-top: 18px; }
-      .hero { display: flex; max-width: var(--content); min-height: 100svh; padding: 90px 0 96px; }
-      .intro { border-left: 0; border-top: 1px solid var(--line); padding: 18px 0 0; }
-      .scroll-cue { bottom: 24px; }
-      .publication { gap: 18px; }
+      .site-header { align-items: flex-start; font-size: 10px; gap: 10px; padding-top: 16px; }
+      .site-header > a { line-height: 1.3; max-width: 137px; }
+      .header-actions { flex-shrink: 0; gap: 6px; }
+      .header-research, .header-blog { padding: 6px 7px; }
+      .hero { align-items: stretch; display: flex; flex-direction: column; gap: 86px; justify-content: center; max-width: var(--content); min-height: 100svh; padding: 30px 0 11svh; }
+      .hero > div { flex-shrink: 0; }
+      h1 { font-size: clamp(48px, 13.2vw, 60px); line-height: .98; }
+      .eyebrow { margin-bottom: 15px; }
+      .eyebrow span { display: block; }
+      .eyebrow span + span::before { content: none; }
+      .intro { align-self: stretch; border-left: 0; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.5; padding: 22px 0 0; }
+      .intro { animation-name: intro-enter-mobile; transform: translateY(10svh); }
+      .intro-name { font-size: 21px; margin-bottom: 15px; }
+      .intro-description { font-size: 14px; }
+      .intro-links { gap: 10px 14px; margin-top: 16px; }
+      .intro-links a { font-size: 11px; }
+      .scroll-cue { bottom: 27px; right: 0; }
+      .archive-divider { margin-bottom: 62px; }
+      .research { padding-top: 88px; scroll-margin-top: 62px; }
+      .publication { gap: 17px; grid-template-columns: 1fr; padding: 35px 0; }
       .pub-number { padding: 0; }
+      .publication h3 { font-size: clamp(36px, 11vw, 46px); margin-bottom: 13px; }
+      .paper-title { font-size: 17px; margin-bottom: 12px; }
+      .publication-side { gap: 14px; }
+      .summary { font-size: 16px; }
       .research-head p { display: none; }
-      .site-footer { gap: 18px; flex-direction: column; }
+      .site-footer { flex-direction: row; font-size: 12px; gap: 12px; justify-content: space-between; white-space: nowrap; }
+    }
+    @keyframes intro-enter-mobile {
+      from { opacity: 0; transform: translateY(calc(10svh + 12px)); }
+      to { opacity: 1; transform: translateY(10svh); }
     }
   </style>
 </head>
@@ -291,16 +316,17 @@
   <main id="top">
     <section class="hero" aria-labelledby="page-title">
       <div>
-        <p class="eyebrow">Computational aesthetics · generative art · computer vision · computer graphics</p>
+        <p class="eyebrow"><span>Computational aesthetics · generative art</span><span>computer vision · computer graphics</span></p>
         <h1 id="page-title">I study how machines <span class="accent accent--understand">understand</span> and <span class="accent accent--create">create</span> beauty.</h1>
       </div>
       <div class="intro">
         <p class="intro-name">Ruixiang Jiang</p>
-        <p>PhD candidate at The Hong Kong Polytechnic University, working across generative AI, visual understanding, and the aesthetics of images.</p>
+        <p class="intro-description">PhD candidate at The Hong Kong Polytechnic University, working across generative AI, visual understanding, and the aesthetics of images.</p>
         <nav class="intro-links" aria-label="External profiles">
           <a href="https://scholar.google.com/citations?user=e34K_QoAAAAJ">Google Scholar</a>
           <a href="https://github.com/songrise">GitHub</a>
           <a href="data/CV.pdf">CV</a>
+          <a href="mailto:rui-x.jiang@connect.polyu.hk">Email</a>
         </nav>
       </div>
       <a class="scroll-cue" href="#publications">Scroll to publications <span aria-hidden="true">↓</span></a>
@@ -356,7 +382,7 @@
     </section>
   </main>
 
-  <footer class="site-footer"><span>Ruixiang Jiang</span><span>Computational aesthetics &amp; generative art</span></footer>
+  <footer class="site-footer"><span>Ruixiang Jiang</span><span>Last update Jul 2026</span></footer>
   <script>
     const items = document.querySelectorAll('.reveal');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
