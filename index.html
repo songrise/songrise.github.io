@@ -30,29 +30,49 @@
 
     .site-header {
       align-items: center;
+      background: rgba(244, 240, 232, .94);
       border-bottom: 1px solid var(--line);
       display: flex;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 11px;
       justify-content: space-between;
       letter-spacing: .06em;
-      margin: 0 auto;
       max-width: var(--content);
+      opacity: 0;
       padding: 22px 0 17px;
+      pointer-events: none;
+      position: fixed;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -110%);
       text-transform: uppercase;
+      transition: opacity .35s ease, transform .45s cubic-bezier(.2, .75, .25, 1);
+      width: var(--content);
+      z-index: 10;
     }
+    .site-header.is-visible { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
     .site-header a { text-decoration: none; }
     .site-header a:hover { color: var(--accent); }
+    .header-research {
+      border: 1px solid var(--ink);
+      padding: 7px 10px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .header-research:hover { background: var(--ink); color: var(--paper) !important; }
     .slash { color: var(--accent); }
 
     .hero,
     .research,
     .site-footer { margin: 0 auto; max-width: var(--content); }
     .hero {
+      align-items: end;
       display: grid;
-      gap: clamp(36px, 5vw, 76px);
-      grid-template-columns: minmax(0, 1.55fr) minmax(250px, .45fr);
-      padding: clamp(105px, 10vw, 145px) 0 clamp(110px, 14vw, 190px);
+      gap: clamp(64px, 9vw, 180px);
+      grid-template-columns: minmax(0, 1.62fr) minmax(300px, .38fr);
+      max-width: min(1760px, calc(100% - 96px));
+      min-height: 100svh;
+      padding: 92px 0 clamp(88px, 10vw, 145px);
+      position: relative;
     }
     .eyebrow,
     .archive-label,
@@ -80,8 +100,17 @@
       font-size: clamp(18px, 1.6vw, 22px);
       line-height: 1.42;
       margin: 0;
+      max-width: none;
       padding-left: 26px;
     }
+    .intro-name {
+      color: var(--ink);
+      font-size: clamp(29px, 2.55vw, 42px);
+      letter-spacing: -.045em;
+      line-height: .95;
+      margin: 0 0 18px;
+    }
+    .intro > p:not(.intro-name) { margin: 0; }
     .intro-links {
       display: flex;
       flex-wrap: wrap;
@@ -105,6 +134,23 @@
     .publication-links a::after { content: ' ↗]'; margin-left: 4px; }
     .intro-links a:hover,
     .publication-links a:hover { color: var(--ink); }
+    .scroll-cue {
+      bottom: clamp(32px, 4vw, 56px);
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      letter-spacing: .07em;
+      position: absolute;
+      right: 0;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .scroll-cue span { animation: scroll-cue-bob 1.7s ease-in-out infinite; color: var(--accent); display: inline-block; font-size: 18px; margin-left: 8px; transition: transform .2s ease; }
+    .scroll-cue:hover span { animation-play-state: paused; transform: translateY(4px); }
+    @keyframes scroll-cue-bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
 
     .archive-divider {
       align-items: center;
@@ -115,6 +161,7 @@
       padding-top: 14px;
     }
     .archive-divider::after { background: var(--accent); content: ''; height: 4px; width: 40px; }
+    .research { padding-top: clamp(84px, 12vw, 160px); scroll-margin-top: 76px; }
     .research-head {
       align-items: baseline;
       display: flex;
@@ -195,14 +242,13 @@
     }
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .75, .25, 1); }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } .scroll-cue span { animation: none; } }
     @media (max-width: 760px) {
       :root { --content: min(100% - 40px, 1220px); }
       .site-header { padding-top: 18px; }
-      .site-header span:last-child { display: none; }
-      .hero, .publication { grid-template-columns: 1fr; }
-      .hero { gap: 42px; padding: 96px 0 120px; }
+      .hero { display: flex; max-width: var(--content); min-height: 100svh; padding: 90px 0 96px; }
       .intro { border-left: 0; border-top: 1px solid var(--line); padding: 18px 0 0; }
+      .scroll-cue { bottom: 24px; }
       .publication { gap: 18px; }
       .pub-number { padding: 0; }
       .research-head p { display: none; }
@@ -213,17 +259,18 @@
 
 <body>
   <header class="site-header">
-    <a href="#top">Ruixiang Jiang <span class="slash">/</span> Researcher</a>
-    <span>Hong Kong · 2026</span>
+    <a href="#top">Ruixiang Jiang <span class="slash">/</span> PhD Candidate</a>
+    <a class="header-research" href="#publications">Research ↓</a>
   </header>
 
   <main id="top">
     <section class="hero" aria-labelledby="page-title">
       <div>
-        <p class="eyebrow">Computer vision · computational aesthetics</p>
+        <p class="eyebrow">Computational aesthetics · generative art · computer vision · computer graphics</p>
         <h1 id="page-title">I study how machines <span class="accent">understand</span> and <span class="accent">create</span> beauty.</h1>
       </div>
       <div class="intro">
+        <p class="intro-name">Ruixiang Jiang</p>
         <p>PhD candidate at The Hong Kong Polytechnic University, working across generative AI, visual understanding, and the aesthetics of images.</p>
         <nav class="intro-links" aria-label="External profiles">
           <a href="https://scholar.google.com/citations?user=e34K_QoAAAAJ">Google Scholar</a>
@@ -231,9 +278,10 @@
           <a href="data/CV.pdf">CV</a>
         </nav>
       </div>
+      <a class="scroll-cue" href="#publications">Scroll to publications <span aria-hidden="true">↓</span></a>
     </section>
 
-    <section class="research" aria-labelledby="research-title">
+    <section class="research" id="publications" aria-labelledby="research-title">
       <div class="archive-divider" aria-hidden="true"></div>
       <div class="research-head">
         <h2 id="research-title">Publications</h2>
@@ -242,36 +290,41 @@
 
       <article class="publication reveal">
         <div class="pub-number">01 / 2026</div>
+        <div><h3>Before the Shutter</h3><p class="paper-title">Before the Shutter: Aesthetic and Actionable Portrait Photography Planning in 3D Scenes</p><p class="venue">arXiv 2026 · Ruixiang Jiang, Chang Wen Chen</p></div>
+        <div class="publication-side"><div class="teaser teaser--orange" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">An agentic system for planning human pose, camera, and lighting for portrait photography in a 3D environment.</p><div class="publication-links"><a href="https://arxiv.org/abs/2605.30318">arXiv</a><a href="https://github.com/songrise/Before-the-Shutter">GitHub</a></div></div>
+      </article>
+      <article class="publication reveal">
+        <div class="pub-number">02 / 2026</div>
         <div><h3>Sem-Judge</h3><p class="paper-title">On Semiotic-Grounded Interpretive Evaluation of Generative Art</p><p class="venue">ACM MM 2026 · Ruixiang Jiang, Changwen Chen</p></div>
         <div class="publication-side"><div class="teaser teaser--green" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">A semiotics-theoretic framework for evaluating art interpretation through Peirce's semiosis.</p><div class="publication-links"><a href="https://arxiv.org/abs/2604.08641">arXiv</a><a href="https://github.com/songrise/SemJudge">GitHub</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">02 / 2025</div>
+        <div class="pub-number">03 / 2025</div>
         <div><h3>Diff-Artist</h3><p class="paper-title">DiffArtist: Towards Structure and Appearance Controllable Image Stylization</p><p class="venue">ACM MM 2025 · Ruixiang Jiang, Changwen Chen</p></div>
         <div class="publication-side"><div class="teaser" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">A controllable diffusion approach that uses image structure as a material for non-representational art.</p><div class="publication-links"><a href="https://dl.acm.org/doi/10.1145/3746027.3755010">Paper</a><a href="https://github.com/songrise/artist">GitHub</a><a href="https://diffusionartist.github.io/">Project</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">03 / 2025</div>
+        <div class="pub-number">04 / 2025</div>
         <div><h3>ArtCoT</h3><p class="paper-title">Multimodal LLMs Can Reason about Aesthetics in Zero-Shot</p><p class="venue">ACM MM 2025 · Ruixiang Jiang, Changwen Chen</p></div>
         <div class="publication-side"><div class="teaser teaser--orange" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">A reasoning framework that interprets visual aesthetics beyond surface-level appeal.</p><div class="publication-links"><a href="https://arxiv.org/abs/2501.09012">Paper</a><a href="https://github.com/songrise/MLLM4Art">GitHub</a><a href="https://huggingface.co/datasets/Ruixiang/FineArtBench">Data</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">04 / 2025</div>
+        <div class="pub-number">05 / 2025</div>
         <div><h3>MoPE</h3><p class="paper-title">MoPE: Mixture of Prompt Experts for Parameter-Efficient and Scalable Multimodal Fusion</p><p class="venue">TMM 2025 · Ruixiang Jiang, Lingbo Liu, Changwen Chen</p></div>
         <div class="publication-side"><div class="teaser teaser--blue" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">Prompt tuning for multimodal fusion that preserves task-specific cues through selective conditioning.</p><div class="publication-links"><a href="https://github.com/songrise/ConditionalPrompt">GitHub</a><a href="https://arxiv.org/abs/2312.03734">arXiv</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">05 / 2023</div>
+        <div class="pub-number">06 / 2023</div>
         <div><h3>CLIP-Count</h3><p class="paper-title">CLIP-Count: Towards Text-Guided Zero-Shot Object Counting</p><p class="venue">ACM MM 2023 · Ruixiang Jiang, Lingbo Liu, Changwen Chen</p></div>
         <div class="publication-side"><div class="teaser teaser--red" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">Open-vocabulary object counting from arbitrary text prompts, without category-specific training.</p><div class="publication-links"><a href="https://github.com/songrise/CLIP-Count">GitHub</a><a href="https://arxiv.org/abs/2305.07304">arXiv</a><a href="https://dl.acm.org/doi/10.1145/3581783.3611789">Paper</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">06 / 2023</div>
+        <div class="pub-number">07 / 2023</div>
         <div><h3>AvatarCraft</h3><p class="paper-title">AvatarCraft: Transforming Text into Neural Human Avatars with Parameterized Shape and Pose Control</p><p class="venue">ICCV 2023 · Ruixiang Jiang et al.</p></div>
         <div class="publication-side"><div class="teaser teaser--violet" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">A text-to-avatar pipeline with explicit control over neural human shape and pose.</p><div class="publication-links"><a href="https://avatar-craft.github.io">Project</a><a href="https://github.com/songrise/avatarcraft">GitHub</a><a href="https://arxiv.org/abs/2303.17606">arXiv</a><a href="https://openaccess.thecvf.com/content/ICCV2023/html/Jiang_AvatarCraft_Transforming_Text_into_Neural_Human_Avatars_with_Parameterized_Shape_ICCV_2023_paper.html">Paper</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">07 / 2023</div>
+        <div class="pub-number">08 / 2023</div>
         <div><h3>NeRF-Art</h3><p class="paper-title">NeRF-Art: Text-Driven Neural Radiance Fields Stylization</p><p class="venue">TVCG 2023 · Can Wang, Ruixiang Jiang et al.</p></div>
         <div class="publication-side"><div class="teaser teaser--ink" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">Text-driven stylization for neural radiance fields, with flexible artistic control over 3D objects.</p><div class="publication-links"><a href="https://cassiepython.github.io/nerfart/index.html">Project</a><a href="https://github.com/cassiePython/NeRF-Art">GitHub</a><a href="https://arxiv.org/abs/2212.08070">arXiv</a><a href="https://ieeexplore.ieee.org/abstract/document/10144678">Paper</a></div></div>
       </article>
@@ -295,6 +348,13 @@
       }, { threshold: 0.12 });
       items.forEach((item) => observer.observe(item));
     }
+
+    const header = document.querySelector('.site-header');
+    const scrollCue = document.querySelector('.scroll-cue');
+    const headerObserver = new IntersectionObserver(([entry]) => {
+      header.classList.toggle('is-visible', !entry.isIntersecting);
+    }, { threshold: 0 });
+    headerObserver.observe(scrollCue);
   </script>
 </body>
 </html>
