@@ -1,1344 +1,300 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruixiang Jiang, Phd Candidate</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
-
-        body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background: #f5f5f3;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* ──────── Scene ──────── */
-        .scene {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* ──────── Title + overlay ──────── */
-        .title-area {
-            position: relative;
-            z-index: 50;
-            text-align: center;
-            transition:
-                transform 1s cubic-bezier(.4, 0, .2, 1),
-                opacity .35s ease .5s;
-            will-change: transform, opacity;
-        }
-
-        /* soft radial mask that covers the cards behind the title */
-        .title-area::before {
-            content: '';
-            position: absolute;
-            inset: -36vh -38vw;
-            background: radial-gradient(ellipse 40% 48% at 50% 50%,
-                    rgba(245, 245, 243, .90) 0%,
-                    rgba(245, 245, 243, .78) 18%,
-                    rgba(245, 245, 243, .48) 40%,
-                    rgba(245, 245, 243, .16) 66%,
-                    rgba(245, 245, 243, 0) 100%);
-            z-index: -1;
-            pointer-events: none;
-            transition: opacity .8s ease;
-        }
-
-        .scene.expanded .title-area {
-            transform: translateY(-38vh) scale(.4);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .scene.expanded .title-area::before {
-            opacity: 0
-        }
-
-        h1 {
-            font-size: clamp(4rem, 8.6vw, 8rem);
-            font-weight: 700;
-            color: #111;
-            letter-spacing: -1px;
-            line-height: 1.1;
-            position: relative;
-        }
-
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -9px;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: url("data:image/svg+xml,%3Csvg width='12' height='6' viewBox='0 0 12 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3 L3 0 L6 3 L9 0 L12 3 L9 6 L6 3 L3 6 Z' fill='%23c0392b'/%3E%3C/svg%3E") repeat-x;
-            background-size: 12px 6px;
-        }
-
-        .subtitle {
-            margin-top: 18px;
-            font-size: clamp(1.6rem, 3vw, 2.45rem);
-            color: #444;
-            cursor: pointer;
-            display: inline-block;
-            transition: color .3s;
-            user-select: none;
-        }
-
-        .subtitle:hover {
-            color: #c0392b
-        }
-
-        .arrow {
-            display: block;
-            color: #c0392b;
-            margin-top: 8px;
-            font-size: 1.85rem;
-            animation: bob 1.6s ease-in-out infinite;
-        }
-
-        @keyframes bob {
-
-            0%,
-            100% {
-                transform: translateY(0)
-            }
-
-            50% {
-                transform: translateY(7px)
-            }
-        }
-
-        /* ──────── Cards layer ──────── */
-        .cards {
-            position: absolute;
-            inset: 0;
-            perspective: 1400px;
-            z-index: 1;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .scene.expanded .cards {
-            pointer-events: auto;
-        }
-
-        .scene.detail-active .cards {
-            z-index: 80;
-        }
-
-        /* ──────── Single card ──────── */
-        .card {
-            --card-width: 230px;
-            --card-height: 354px;
-            --card-corner-radius: 14px;
-            position: absolute;
-            width: var(--card-width-current, var(--card-width));
-            height: var(--card-height-current, var(--card-height));
-            border-radius: var(--card-corner-radius);
-            overflow: hidden;
-
-            /* anchor at viewport centre */
-            left: calc(50% - (var(--card-width-current, var(--card-width)) / 2));
-            top: calc(50% - (var(--card-height-current, var(--card-height)) / 2));
-
-            transform-origin: bottom center;
-            backface-visibility: hidden;
-
-            pointer-events: none;
-            cursor: default;
-
-            /*  every state uses the SAME function list
-        → CSS interpolates each independently           */
-            transition:
-                transform .72s cubic-bezier(.22, 1, .36, 1),
-                opacity .65s ease,
-                width .72s cubic-bezier(.22, 1, .36, 1),
-                height .72s cubic-bezier(.22, 1, .36, 1),
-                border-radius .4s ease;
-
-            perspective: 1100px;
-            perspective-origin: center center;
-            transform-style: preserve-3d;
-            transform:
-                translateX(var(--fan-x, 0px)) translateY(var(--fan-y, 0px)) rotateY(var(--fan-rotate-y, 0deg)) rotateZ(var(--fan-rotate-z, 0deg)) scale(var(--fan-scale, 1));
-            z-index: var(--fan-z, 1);
-            opacity: var(--fan-opacity, 1);
-        }
-
-        .scene.expanded .card {
-            pointer-events: auto;
-            cursor: pointer;
-            overflow: visible;
-            transition-delay: 0s;
-            transform:
-                translateX(var(--detail-x, 0px)) translateY(var(--detail-y, 28vh)) rotateZ(var(--detail-rotate, 0deg)) translateY(var(--hover-lift, 0px)) scale(var(--detail-scale, 1.98)) scale(var(--hover-scale, 1));
-            z-index: var(--detail-z, 3);
-            opacity: 1;
-        }
-
-        .card:focus,
-        .card:focus-visible {
-            outline: none;
-        }
-
-        .scene.expanded .card.is-hovered {
-            --hover-lift: -18px;
-            --hover-scale: 1.04;
-            z-index: 30;
-        }
-
-        .scene.detail-active .card {
-            transition-duration: .8s, .55s, .55s, .8s, .8s, .4s, .3s;
-        }
-
-        .scene.detail-active .card:not(.is-active) {
-            pointer-events: none;
-            cursor: default;
-            opacity: 1;
-            transform:
-                translateX(var(--stack-x, 0px)) translateY(var(--stack-y, 42vh)) rotateZ(var(--stack-rotate, 0deg)) scale(var(--stack-scale, .82));
-            z-index: var(--stack-z, 1);
-        }
-
-        .scene.detail-active .card.is-active {
-            pointer-events: auto;
-            cursor: default;
-            filter: none;
-            overflow: visible;
-            transform-origin: center center;
-            transform:
-                translateX(var(--focus-x, 0px)) translateY(var(--focus-y, -56px)) rotateZ(90deg) scale(1);
-            --card-corner-radius: 0px;
-            z-index: 120;
-        }
-
-        .scene.detail-active .card.is-active:hover {
-            filter: brightness(1.06) saturate(1.12);
-        }
-
-        .card-shell {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition:
-                transform .82s cubic-bezier(.22, 1, .36, 1),
-                filter .22s cubic-bezier(.22, 1, .36, 1);
-            will-change: transform;
-        }
-
-        .scene.detail-active .card.is-active .card-shell {
-            transform: rotateY(180deg);
-        }
-
-        .card-face {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            color: #fff;
-            padding: 20px;
-            transform-origin: center center;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-        }
-
-        .card-front {
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: var(--card-background, transparent);
-            border-radius: var(--card-corner-radius);
-            overflow: hidden;
-            transform:
-                rotateY(0deg) rotateY(var(--hover-tilt-y, 0deg)) rotateX(var(--hover-tilt-x, 0deg));
-            transition:
-                transform .22s cubic-bezier(.22, 1, .36, 1),
-                filter .22s cubic-bezier(.22, 1, .36, 1);
-            transform-style: preserve-3d;
-            will-change: transform;
-            filter: brightness(.96) saturate(.82) drop-shadow(0 10px 26px rgba(0, 0, 0, .14));
-        }
-
-        .scene.expanded .card .card-front {
-            filter: brightness(1) saturate(1) drop-shadow(0 10px 26px rgba(0, 0, 0, .14));
-        }
-
-        .scene.detail-active .card:not(.is-active) .card-front {
-            filter: brightness(.78) saturate(.82) drop-shadow(0 10px 20px rgba(0, 0, 0, .08));
-        }
-
-        .card-back {
-            top: 50%;
-            left: 50%;
-            width: var(--back-face-width, 100%);
-            height: var(--back-face-height, 100%);
-            padding: 0;
-            color: var(--card-ink, #fff);
-            background: none;
-            transform: translate(-50%, -50%) rotateY(180deg) rotateZ(-90deg);
-            pointer-events: none;
-        }
-
-        .scene.detail-active .card.is-active .card-back {
-            pointer-events: auto;
-        }
-
-        .card-back-panel {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: stretch;
-            justify-content: space-between;
-            gap: 24px;
-            padding: 34px 40px 30px;
-            color: #172033;
-            text-align: left;
-            border-radius: 28px;
-            background:
-                linear-gradient(135deg, rgba(255, 255, 255, .92), rgba(242, 246, 252, .96));
-            box-shadow: 0 26px 54px rgba(0, 0, 0, .28);
-            overflow: hidden;
-        }
-
-        .scene.detail-active .card.is-active .card-back-panel {
-            pointer-events: auto;
-        }
-
-        .detail-layout {
-            position: relative;
-            display: grid;
-            grid-template-columns: minmax(0, 1.15fr) minmax(220px, .85fr);
-            width: 100%;
-            height: 100%;
-            min-height: 0;
-            gap: 20px;
-            pointer-events: auto;
-        }
-
-        .scene.expanded .card:hover .card-front {
-            filter: brightness(1.06) saturate(1.12) drop-shadow(0 18px 42px rgba(0, 0, 0, .22));
-        }
-
-        .scene.expanded .card.is-hovered .card-front {
-            filter: brightness(1.06) saturate(1.12) drop-shadow(0 28px 62px rgba(0, 0, 0, .28));
-        }
-
-        .scene.detail-active .card.is-active:hover .card-back-panel {
-            box-shadow: 0 30px 58px rgba(0, 0, 0, .3);
-        }
-
-        .card-face .icon {
-            font-size: 2.8rem;
-            font-weight: 700;
-            line-height: 1
-        }
-
-        .card-face .label {
-            font-size: .55rem;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            margin-top: 12px;
-            opacity: .75;
-        }
-
-        .card-back-title {
-            max-width: 100%;
-            font-size: clamp(1.9rem, 3.5vw, 3rem);
-            font-weight: 700;
-            line-height: 1.02;
-            letter-spacing: -.025em;
-        }
-
-        .detail-main {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            max-width: 100%;
-            pointer-events: auto;
-        }
-
-        .detail-meta-group {
-            margin-top: 22px;
-            display: grid;
-            gap: 10px;
-        }
-
-        .detail-copy {
-            max-width: 92%;
-            margin-top: 34px;
-            opacity: 0;
-            transform: translateY(14px);
-            transition:
-                opacity .26s ease,
-                transform .42s cubic-bezier(.22, 1, .36, 1);
-            pointer-events: auto;
-        }
-
-        .scene.detail-active .card.is-active .detail-copy {
-            opacity: 1;
-            transform: translateY(0);
-            transition-delay: .14s;
-        }
-
-        .detail-field {
-            font-size: 1.04rem;
-            line-height: 1.65;
-            color: rgba(23, 32, 51, .84);
-        }
-
-        .detail-field strong {
-            display: inline-block;
-            margin-right: 8px;
-            font-weight: 700;
-            font-size: .95rem;
-            color: #172033;
-        }
-
-        .detail-field a {
-            display: inline-block;
-            color: inherit;
-            padding: .08em .28em;
-            border-radius: 0;
-            text-decoration: none;
-            cursor: pointer;
-            pointer-events: auto;
-            background-image: linear-gradient(#1f5f8f, #1f5f8f);
-            background-repeat: no-repeat;
-            background-position: 0 100%;
-            background-size: 100% 0%;
-            transition:
-                color .24s ease,
-                background-size .24s ease;
-        }
-
-        .detail-field a:hover {
-            color: #f5f5f3;
-            background-size: 100% 100%;
-        }
-
-        .detail-field a.author-highlight {
-            color: #1f5f8f;
-            font-weight: 700;
-        }
-
-        .detail-body {
-            font-size: clamp(1.08rem, 1.45vw, 1.32rem);
-            line-height: 1.78;
-            color: rgba(23, 32, 51, .9);
-        }
-
-        .detail-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px;
-            margin-top: auto;
-            padding-top: 26px;
-            position: relative;
-            z-index: 3;
-        }
-
-        .detail-link {
-            display: inline-block;
-            color: #172033;
-            font-size: 1.02rem;
-            font-weight: 600;
-            letter-spacing: .02em;
-            padding: .26em .62em;
-            border-radius: 0;
-            text-decoration: none;
-            cursor: pointer;
-            pointer-events: auto;
-            background-image: linear-gradient(#1f5f8f, #1f5f8f);
-            background-repeat: no-repeat;
-            background-position: 0 100%;
-            background-size: 100% 0%;
-            transition:
-                color .24s ease,
-                background-size .24s ease;
-        }
-
-        .detail-link:hover {
-            color: #f5f5f3;
-            background-size: 100% 100%;
-        }
-
-        .detail-visual {
-            position: relative;
-            min-width: 0;
-            min-height: 100%;
-            border-radius: 22px;
-            overflow: hidden;
-            background:
-                linear-gradient(135deg, rgba(169, 196, 255, .12), rgba(130, 167, 245, .28));
-        }
-
-        .detail-visual img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            opacity: .98;
-            filter: saturate(.98) contrast(1.02);
-            mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .28) 18%, rgba(0, 0, 0, .96) 58%);
-            -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .28) 18%, rgba(0, 0, 0, .96) 58%);
-        }
-
-        .detail-visual::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(90deg, rgba(242, 246, 252, .94) 0%, rgba(242, 246, 252, .2) 24%, rgba(242, 246, 252, 0) 44%),
-                linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, 0));
-            pointer-events: none;
-        }
-
-        /* =============================================
-     INITIAL STATE  —  3-D open-book spread
-     transform: tX · tY · rotY · rotZ · scale
-     ============================================= */
-
-        .card:nth-child(1) {
-            transition-delay: .24s;
-        }
-
-        .card:nth-child(2) {
-            transition-delay: .16s;
-        }
-
-        .card:nth-child(3) {
-            transition-delay: .08s;
-        }
-
-        /* centre card — edge-on (90 °) → invisible */
-        .card:nth-child(4) {
-            transition-delay: 0s;
-        }
-
-        .card:nth-child(5) {
-            transition-delay: .08s;
-        }
-
-        .card:nth-child(6) {
-            transition-delay: .16s;
-        }
-
-        .card:nth-child(7) {
-            transition-delay: .24s;
-        }
-
-        /* =============================================
-     DETAILED VIEW  —  wide fan spread
-     ============================================= */
-
-        /* ──────── Back button ──────── */
-        .back-btn {
-            position: fixed;
-            top: 28px;
-            left: 28px;
-            border: 2px solid #222;
-            background: transparent;
-            padding: 8px 22px;
-            font-family: inherit;
-            font-size: .85rem;
-            cursor: pointer;
-            border-radius: 6px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .4s, background .25s, color .25s;
-            z-index: 200;
-        }
-
-        .back-btn:hover {
-            background: #222;
-            color: #fff
-        }
-
-        .scene.expanded~.back-btn {
-            opacity: 1;
-            pointer-events: all
-        }
-
-        .detail-scrim {
-            position: fixed;
-            inset: 0;
-            background: rgba(20, 20, 20, .04);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .45s ease;
-            z-index: 55;
-        }
-
-        .scene.detail-active~.detail-scrim {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .nav-btn {
-            position: fixed;
-            bottom: 26px;
-            width: 54px;
-            height: 54px;
-            border: 2px solid #222;
-            border-radius: 999px;
-            background: rgba(245, 245, 243, .92);
-            color: #111;
-            font-family: inherit;
-            font-size: 1.6rem;
-            line-height: 1;
-            cursor: pointer;
-            opacity: 0;
-            pointer-events: none;
-            transition:
-                opacity .35s ease,
-                transform .35s ease,
-                background .25s ease,
-                color .25s ease,
-                border-color .25s ease;
-            z-index: 220;
-        }
-
-        .nav-btn:hover {
-            background: #222;
-            color: #fff;
-            border-color: #222;
-            transform: translateY(-2px);
-        }
-
-        .nav-left {
-            left: 28px;
-        }
-
-        .nav-right {
-            right: 28px;
-        }
-
-        .scene.expanded~.nav-btn {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .scene.expanded~.nav-btn.is-disabled {
-            opacity: .28;
-            pointer-events: none;
-        }
-
-        .scene.detail-active~.nav-btn {
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(10px);
-        }
-
-        .sort-toggle {
-            position: fixed;
-            left: 50%;
-            bottom: 28px;
-            transform: translateX(-50%) translateY(10px);
-            padding: 8px 14px;
-            border: 1px solid rgba(17, 17, 17, .18);
-            border-radius: 999px;
-            background: transparent;
-            color: #111;
-            font: inherit;
-            font-size: .62rem;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            cursor: pointer;
-            opacity: 0;
-            pointer-events: none;
-            transition:
-                opacity .35s ease,
-                transform .35s ease,
-                background .25s ease,
-                border-color .25s ease;
-            z-index: 210;
-        }
-
-        .sort-toggle:hover {
-            border-color: rgba(17, 17, 17, .34);
-        }
-
-        .sort-toggle.is-on {
-            background: rgba(17, 17, 17, .9);
-            border-color: rgba(17, 17, 17, .9);
-            color: #f5f5f3;
-        }
-
-        .scene.expanded~.sort-toggle {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .scene.detail-active~.sort-toggle {
-            opacity: 0;
-            pointer-events: none;
-            transform: translateX(-50%) translateY(10px);
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ruixiang Jiang — PhD candidate researching computational aesthetics, generative AI, and visual understanding.">
+  <title>Ruixiang Jiang — Research</title>
+  <style>
+    :root {
+      --paper: #f4f0e8;
+      --ink: #1e1b17;
+      --muted: #70695f;
+      --line: #cfc6ba;
+      --accent: #ae4e2b;
+      --content: min(1220px, calc(100% - 64px));
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, 'Times New Roman', serif;
+      margin: 0;
+      min-width: 320px;
+    }
+    a { color: inherit; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+    .site-header {
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      justify-content: space-between;
+      letter-spacing: .06em;
+      margin: 0 auto;
+      max-width: var(--content);
+      padding: 22px 0 17px;
+      text-transform: uppercase;
+    }
+    .site-header a { text-decoration: none; }
+    .site-header a:hover { color: var(--accent); }
+    .slash { color: var(--accent); }
+
+    .hero,
+    .research,
+    .site-footer { margin: 0 auto; max-width: var(--content); }
+    .hero {
+      display: grid;
+      gap: clamp(36px, 5vw, 76px);
+      grid-template-columns: minmax(0, 1.55fr) minmax(250px, .45fr);
+      padding: clamp(105px, 10vw, 145px) 0 clamp(110px, 14vw, 190px);
+    }
+    .eyebrow,
+    .archive-label,
+    .pub-number,
+    .venue {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      letter-spacing: .075em;
+      text-transform: uppercase;
+    }
+    .eyebrow { color: var(--muted); margin: 0 0 18px; }
+    h1 {
+      font-size: clamp(54px, 8.2vw, 126px);
+      font-weight: 400;
+      letter-spacing: -.065em;
+      line-height: .88;
+      margin: 0;
+      max-width: 950px;
+    }
+    .accent { color: var(--accent); font-style: italic; }
+    .intro {
+      align-self: end;
+      border-left: 1px solid var(--line);
+      color: var(--muted);
+      font-size: clamp(18px, 1.6vw, 22px);
+      line-height: 1.42;
+      margin: 0;
+      padding-left: 26px;
+    }
+    .intro-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      margin-top: 28px;
+    }
+    .intro-links a,
+    .publication-links a {
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: .055em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color .2s ease;
+    }
+    .intro-links a::before,
+    .publication-links a::before { content: '['; margin-right: 4px; }
+    .intro-links a::after,
+    .publication-links a::after { content: ' ↗]'; margin-left: 4px; }
+    .intro-links a:hover,
+    .publication-links a:hover { color: var(--ink); }
+
+    .archive-divider {
+      align-items: center;
+      border-top: 1px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: clamp(62px, 9vw, 135px);
+      padding-top: 14px;
+    }
+    .archive-divider::after { background: var(--accent); content: ''; height: 4px; width: 40px; }
+    .research-head {
+      align-items: baseline;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    h2 { font-size: clamp(28px, 3vw, 44px); font-weight: 400; letter-spacing: -.04em; margin: 0; }
+    .research-head p { color: var(--muted); margin: 0; }
+
+    .publication {
+      display: grid;
+      gap: 28px;
+      grid-template-columns: 76px minmax(220px, 1fr) minmax(280px, .94fr);
+      padding: clamp(30px, 4vw, 54px) 0;
+    }
+    .publication + .publication { border-top: 1px solid var(--line); }
+    .pub-number { color: var(--accent); padding-top: 7px; }
+    .publication h3 {
+      font-size: clamp(31px, 3.6vw, 54px);
+      font-weight: 400;
+      letter-spacing: -.052em;
+      line-height: .95;
+      margin: 0 0 17px;
+    }
+    .paper-title {
+      color: var(--muted);
+      font-size: clamp(16px, 1.45vw, 20px);
+      font-style: italic;
+      line-height: 1.2;
+      margin: 0 0 15px;
+    }
+    .venue { color: var(--muted); line-height: 1.5; }
+    .publication-side { display: grid; gap: 16px; align-content: start; }
+    .teaser {
+      align-items: center;
+      aspect-ratio: 16 / 7;
+      background: linear-gradient(135deg, #c7af98 0%, #786056 45%, #20272a 46%, #e8ded0 47% 100%);
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .teaser::before {
+      background: rgba(244, 240, 232, .8);
+      content: '';
+      height: 124%;
+      position: absolute;
+      transform: rotate(26deg);
+      width: 28%;
+    }
+    .teaser span {
+      color: var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 10px;
+      letter-spacing: .1em;
+      position: relative;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+    .teaser--orange { background: linear-gradient(148deg, #342f2b 0 35%, #cd673b 36% 53%, #e8d9b4 54% 67%, #748470 68%); }
+    .teaser--orange::before { background: rgba(37, 31, 27, .72); transform: rotate(-32deg); }
+    .teaser--blue { background: linear-gradient(135deg, #c1d2cd 0 27%, #264150 28% 52%, #e2c27b 53% 75%, #eee7d9 76%); }
+    .teaser--red { background: linear-gradient(130deg, #201f1e 0 30%, #a64232 31% 47%, #d9c9ab 48% 68%, #646e69 69%); }
+    .teaser--violet { background: linear-gradient(145deg, #302a38 0 31%, #9584a9 32% 49%, #d9c9bb 50% 70%, #453d53 71%); }
+    .teaser--green { background: linear-gradient(135deg, #d7d4c4 0 29%, #56766c 30% 49%, #e09650 50% 67%, #283a36 68%); }
+    .teaser--ink { background: linear-gradient(145deg, #1b1b1b 0 38%, #57534d 39% 52%, #beb5a4 53% 65%, #777a71 66%); }
+    .summary { color: var(--muted); font-size: 17px; line-height: 1.45; margin: 0; }
+    .publication-links { display: flex; flex-wrap: wrap; gap: 8px 15px; }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      display: flex;
+      font-size: 14px;
+      justify-content: space-between;
+      margin-top: clamp(80px, 13vw, 180px);
+      padding: 18px 0 30px;
+    }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .75, .25, 1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } }
+    @media (max-width: 760px) {
+      :root { --content: min(100% - 40px, 1220px); }
+      .site-header { padding-top: 18px; }
+      .site-header span:last-child { display: none; }
+      .hero, .publication { grid-template-columns: 1fr; }
+      .hero { gap: 42px; padding: 96px 0 120px; }
+      .intro { border-left: 0; border-top: 1px solid var(--line); padding: 18px 0 0; }
+      .publication { gap: 18px; }
+      .pub-number { padding: 0; }
+      .research-head p { display: none; }
+      .site-footer { gap: 18px; flex-direction: column; }
+    }
+  </style>
 </head>
 
 <body>
+  <header class="site-header">
+    <a href="#top">Ruixiang Jiang <span class="slash">/</span> Researcher</a>
+    <span>Hong Kong · 2026</span>
+  </header>
 
-    <div class="scene" id="scene">
+  <main id="top">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Computer vision · computational aesthetics</p>
+        <h1 id="page-title">I study how machines <span class="accent">understand</span> and <span class="accent">create</span> beauty.</h1>
+      </div>
+      <div class="intro">
+        <p>PhD candidate at The Hong Kong Polytechnic University, working across generative AI, visual understanding, and the aesthetics of images.</p>
+        <nav class="intro-links" aria-label="External profiles">
+          <a href="https://scholar.google.com/citations?user=e34K_QoAAAAJ">Google Scholar</a>
+          <a href="https://github.com/songrise">GitHub</a>
+          <a href="data/CV.pdf">CV</a>
+        </nav>
+      </div>
+    </section>
 
-        <!-- title + radial overlay -->
-        <div class="title-area">
-            <h1>Ruixiang Jiang</h1>
-            <div class="subtitle" id="trigger">
-                Phd candidate, Computational Aesthetics.
-                <span class="arrow">↓</span>
-            </div>
-        </div>
+    <section class="research" aria-labelledby="research-title">
+      <div class="archive-divider" aria-hidden="true"></div>
+      <div class="research-head">
+        <h2 id="research-title">Publications</h2>
+        <p class="eyebrow">2023 — 2026</p>
+      </div>
 
-        <!-- 3-D card book -->
-        <div class="cards">
+      <article class="publication reveal">
+        <div class="pub-number">01 / 2026</div>
+        <div><h3>Sem-Judge</h3><p class="paper-title">On Semiotic-Grounded Interpretive Evaluation of Generative Art</p><p class="venue">ACM MM 2026 · Ruixiang Jiang, Changwen Chen</p></div>
+        <div class="publication-side"><div class="teaser teaser--green" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">A semiotics-theoretic framework for evaluating art interpretation through Peirce's semiosis.</p><div class="publication-links"><a href="https://arxiv.org/abs/2604.08641">arXiv</a><a href="https://github.com/songrise/SemJudge">GitHub</a></div></div>
+      </article>
+      <article class="publication reveal">
+        <div class="pub-number">02 / 2025</div>
+        <div><h3>Diff-Artist</h3><p class="paper-title">DiffArtist: Towards Structure and Appearance Controllable Image Stylization</p><p class="venue">ACM MM 2025 · Ruixiang Jiang, Changwen Chen</p></div>
+        <div class="publication-side"><div class="teaser" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">A controllable diffusion approach that uses image structure as a material for non-representational art.</p><div class="publication-links"><a href="https://dl.acm.org/doi/10.1145/3746027.3755010">Paper</a><a href="https://github.com/songrise/artist">GitHub</a><a href="https://diffusionartist.github.io/">Project</a></div></div>
+      </article>
+      <article class="publication reveal">
+        <div class="pub-number">03 / 2025</div>
+        <div><h3>ArtCoT</h3><p class="paper-title">Multimodal LLMs Can Reason about Aesthetics in Zero-Shot</p><p class="venue">ACM MM 2025 · Ruixiang Jiang, Changwen Chen</p></div>
+        <div class="publication-side"><div class="teaser teaser--orange" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">A reasoning framework that interprets visual aesthetics beyond surface-level appeal.</p><div class="publication-links"><a href="https://arxiv.org/abs/2501.09012">Paper</a><a href="https://github.com/songrise/MLLM4Art">GitHub</a><a href="https://huggingface.co/datasets/Ruixiang/FineArtBench">Data</a></div></div>
+      </article>
+      <article class="publication reveal">
+        <div class="pub-number">04 / 2025</div>
+        <div><h3>MoPE</h3><p class="paper-title">MoPE: Mixture of Prompt Experts for Parameter-Efficient and Scalable Multimodal Fusion</p><p class="venue">TMM 2025 · Ruixiang Jiang, Lingbo Liu, Changwen Chen</p></div>
+        <div class="publication-side"><div class="teaser teaser--blue" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">Prompt tuning for multimodal fusion that preserves task-specific cues through selective conditioning.</p><div class="publication-links"><a href="https://github.com/songrise/ConditionalPrompt">GitHub</a><a href="https://arxiv.org/abs/2312.03734">arXiv</a></div></div>
+      </article>
+      <article class="publication reveal">
+        <div class="pub-number">05 / 2023</div>
+        <div><h3>CLIP-Count</h3><p class="paper-title">CLIP-Count: Towards Text-Guided Zero-Shot Object Counting</p><p class="venue">ACM MM 2023 · Ruixiang Jiang, Lingbo Liu, Changwen Chen</p></div>
+        <div class="publication-side"><div class="teaser teaser--red" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">Open-vocabulary object counting from arbitrary text prompts, without category-specific training.</p><div class="publication-links"><a href="https://github.com/songrise/CLIP-Count">GitHub</a><a href="https://arxiv.org/abs/2305.07304">arXiv</a><a href="https://dl.acm.org/doi/10.1145/3581783.3611789">Paper</a></div></div>
+      </article>
+      <article class="publication reveal">
+        <div class="pub-number">06 / 2023</div>
+        <div><h3>AvatarCraft</h3><p class="paper-title">AvatarCraft: Transforming Text into Neural Human Avatars with Parameterized Shape and Pose Control</p><p class="venue">ICCV 2023 · Ruixiang Jiang et al.</p></div>
+        <div class="publication-side"><div class="teaser teaser--violet" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">A text-to-avatar pipeline with explicit control over neural human shape and pose.</p><div class="publication-links"><a href="https://avatar-craft.github.io">Project</a><a href="https://github.com/songrise/avatarcraft">GitHub</a><a href="https://arxiv.org/abs/2303.17606">arXiv</a><a href="https://openaccess.thecvf.com/content/ICCV2023/html/Jiang_AvatarCraft_Transforming_Text_into_Neural_Human_Avatars_with_Parameterized_Shape_ICCV_2023_paper.html">Paper</a></div></div>
+      </article>
+      <article class="publication reveal">
+        <div class="pub-number">07 / 2023</div>
+        <div><h3>NeRF-Art</h3><p class="paper-title">NeRF-Art: Text-Driven Neural Radiance Fields Stylization</p><p class="venue">TVCG 2023 · Can Wang, Ruixiang Jiang et al.</p></div>
+        <div class="publication-side"><div class="teaser teaser--ink" role="img" aria-label="Abstract placeholder teaser image"><span>Teaser image</span></div><p class="summary">Text-driven stylization for neural radiance fields, with flexible artistic control over 3D objects.</p><div class="publication-links"><a href="https://cassiepython.github.io/nerfart/index.html">Project</a><a href="https://github.com/cassiePython/NeRF-Art">GitHub</a><a href="https://arxiv.org/abs/2212.08070">arXiv</a><a href="https://ieeexplore.ieee.org/abstract/document/10144678">Paper</a></div></div>
+      </article>
+    </section>
+  </main>
 
-            <div class="card" data-card-id="diff-artist" data-time-order="5"
-                style="background:linear-gradient(145deg,#222,#000)">
-                <div class="card-face">
-                    <div class="icon">Diff-Artist</div>
-                    <div class="label">We study how AI can generate non-representational art.</div>
-                </div>
-            </div>
-
-
-            <!-- centre card (invisible in book view) -->
-            <div class="card" data-card-id="mope" data-time-order="4"
-                style="background:linear-gradient(145deg,#14142e,#1e2a4a)">
-                <div class="card-face">
-                    <div class="icon">MoPE</div>
-                    <div class="label">We study how different modals can be efficiently fused.</div>
-                </div>
-            </div>
-
-            <div class="card" data-card-id="clip-count" data-time-order="3"
-                style="background:linear-gradient(145deg,#1a1a1a,#333)">
-                <div class="card-face">
-                    <div class="icon">CLIP-Count</div>
-                    <div class="label">We study how AI model can count like humans.</div>
-                </div>
-            </div>
-
-            <div class="card" data-card-id="artcot" data-time-order="6"
-                style="background:linear-gradient(145deg,#c0c8d8,#e2e2e2)">
-                <div class="card-face" style="color:#111">
-                    <div class="icon">ArtCoT</div>
-                    <div class="label">We study how AI can reason about beauty.</div>
-                </div>
-            </div>
-
-            <div class="card" data-card-id="avatar-craft" data-time-order="2"
-                style="background:linear-gradient(145deg,#4a4a5a,#8a8a9a)">
-                <div class="card-face">
-                    <div class="icon">Avatar Craft</div>
-                    <div class="label">We study how AI can generate 3D human avatars from text.</div>
-                </div>
-            </div>
-
-
-
-
-
-            <div class="card" data-card-id="sem-judge" data-time-order="7"
-                style="background:linear-gradient(145deg,#355c7d,#6c5b7b)">
-                <div class="card-face">
-                    <div class="icon">Sem-Judge</div>
-                    <div class="label">We study how artistic interpretation can be achieved using semiotics theory.
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" data-card-id="nerf-art" data-time-order="1"
-                style="background:linear-gradient(145deg,#3a3a3a,#707070)">
-                <div class="card-face">
-                    <div class="icon">Nerf-Art</div>
-                    <div class="label">We study how 3D objects can be stylized from text prompts.</div>
-                </div>
-            </div>
-
-
-
-
-
-        </div>
-    </div>
-
-    <div class="detail-scrim" id="detailScrim" aria-hidden="true"></div>
-    <button class="back-btn" id="backBtn">← Back</button>
-    <button class="nav-btn nav-left" id="rotateLeftBtn" aria-label="Rotate cards left">←</button>
-    <button class="nav-btn nav-right" id="rotateRightBtn" aria-label="Rotate cards right">→</button>
-    <button class="sort-toggle" id="sortToggleBtn" aria-label="Toggle time sorting">Sort with Time</button>
-
-    <script>
-        const scene = document.getElementById('scene');
-        const trigger = document.getElementById('trigger');
-        const detailScrim = document.getElementById('detailScrim');
-        const backBtn = document.getElementById('backBtn');
-        const rotateLeftBtn = document.getElementById('rotateLeftBtn');
-        const rotateRightBtn = document.getElementById('rotateRightBtn');
-        const sortToggleBtn = document.getElementById('sortToggleBtn');
-        const cards = [...document.querySelectorAll('.card')];
-        const ENABLE_CARD_TILT = true;
-        const DETAIL_IMAGE_SRC = 'images/toonNerf.png';
-        const hoverTimers = new WeakMap();
-        const PROJECT_DETAILS = {
-            'nerf-art': {
-                venue: 'TVCG 2023',
-                authors: [
-                    { name: 'Can Wang', href: 'https://cassiepython.github.io' },
-                    { name: 'Ruixiang Jiang', href: 'index.html' },
-                    { name: 'Menglei Chai', href: 'https://mlchai.com/' },
-                    { name: 'Mingming He', href: 'https://mingminghe.com/' },
-                    { name: 'Dongdong Chen', href: 'https://www.dongdongchen.bid/' },
-                    { name: 'Jing Liao', href: 'https://liaojing.github.io/html/' }
-                ],
-                body: 'We present the first method for stylizing 3D objects using text prompts, which leverages the powerful knowledge of multi-modal models to achieve high-quality stylization with flexible control over the stylization process.',
-                links: [
-                    { label: 'Project Page', href: 'https://cassiepython.github.io/nerfart/index.html' },
-                    { label: 'GitHub', href: 'https://github.com/cassiePython/NeRF-Art' },
-                    { label: 'arXiv', href: 'https://arxiv.org/abs/2212.08070' },
-                    { label: 'Paper', href: 'https://ieeexplore.ieee.org/abstract/document/10144678' }
-                ]
-            },
-            'avatar-craft': {
-                venue: 'ICCV 2023',
-                authors: [
-                    { name: 'Ruixiang Jiang', href: 'index.html' },
-                    { name: 'Can Wang', href: 'https://cassiepython.github.io' },
-                    { name: 'Jingbo Zhang', href: 'https://eckertzhang.github.io/' },
-                    { name: 'Menglei Chai', href: 'https://mlchai.com/' },
-                    { name: 'Mingming He', href: 'https://mingminghe.com/' },
-                    { name: 'Dongdong Chen', href: 'https://www.dongdongchen.bid/' },
-                    { name: 'Jing Liao', href: 'https://liaojing.github.io/html/' }
-                ],
-                body: 'We propose a comprehensive pipeline that transforms text prompts into high-quality 3D human avatars with parameterized shape and pose control, enabling users to create and animated personalized avatars.',
-                links: [
-                    { label: 'Project Page', href: 'https://avatar-craft.github.io' },
-                    { label: 'GitHub', href: 'https://github.com/songrise/avatarcraft' },
-                    { label: 'arXiv', href: 'https://arxiv.org/abs/2303.17606' },
-                    { label: 'Paper', href: 'https://openaccess.thecvf.com/content/ICCV2023/html/Jiang_AvatarCraft_Transforming_Text_into_Neural_Human_Avatars_with_Parameterized_Shape_ICCV_2023_paper.html' }
-                ]
-            },
-            'clip-count': {
-                venue: 'ACM MM 2023',
-                authors: [
-                    { name: 'Ruixiang Jiang', href: 'index.html' },
-                    { name: 'Lingbo Liu', href: 'https://lingboliu.com/' },
-                    { name: 'Changwen Chen', href: 'http://www4.comp.polyu.edu.hk/~chencw/Biography.html' }
-                ],
-                body: 'Existing object counting models need to be trained on specific object categories and often fail to generalize to unseen categories. CLIP-Count tackles this by leveraging CLIP\'s open-vocabulary capabilities to count objects based on arbitrary text prompts, without requiring category-specific training.',
-                links: [
-                    { label: 'GitHub', href: 'https://github.com/songrise/CLIP-Count' },
-                    { label: 'arXiv', href: 'https://arxiv.org/abs/2305.07304' },
-                    { label: 'Paper', href: 'https://dl.acm.org/doi/10.1145/3581783.3611789' }
-                ]
-            },
-            'mope': {
-                venue: 'TMM 2025',
-                authors: [
-                    { name: 'Ruixiang Jiang', href: 'index.html' },
-                    { name: 'Lingbo Liu', href: 'https://lingboliu.com/' },
-                    { name: 'Changwen Chen', href: 'http://www4.comp.polyu.edu.hk/~chencw/Biography.html' }
-                ],
-                body: 'A prompt tuning setup for multimodal fusion that focuses on selective conditioning, preserving task-specific cues without overfitting every modality path.',
-                links: [
-                    { label: 'GitHub', href: 'https://github.com/songrise/ConditionalPrompt' },
-                    { label: 'arXiv', href: 'https://arxiv.org/abs/2312.03734' }
-                ]
-            },
-            'diff-artist': {
-                venue: 'ACM MM 2025',
-                authors: [
-                    { name: 'Ruixiang Jiang', href: 'index.html' },
-                    { name: 'Changwen Chen', href: 'http://www4.comp.polyu.edu.hk/~chencw/Biography.html' }
-                ],
-                body: 'Existing neural stylization methods predominantly focus on stylizing the appearance of image. In this work, we explore how diffusion models can be used to stylize the structure of an image in a controllable way.',
-                links: [
-                    { label: 'Paper', href: 'https://dl.acm.org/doi/10.1145/3746027.3755010' },
-                    { label: 'GitHub', href: 'https://github.com/songrise/artist' },
-                    { label: 'Project Page', href: 'https://diffusionartist.github.io/' }
-                ]
-            },
-            'artcot': {
-                venue: 'ACM MM 2025',
-                authors: [
-                    { name: 'Ruixiang Jiang', href: 'index.html' },
-                    { name: 'Changwen Chen', href: 'http://www4.comp.polyu.edu.hk/~chencw/Biography.html' }
-                ],
-                body: 'Existing aesthetic computational models often focus on surface-level features and lack a deeper understanding of artistic principles. In this work, we propose ArtCoT that deeply reasons about the aesthetic of images beyond visual appeal.',
-                links: [
-                    { label: 'Paper', href: 'https://arxiv.org/abs/2501.09012' },
-                    { label: 'GitHub', href: 'https://github.com/songrise/MLLM4Art' },
-                    { label: 'Hugging Face', href: 'https://huggingface.co/datasets/Ruixiang/FineArtBench' }
-                ]
-            },
-            'sem-judge': {
-                venue: 'Preprint 2026',
-                authors: [
-                    { name: 'Ruixiang Jiang', href: 'index.html' }, { name: 'Changwen Chen', href: 'http://www4.comp.polyu.edu.hk/~chencw/Biography.html' }
-                ],
-                body: 'Interpretation is essential to art, yet existing computational models only access the looks of an artwork and fail to capture the underlying meaning. This work explores a semiotics-theoretic framework that evaluates art interpretation through the lens of Peirce\'s semiosis.',
-                links: [
-                    { label: 'Coming Soon', href: '#' },
-                ]
-            }
-        };
-        let detailOffsetSteps = 0;
-        let activeCardIndex = null;
-        let isTimeSortEnabled = false;
-
-        cards.forEach((card, index) => {
-            const frontFace = card.querySelector('.card-face');
-            const inlineBackground = card.style.background;
-            const cardId = card.dataset.cardId;
-            const detail = cardId ? PROJECT_DETAILS[cardId] : null;
-
-            if (frontFace && inlineBackground) {
-                card.style.setProperty('--card-background', inlineBackground);
-                card.style.background = 'none';
-            }
-
-            if (frontFace?.style.color) {
-                card.style.setProperty('--card-ink', frontFace.style.color);
-            }
-
-            if (!frontFace || !detail) return;
-
-            const iconText = frontFace.querySelector('.icon')?.textContent?.trim() || '';
-            const labelText = frontFace.querySelector('.label')?.textContent?.trim() || '';
-            const shell = document.createElement('div');
-            const backFace = document.createElement('div');
-            const detailAuthors = (detail.authors || [])
-                .map((author) => {
-                    const highlightClass = author.name === 'Ruixiang Jiang' ? ' class="author-highlight"' : '';
-                    return `<a href="${author.href}"${highlightClass}>${author.name}</a>`;
-                })
-                .join(', ');
-            const detailLinks = (detail.links || [])
-                .map((link) => `<a class="detail-link" href="${link.href}">${link.label}</a>`)
-                .join('');
-
-            shell.className = 'card-shell';
-            frontFace.classList.add('card-front');
-            backFace.className = 'card-face card-back';
-            backFace.innerHTML = `
-                <div class="card-back-panel">
-                    <div class="detail-layout">
-                        <div class="detail-main">
-                            <div class="card-back-title">${iconText}</div>
-                            <div class="detail-meta-group">
-                                <div class="detail-field"><strong>Venue</strong>${detail.venue}</div>
-                                <div class="detail-field"><strong>Authors</strong>${detailAuthors}</div>
-                            </div>
-                            <div class="detail-copy">
-                                <p class="detail-body">${detail.body}</p>
-                            </div>
-                            <div class="detail-links">${detailLinks}</div>
-                        </div>
-                        <div class="detail-visual" aria-hidden="true">
-                            <img src="${DETAIL_IMAGE_SRC}" alt="">
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            card.appendChild(shell);
-            shell.append(frontFace, backFace);
-            card.setAttribute('role', 'button');
-            card.setAttribute('tabindex', '0');
-
-            backFace.querySelectorAll('a').forEach((link) => {
-                link.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                });
-            });
+  <footer class="site-footer"><span>Ruixiang Jiang</span><span>Computational aesthetics &amp; generative art</span></footer>
+  <script>
+    const items = document.querySelectorAll('.reveal');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      items.forEach((item) => item.classList.add('is-visible'));
+    } else {
+      const observer = new IntersectionObserver((entries, activeObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            activeObserver.unobserve(entry.target);
+          }
         });
-
-        function getSortedCardIndices() {
-            if (!isTimeSortEnabled) {
-                return cards.map((_, index) => index);
-            }
-
-            return cards
-                .map((card, index) => ({
-                    index,
-                    order: Number(card.dataset.timeOrder || index + 1)
-                }))
-                .sort((a, b) => a.order - b.order)
-                .map((entry) => entry.index);
-        }
-
-        function getDetailedLayoutConfig() {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            const step = Math.min(210, Math.max(120, Math.round(width * 0.105)));
-            const rotations = [-34, -22, -10, 0, 10, 22, 34];
-            const scales = [1.74, 1.92, 2.1, 2.28, 2.1, 1.92, 1.74];
-            const layers = [1, 2, 4, 7, 4, 2, 1];
-            const sidePadding = Math.max(56, Math.round(width * 0.06));
-            const fullSpan = step * (cards.length - 1) + (190 * Math.max(...scales));
-            const availableSpan = width - (sidePadding * 2);
-            const hiddenWidth = Math.max(0, fullSpan - availableSpan);
-            const maxOffsetSteps = Math.ceil(hiddenWidth / (2 * step));
-            const yOffset = `${Math.round(Math.max(height * 0.22, 155))}px`;
-            const sortedIndices = getSortedCardIndices();
-            const middleIndex = (cards.length - 1) / 2;
-            const slots = new Array(cards.length);
-
-            sortedIndices.forEach((cardIndex, visualIndex) => {
-                slots[cardIndex] = {
-                    x: Math.round((visualIndex - middleIndex) * step),
-                    y: yOffset,
-                    rotate: `${rotations[visualIndex]}deg`,
-                    scale: scales[visualIndex],
-                    z: layers[visualIndex]
-                };
-            });
-
-            return { maxOffsetSteps, slots, step };
-        }
-
-        function updateNavState(maxOffsetSteps) {
-            rotateLeftBtn.classList.toggle('is-disabled', detailOffsetSteps <= -maxOffsetSteps);
-            rotateRightBtn.classList.toggle('is-disabled', detailOffsetSteps >= maxOffsetSteps);
-        }
-
-        function applyInitialFanLayout() {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            const offsets = [-3, -2, -1, 0, 1, 2, 3];
-            const rotateY = [28, 58, 84, 90, -84, -58, -28];
-            const scales = [1.06, 1.01, .96, 1, .96, 1.01, 1.06];
-            const layers = [1, 2, 3, 0, 3, 2, 1];
-            const opacities = [.78, .66, .56, 0, .56, .66, .78];
-            const step = Math.min(230, Math.max(118, Math.round(width * 0.115)));
-            const arcLift = Math.min(42, Math.max(12, Math.round(height * 0.025)));
-            const yOffsets = [arcLift, Math.round(arcLift * 0.42), -Math.round(arcLift * 0.18), 0, -Math.round(arcLift * 0.18), Math.round(arcLift * 0.42), arcLift];
-
-            cards.forEach((card, index) => {
-                card.style.setProperty('--fan-x', `${offsets[index] * step}px`);
-                card.style.setProperty('--fan-y', `${yOffsets[index]}px`);
-                card.style.setProperty('--fan-rotate-y', `${rotateY[index]}deg`);
-                card.style.setProperty('--fan-rotate-z', '0deg');
-                card.style.setProperty('--fan-scale', String(scales[index]));
-                card.style.setProperty('--fan-z', String(layers[index]));
-                card.style.setProperty('--fan-opacity', String(opacities[index]));
-            });
-        }
-
-        function applyDetailedLayout() {
-            const { maxOffsetSteps, slots, step } = getDetailedLayoutConfig();
-
-            detailOffsetSteps = Math.max(-maxOffsetSteps, Math.min(maxOffsetSteps, detailOffsetSteps));
-
-            cards.forEach((card, index) => {
-                const slot = slots[index];
-                card.style.removeProperty('--card-width-current');
-                card.style.removeProperty('--card-height-current');
-                card.style.removeProperty('--back-face-width');
-                card.style.removeProperty('--back-face-height');
-                card.style.setProperty('--detail-x', `${slot.x - (detailOffsetSteps * step)}px`);
-                card.style.setProperty('--detail-y', slot.y);
-                card.style.setProperty('--detail-rotate', slot.rotate);
-                card.style.setProperty('--detail-scale', slot.scale);
-                card.style.setProperty('--detail-z', slot.z);
-            });
-
-            updateNavState(maxOffsetSteps);
-        }
-
-        function updateBackButtonLabel() {
-            backBtn.textContent = activeCardIndex === null ? '← Back' : 'Close';
-        }
-
-        function updateSortToggleLabel() {
-            sortToggleBtn.classList.toggle('is-on', isTimeSortEnabled);
-        }
-
-        function clearCardHoverState() {
-            cards.forEach((card) => {
-                const timerId = hoverTimers.get(card);
-
-                if (timerId) {
-                    window.clearTimeout(timerId);
-                    hoverTimers.delete(card);
-                }
-
-                card.classList.remove('is-hovered');
-                resetCardTilt(card);
-            });
-        }
-
-        function applyFocusLayout() {
-            if (activeCardIndex === null) return;
-
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            const compactStep = Math.min(92, Math.max(50, Math.round(width * 0.06)));
-            const stackY = `${Math.round(Math.max(height * 0.39, 235))}px`;
-            const focusWidth = Math.min(Math.max((width - 28) * 1.3, 546), 1170);
-            const focusHeight = Math.min(Math.max((height * 0.44) * 1.3, 390), 598);
-            const focusY = `-${Math.round(Math.min(132, Math.max(54, height * 0.15)))}px`;
-
-            cards.forEach((card, index) => {
-                if (index === activeCardIndex) {
-                    card.style.setProperty('--card-width-current', `${Math.round(focusHeight)}px`);
-                    card.style.setProperty('--card-height-current', `${Math.round(focusWidth)}px`);
-                    card.style.setProperty('--back-face-width', `${Math.round(focusWidth)}px`);
-                    card.style.setProperty('--back-face-height', `${Math.round(focusHeight)}px`);
-                    card.style.setProperty('--focus-x', '0px');
-                    card.style.setProperty('--focus-y', focusY);
-                    return;
-                }
-
-                const relativeIndex = index - activeCardIndex;
-                const distance = Math.abs(relativeIndex);
-                const scale = Math.max(0.62, 0.9 - (distance * 0.06));
-                const rotate = Math.max(-12, Math.min(12, relativeIndex * 3.5));
-
-                card.style.removeProperty('--card-width-current');
-                card.style.removeProperty('--card-height-current');
-                card.style.removeProperty('--back-face-width');
-                card.style.removeProperty('--back-face-height');
-                card.style.setProperty('--stack-x', `${Math.round(relativeIndex * compactStep)}px`);
-                card.style.setProperty('--stack-y', stackY);
-                card.style.setProperty('--stack-rotate', `${rotate}deg`);
-                card.style.setProperty('--stack-scale', scale.toFixed(2));
-                card.style.setProperty('--stack-z', String(Math.max(1, 8 - distance)));
-            });
-        }
-
-        function openCardDetail(index) {
-            if (!scene.classList.contains('expanded')) return;
-
-            activeCardIndex = index;
-            clearCardHoverState();
-
-            cards.forEach((card, cardIndex) => {
-                const isActive = cardIndex === index;
-                card.classList.toggle('is-active', isActive);
-            });
-
-            scene.classList.add('detail-active');
-            applyFocusLayout();
-            updateBackButtonLabel();
-        }
-
-        function closeCardDetail() {
-            if (activeCardIndex === null) return;
-
-            activeCardIndex = null;
-            scene.classList.remove('detail-active');
-            cards.forEach((card) => {
-                card.classList.remove('is-active');
-                card.style.removeProperty('--card-width-current');
-                card.style.removeProperty('--card-height-current');
-                card.style.removeProperty('--back-face-width');
-                card.style.removeProperty('--back-face-height');
-            });
-            applyDetailedLayout();
-            updateBackButtonLabel();
-        }
-
-        function toggleSortMode() {
-            if (!scene.classList.contains('expanded') || activeCardIndex !== null) return;
-
-            isTimeSortEnabled = !isTimeSortEnabled;
-            detailOffsetSteps = 0;
-            applyDetailedLayout();
-            updateSortToggleLabel();
-        }
-
-        function exitExpandedView() {
-            closeCardDetail();
-            detailOffsetSteps = 0;
-            scene.classList.remove('expanded');
-            applyInitialFanLayout();
-            updateBackButtonLabel();
-        }
-
-        function enterExpandedView() {
-            if (scene.classList.contains('expanded')) return;
-
-            scene.classList.add('expanded');
-            applyDetailedLayout();
-            updateBackButtonLabel();
-            updateSortToggleLabel();
-        }
-
-        function shiftDetailedView(stepDelta) {
-            const { maxOffsetSteps } = getDetailedLayoutConfig();
-            const nextStep = detailOffsetSteps + stepDelta;
-
-            if (nextStep < -maxOffsetSteps || nextStep > maxOffsetSteps) {
-                updateNavState(maxOffsetSteps);
-                return;
-            }
-
-            detailOffsetSteps = nextStep;
-            applyDetailedLayout();
-        }
-
-        function resetCardTilt(card) {
-            card.style.setProperty('--hover-tilt-x', '0deg');
-            card.style.setProperty('--hover-tilt-y', '0deg');
-        }
-
-        function updateCardTilt(card, event) {
-            if (!ENABLE_CARD_TILT || !card.classList.contains('is-hovered')) return;
-
-            const rect = card.getBoundingClientRect();
-            const x = (event.clientX - rect.left) / rect.width;
-            const y = (event.clientY - rect.top) / rect.height;
-            const maxTilt = 7;
-            const dx = (x - 0.5) * 2;
-            const dy = (y - 0.5) * 2;
-            const tiltX = -dy * maxTilt;
-            const tiltY = dx * maxTilt;
-
-            card.style.setProperty('--hover-tilt-x', `${tiltX.toFixed(2)}deg`);
-            card.style.setProperty('--hover-tilt-y', `${tiltY.toFixed(2)}deg`);
-        }
-
-        function attachCardTilt(card) {
-            if (!ENABLE_CARD_TILT) return;
-
-            card.addEventListener('mousemove', (event) => {
-                if (!scene.classList.contains('expanded') || !card.classList.contains('is-hovered')) return;
-                updateCardTilt(card, event);
-            });
-
-            card.addEventListener('mouseleave', () => {
-                resetCardTilt(card);
-            });
-        }
-
-        trigger.addEventListener('click', () => {
-            enterExpandedView();
-        });
-
-        detailScrim.addEventListener('click', () => closeCardDetail());
-        backBtn.addEventListener('click', () => {
-            if (activeCardIndex !== null) {
-                closeCardDetail();
-                return;
-            }
-
-            exitExpandedView();
-        });
-        rotateLeftBtn.addEventListener('click', () => {
-            if (scene.classList.contains('expanded') && activeCardIndex === null) shiftDetailedView(-1);
-        });
-        rotateRightBtn.addEventListener('click', () => {
-            if (scene.classList.contains('expanded') && activeCardIndex === null) shiftDetailedView(1);
-        });
-        sortToggleBtn.addEventListener('click', () => toggleSortMode());
-        window.addEventListener('resize', () => {
-            if (activeCardIndex !== null) {
-                applyFocusLayout();
-                return;
-            }
-
-            if (scene.classList.contains('expanded')) {
-                applyDetailedLayout();
-                return;
-            }
-
-            applyInitialFanLayout();
-        });
-        window.addEventListener('keydown', (event) => {
-            if (event.key !== 'Escape') return;
-
-            if (activeCardIndex !== null) {
-                closeCardDetail();
-                return;
-            }
-
-            if (scene.classList.contains('expanded')) exitExpandedView();
-        });
-        window.addEventListener('wheel', (event) => {
-            if (Math.abs(event.deltaY) < 10) return;
-
-            if (event.deltaY > 0) {
-                enterExpandedView();
-                return;
-            }
-
-            if (scene.classList.contains('expanded')) exitExpandedView();
-        }, { passive: true });
-        document.addEventListener('click', (event) => {
-            if (activeCardIndex === null) return;
-            if (event.target.closest('.card.is-active')) return;
-            if (event.target.closest('.back-btn, .nav-btn, .sort-toggle')) return;
-
-            closeCardDetail();
-        });
-
-        cards.forEach((c, i) => {
-            c.addEventListener('click', (event) => {
-                if (event.target.closest('a')) return;
-                if (!scene.classList.contains('expanded')) return;
-                if (activeCardIndex !== null) return;
-                openCardDetail(i);
-            });
-
-            c.addEventListener('keydown', (event) => {
-                if (!scene.classList.contains('expanded')) return;
-                if (activeCardIndex !== null) return;
-                if (event.key !== 'Enter' && event.key !== ' ') return;
-
-                event.preventDefault();
-                openCardDetail(i);
-            });
-
-            c.addEventListener('mouseenter', () => {
-                if (!scene.classList.contains('expanded') || activeCardIndex !== null) return;
-
-                const timerId = window.setTimeout(() => {
-                    c.classList.add('is-hovered');
-                    hoverTimers.delete(c);
-                    resetCardTilt(c);
-                }, 250);
-
-                hoverTimers.set(c, timerId);
-            });
-
-            c.addEventListener('mouseleave', () => {
-                const timerId = hoverTimers.get(c);
-
-                if (timerId) {
-                    window.clearTimeout(timerId);
-                    hoverTimers.delete(c);
-                }
-
-                c.classList.remove('is-hovered');
-                resetCardTilt(c);
-            });
-
-            attachCardTilt(c);
-        });
-
-        applyInitialFanLayout();
-        updateSortToggleLabel();
-    </script>
+      }, { threshold: 0.12 });
+      items.forEach((item) => observer.observe(item));
+    }
+  </script>
 </body>
-
 </html>
