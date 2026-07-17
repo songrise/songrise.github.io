@@ -1,4 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="title desc">
-  <title id="title">NeRF-Art teaser</title><desc id="desc">Abstract stylized three dimensional radiance field.</desc>
-  <rect width="480" height="300" fill="#e8e3d6"/><path d="M29 257L130 40L242 257Z" fill="#1f2424"/><path d="M130 40L293 84L242 257Z" fill="#b9513b"/><path d="M242 257L293 84L425 237Z" fill="#71877d"/><circle cx="294" cy="125" r="54" fill="#d6a861"/><circle cx="294" cy="125" r="24" fill="#e8e3d6"/><rect x="38" y="51" width="98" height="16" fill="#b9513b" transform="rotate(-17 38 51)"/><rect x="337" y="245" width="92" height="13" fill="#1f2424"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 210" role="img" aria-labelledby="title desc">
+  <title id="title">NeRF-Art teaser</title>
+  <desc id="desc">An abstract Suprematist composition representing artistic reconstruction through a neural radiance field.</desc>
+  <rect width="480" height="210" fill="#e9e1dd"/>
+  <path d="M36 161 226 27l81 148z" fill="#4a3a64"/>
+  <path d="M167 184 420 49l-47 126z" fill="#a96579"/>
+  <rect x="95" y="37" width="132" height="29" fill="#81988b" transform="rotate(13 161 52)"/>
+  <circle cx="274" cy="91" r="40" fill="#f4f0e8"/>
+  <circle cx="274" cy="91" r="17" fill="#d4a353"/>
 </svg>

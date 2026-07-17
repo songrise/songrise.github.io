@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Ruixiang Jiang — PhD candidate researching computational aesthetics, generative AI, and visual understanding.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>Ruixiang Jiang — Research</title>
   <style>
     :root {
@@ -178,7 +179,7 @@
       border-top: 1px solid var(--ink);
       display: flex;
       justify-content: space-between;
-      margin-bottom: clamp(62px, 9vw, 135px);
+      margin-bottom: clamp(48px, 6vw, 92px);
       padding-top: 14px;
     }
     .archive-divider::after { background: var(--accent); content: ''; height: 4px; width: 40px; }
@@ -196,7 +197,7 @@
       display: grid;
       gap: 28px;
       grid-template-columns: 76px minmax(220px, 1fr) minmax(280px, .94fr);
-      padding: clamp(30px, 4vw, 54px) 0;
+      padding: clamp(42px, 5vw, 70px) 0;
     }
     .publication + .publication { border-top: 1px solid var(--line); }
     .pub-number { color: var(--accent); padding-top: 7px; }
@@ -264,7 +265,7 @@
       margin-top: clamp(80px, 13vw, 180px);
       padding: 18px 0 30px;
     }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .75, .25, 1); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .88s ease, transform .88s cubic-bezier(.2, .75, .25, 1); }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } .scroll-cue span, .accent { animation: none; } }
     @media (max-width: 760px) {
@@ -288,7 +289,7 @@
       .scroll-cue { bottom: 27px; right: 0; }
       .archive-divider { margin-bottom: 62px; }
       .research { padding-top: 88px; scroll-margin-top: 62px; }
-      .publication { gap: 17px; grid-template-columns: 1fr; padding: 35px 0; }
+      .publication { gap: 17px; grid-template-columns: 1fr; padding: 42px 0; }
       .pub-number { padding: 0; }
       .publication h3 { font-size: clamp(36px, 11vw, 46px); margin-bottom: 13px; }
       .paper-title { font-size: 17px; margin-bottom: 12px; }
@@ -340,42 +341,42 @@
       </div>
 
       <article class="publication reveal">
-        <div class="pub-number">01 / 2026</div>
+        <time class="pub-number" datetime="2026-05-28">May / 2026</time>
         <div><h3>Before the Shutter</h3><p class="paper-title">Before the Shutter: Aesthetic and Actionable Portrait Photography Planning in 3D Scenes</p><p class="venue">arXiv 2026 · Ruixiang Jiang, Chang Wen Chen</p></div>
         <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/before-the-shutter.svg" alt="Abstract lens and perspective planes for Before the Shutter"></div><p class="summary">An agentic system for planning human pose, camera, and lighting for portrait photography in a 3D environment.</p><div class="publication-links"><a href="https://arxiv.org/abs/2605.30318">arXiv</a><a href="https://github.com/songrise/Before-the-Shutter">GitHub</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">02 / 2026</div>
-        <div><h3>Sem-Judge</h3><p class="paper-title">On Semiotic-Grounded Interpretive Evaluation of Generative Art</p><p class="venue">ACM MM 2026 · Ruixiang Jiang, Changwen Chen</p></div>
-        <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/sem-judge.svg" alt="Abstract signs and interpretive layers for Sem-Judge"></div><p class="summary">A semiotics-theoretic framework for evaluating art interpretation through Peirce's semiosis.</p><div class="publication-links"><a href="https://arxiv.org/abs/2604.08641">arXiv</a><a href="https://github.com/songrise/SemJudge">GitHub</a></div></div>
+        <time class="pub-number" datetime="2026-04-09">Apr / 2026</time>
+        <div><h3>SemJudge</h3><p class="paper-title">On Semiotic-Grounded Interpretive Evaluation of Generative Art</p><p class="venue">ACM MM 2026 · Ruixiang Jiang, Changwen Chen</p></div>
+        <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/sem-judge.svg" alt="Abstract signs and interpretive layers for SemJudge"></div><p class="summary">A semiotics-theoretic framework for evaluating art interpretation through Peirce's semiosis.</p><div class="publication-links"><a href="https://arxiv.org/abs/2604.08641">arXiv</a><a href="https://github.com/songrise/SemJudge">GitHub</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">03 / 2025</div>
-        <div><h3>Diff-Artist</h3><p class="paper-title">DiffArtist: Towards Structure and Appearance Controllable Image Stylization</p><p class="venue">ACM MM 2025 · Ruixiang Jiang, Changwen Chen</p></div>
-        <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/diff-artist.svg" alt="Abstract structural stylization collage for Diff-Artist"></div><p class="summary">A controllable diffusion approach that uses image structure as a material for non-representational art.</p><div class="publication-links"><a href="https://dl.acm.org/doi/10.1145/3746027.3755010">Paper</a><a href="https://github.com/songrise/artist">GitHub</a><a href="https://diffusionartist.github.io/">Project</a></div></div>
+        <time class="pub-number" datetime="2025-08-27">Aug / 2025</time>
+        <div><h3>DiffArtist</h3><p class="paper-title">DiffArtist: Towards Structure and Appearance Controllable Image Stylization</p><p class="venue">ACM MM 2025 · Ruixiang Jiang, Changwen Chen</p></div>
+        <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/diff-artist.svg" alt="Abstract structural stylization collage for DiffArtist"></div><p class="summary">A controllable diffusion approach that uses image structure as a material for non-representational art.</p><div class="publication-links"><a href="https://dl.acm.org/doi/10.1145/3746027.3755010">Paper</a><a href="https://github.com/songrise/artist">GitHub</a><a href="https://diffusionartist.github.io/">Project</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">04 / 2025</div>
+        <time class="pub-number" datetime="2025-09-02">Sep / 2025</time>
         <div><h3>ArtCoT</h3><p class="paper-title">Multimodal LLMs Can Reason about Aesthetics in Zero-Shot</p><p class="venue">ACM MM 2025 · Ruixiang Jiang, Changwen Chen</p></div>
         <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/artcot.svg" alt="Abstract reasoning frame for ArtCoT"></div><p class="summary">A reasoning framework that interprets visual aesthetics beyond surface-level appeal.</p><div class="publication-links"><a href="https://arxiv.org/abs/2501.09012">Paper</a><a href="https://github.com/songrise/MLLM4Art">GitHub</a><a href="https://huggingface.co/datasets/Ruixiang/FineArtBench">Data</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">05 / 2025</div>
+        <time class="pub-number" datetime="2023-11-28">Nov / 2023</time>
         <div><h3>MoPE</h3><p class="paper-title">MoPE: Mixture of Prompt Experts for Parameter-Efficient and Scalable Multimodal Fusion</p><p class="venue">TMM 2025 · Ruixiang Jiang, Lingbo Liu, Changwen Chen</p></div>
         <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/mope.svg" alt="Abstract prompt experts converging for MoPE"></div><p class="summary">Prompt tuning for multimodal fusion that preserves task-specific cues through selective conditioning.</p><div class="publication-links"><a href="https://github.com/songrise/ConditionalPrompt">GitHub</a><a href="https://arxiv.org/abs/2312.03734">arXiv</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">06 / 2023</div>
+        <time class="pub-number" datetime="2023-08-10">Aug / 2023</time>
         <div><h3>CLIP-Count</h3><p class="paper-title">CLIP-Count: Towards Text-Guided Zero-Shot Object Counting</p><p class="venue">ACM MM 2023 · Ruixiang Jiang, Lingbo Liu, Changwen Chen</p></div>
         <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/clip-count.svg" alt="Abstract repeated forms for CLIP-Count"></div><p class="summary">Open-vocabulary object counting from arbitrary text prompts, without category-specific training.</p><div class="publication-links"><a href="https://github.com/songrise/CLIP-Count">GitHub</a><a href="https://arxiv.org/abs/2305.07304">arXiv</a><a href="https://dl.acm.org/doi/10.1145/3581783.3611789">Paper</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">07 / 2023</div>
+        <time class="pub-number" datetime="2023-08-21">Aug / 2023</time>
         <div><h3>AvatarCraft</h3><p class="paper-title">AvatarCraft: Transforming Text into Neural Human Avatars with Parameterized Shape and Pose Control</p><p class="venue">ICCV 2023 · Ruixiang Jiang et al.</p></div>
         <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/avatar-craft.svg" alt="Abstract geometric avatar for AvatarCraft"></div><p class="summary">A text-to-avatar pipeline with explicit control over neural human shape and pose.</p><div class="publication-links"><a href="https://avatar-craft.github.io">Project</a><a href="https://github.com/songrise/avatarcraft">GitHub</a><a href="https://arxiv.org/abs/2303.17606">arXiv</a><a href="https://openaccess.thecvf.com/content/ICCV2023/html/Jiang_AvatarCraft_Transforming_Text_into_Neural_Human_Avatars_with_Parameterized_Shape_ICCV_2023_paper.html">Paper</a></div></div>
       </article>
       <article class="publication reveal">
-        <div class="pub-number">08 / 2023</div>
+        <time class="pub-number" datetime="2022-12-15">Dec / 2022</time>
         <div><h3>NeRF-Art</h3><p class="paper-title">NeRF-Art: Text-Driven Neural Radiance Fields Stylization</p><p class="venue">TVCG 2023 · Can Wang, Ruixiang Jiang et al.</p></div>
         <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/nerf-art.svg" alt="Abstract stylized radiance field for NeRF-Art"></div><p class="summary">Text-driven stylization for neural radiance fields, with flexible artistic control over 3D objects.</p><div class="publication-links"><a href="https://cassiepython.github.io/nerfart/index.html">Project</a><a href="https://github.com/cassiePython/NeRF-Art">GitHub</a><a href="https://arxiv.org/abs/2212.08070">arXiv</a><a href="https://ieeexplore.ieee.org/abstract/document/10144678">Paper</a></div></div>
       </article>
