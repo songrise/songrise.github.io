@@ -6,303 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Ruixiang Jiang — PhD candidate researching computational aesthetics, generative AI, and visual understanding.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/eb-garamond-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/eb-garamond-latin-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/eb-garamond-latin-medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/eb-garamond-latin-medium-italic.woff2" as="font" type="font/woff2" crossorigin>
   <title>Ruixiang Jiang — Research</title>
-  <style>
-    :root {
-      --paper: #f4f0e8;
-      --ink: #1e1b17;
-      --muted: #70695f;
-      --line: #cfc6ba;
-      --accent: #ae4e2b;
-      --content: min(1220px, calc(100% - 64px));
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: Georgia, 'Times New Roman', serif;
-      margin: 0;
-      min-width: 320px;
-    }
-    a { color: inherit; }
-    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-
-    .site-header {
-      align-items: center;
-      background: rgba(244, 240, 232, .94);
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 11px;
-      justify-content: space-between;
-      letter-spacing: .06em;
-      max-width: var(--content);
-      opacity: 0;
-      padding: 22px 0 17px;
-      pointer-events: none;
-      position: fixed;
-      left: 50%;
-      top: 0;
-      transform: translate(-50%, -110%);
-      text-transform: uppercase;
-      transition: opacity .35s ease, transform .45s cubic-bezier(.2, .75, .25, 1);
-      width: var(--content);
-      z-index: 10;
-    }
-    .site-header.is-visible { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
-    .site-header a { text-decoration: none; }
-    .site-header a:hover { color: var(--accent); }
-    .header-actions { display: flex; gap: 8px; }
-    .header-research,
-    .header-blog {
-      border: 1px solid var(--ink);
-      padding: 7px 10px;
-      transition: background .2s ease, color .2s ease;
-    }
-    .header-research:hover,
-    .header-blog:hover { background: var(--ink); color: var(--paper) !important; }
-    .slash { color: var(--accent); }
-
-    .hero,
-    .research,
-    .site-footer { margin: 0 auto; max-width: var(--content); }
-    .hero {
-      align-items: end;
-      display: grid;
-      gap: clamp(64px, 9vw, 180px);
-      grid-template-columns: minmax(0, 1.62fr) minmax(300px, .38fr);
-      max-width: min(1760px, calc(100% - 96px));
-      min-height: 100svh;
-      padding: 92px 0 clamp(88px, 10vw, 145px);
-      position: relative;
-    }
-    .eyebrow,
-    .archive-label,
-    .pub-number,
-    .venue {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 11px;
-      letter-spacing: .075em;
-      text-transform: uppercase;
-    }
-    .eyebrow { color: var(--muted); line-height: 1.45; margin: 0 0 18px; }
-    .eyebrow span + span::before { content: ' · '; }
-    h1 {
-      font-size: clamp(54px, 8.2vw, 126px);
-      font-weight: 400;
-      letter-spacing: -.065em;
-      line-height: .98;
-      margin: 0;
-      max-width: 950px;
-    }
-    .accent {
-      animation: accent-enter 1.3s cubic-bezier(.22, 1, .36, 1) both;
-      color: var(--accent);
-      display: inline-block;
-      font-style: italic;
-    }
-    .accent--understand { animation-delay: .3s; }
-    .accent--create { animation-delay: .56s; }
-    @keyframes accent-enter {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes intro-enter {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .intro {
-      animation: intro-enter .9s cubic-bezier(.22, 1, .36, 1) .56s both;
-      align-self: end;
-      border-left: 1px solid var(--line);
-      color: var(--muted);
-      font-size: clamp(18px, 1.6vw, 22px);
-      line-height: 1.42;
-      margin: 0;
-      max-width: none;
-      padding-left: 26px;
-    }
-    .intro-name {
-      color: var(--ink);
-      font-size: clamp(29px, 2.55vw, 42px);
-      letter-spacing: -.045em;
-      line-height: .95;
-      margin: 0 0 18px;
-    }
-    .intro-description { color: #766e64; font-size: .9em; }
-    .intro > p:not(.intro-name) { margin: 0; }
-    .intro-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 18px;
-      margin-top: 28px;
-    }
-    .intro-links a,
-    .publication-links a {
-      color: var(--accent);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: .055em;
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: color .2s ease;
-    }
-    .intro-links a::before,
-    .publication-links a::before { content: '['; margin-right: 4px; }
-    .intro-links a::after,
-    .publication-links a::after { content: ' ↗]'; margin-left: 4px; }
-    .intro-links a:hover,
-    .publication-links a:hover { color: var(--ink); }
-    .scroll-cue {
-      bottom: clamp(32px, 4vw, 56px);
-      color: var(--muted);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 11px;
-      letter-spacing: .07em;
-      position: absolute;
-      right: 0;
-      text-decoration: none;
-      text-transform: uppercase;
-    }
-    .scroll-cue span { animation: scroll-cue-bob 1.7s ease-in-out infinite; color: var(--accent); display: inline-block; font-size: 18px; margin-left: 8px; transition: transform .2s ease; }
-    .scroll-cue:hover span { animation-play-state: paused; transform: translateY(4px); }
-    @keyframes scroll-cue-bob {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
-    }
-
-    .archive-divider {
-      align-items: center;
-      border-top: 1px solid var(--ink);
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: clamp(48px, 6vw, 92px);
-      padding-top: 14px;
-    }
-    .archive-divider::after { background: var(--accent); content: ''; height: 4px; width: 40px; }
-    .research { padding-top: clamp(84px, 12vw, 160px); scroll-margin-top: 76px; }
-    .research-head {
-      align-items: baseline;
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 32px;
-    }
-    h2 { font-size: clamp(28px, 3vw, 44px); font-weight: 400; letter-spacing: -.04em; margin: 0; }
-    .research-head p { color: var(--muted); margin: 0; }
-
-    .publication {
-      display: grid;
-      gap: 28px;
-      grid-template-columns: 76px minmax(220px, 1fr) minmax(280px, .94fr);
-      padding: clamp(42px, 5vw, 70px) 0;
-    }
-    .publication + .publication { border-top: 1px solid var(--line); }
-    .pub-number { color: var(--accent); padding-top: 7px; }
-    .publication h3 {
-      font-size: clamp(31px, 3.6vw, 54px);
-      font-weight: 400;
-      letter-spacing: -.052em;
-      line-height: .95;
-      margin: 0 0 17px;
-    }
-    .paper-title {
-      color: var(--muted);
-      font-size: clamp(16px, 1.45vw, 20px);
-      font-style: italic;
-      line-height: 1.2;
-      margin: 0 0 15px;
-    }
-    .venue { color: var(--muted); line-height: 1.5; }
-    .publication-side { display: grid; gap: 16px; align-content: start; }
-    .teaser {
-      align-items: center;
-      aspect-ratio: 16 / 7;
-      background: linear-gradient(135deg, #c7af98 0%, #786056 45%, #20272a 46%, #e8ded0 47% 100%);
-      display: flex;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
-    .teaser::before {
-      background: rgba(244, 240, 232, .8);
-      content: '';
-      height: 124%;
-      position: absolute;
-      transform: rotate(26deg);
-      width: 28%;
-    }
-    .teaser--art { background: none; }
-    .teaser--art::before { content: none; }
-    .teaser--art img { display: block; height: 100%; object-fit: cover; width: 100%; }
-    .teaser span {
-      color: var(--ink);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 10px;
-      letter-spacing: .1em;
-      position: relative;
-      text-transform: uppercase;
-      z-index: 1;
-    }
-    .teaser--orange { background: linear-gradient(148deg, #342f2b 0 35%, #cd673b 36% 53%, #e8d9b4 54% 67%, #748470 68%); }
-    .teaser--orange::before { background: rgba(37, 31, 27, .72); transform: rotate(-32deg); }
-    .teaser--blue { background: linear-gradient(135deg, #c1d2cd 0 27%, #264150 28% 52%, #e2c27b 53% 75%, #eee7d9 76%); }
-    .teaser--red { background: linear-gradient(130deg, #201f1e 0 30%, #a64232 31% 47%, #d9c9ab 48% 68%, #646e69 69%); }
-    .teaser--violet { background: linear-gradient(145deg, #302a38 0 31%, #9584a9 32% 49%, #d9c9bb 50% 70%, #453d53 71%); }
-    .teaser--green { background: linear-gradient(135deg, #d7d4c4 0 29%, #56766c 30% 49%, #e09650 50% 67%, #283a36 68%); }
-    .teaser--ink { background: linear-gradient(145deg, #1b1b1b 0 38%, #57534d 39% 52%, #beb5a4 53% 65%, #777a71 66%); }
-    .summary { color: var(--muted); font-size: 17px; line-height: 1.45; margin: 0; }
-    .publication-links { display: flex; flex-wrap: wrap; gap: 8px 15px; }
-
-    .site-footer {
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      display: flex;
-      font-size: 14px;
-      justify-content: space-between;
-      margin-top: clamp(80px, 13vw, 180px);
-      padding: 18px 0 30px;
-    }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .88s ease, transform .88s cubic-bezier(.2, .75, .25, 1); }
-    .reveal.is-visible { opacity: 1; transform: translateY(0); }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } .scroll-cue span, .accent { animation: none; } }
-    @media (max-width: 760px) {
-      :root { --content: min(100% - 40px, 1220px); }
-      .site-header { align-items: flex-start; font-size: 10px; gap: 10px; padding-top: 16px; }
-      .site-header > a { line-height: 1.3; max-width: 137px; }
-      .header-actions { flex-shrink: 0; gap: 6px; }
-      .header-research, .header-blog { padding: 6px 7px; }
-      .hero { align-items: stretch; display: flex; flex-direction: column; gap: 86px; justify-content: center; max-width: var(--content); min-height: 100svh; padding: 30px 0 11svh; }
-      .hero > div { flex-shrink: 0; }
-      h1 { font-size: clamp(48px, 13.2vw, 60px); line-height: .98; }
-      .eyebrow { margin-bottom: 15px; }
-      .eyebrow span { display: block; }
-      .eyebrow span + span::before { content: none; }
-      .intro { align-self: stretch; border-left: 0; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.5; padding: 22px 0 0; }
-      .intro { animation-name: intro-enter-mobile; transform: translateY(10svh); }
-      .intro-name { font-size: 21px; margin-bottom: 15px; }
-      .intro-description { font-size: 14px; }
-      .intro-links { gap: 10px 14px; margin-top: 16px; }
-      .intro-links a { font-size: 11px; }
-      .scroll-cue { bottom: 27px; right: 0; }
-      .archive-divider { margin-bottom: 62px; }
-      .research { padding-top: 88px; scroll-margin-top: 62px; }
-      .publication { gap: 17px; grid-template-columns: 1fr; padding: 42px 0; }
-      .pub-number { padding: 0; }
-      .publication h3 { font-size: clamp(36px, 11vw, 46px); margin-bottom: 13px; }
-      .paper-title { font-size: 17px; margin-bottom: 12px; }
-      .publication-side { gap: 14px; }
-      .summary { font-size: 16px; }
-      .research-head p { display: none; }
-      .site-footer { flex-direction: row; font-size: 12px; gap: 12px; justify-content: space-between; white-space: nowrap; }
-    }
-    @keyframes intro-enter-mobile {
-      from { opacity: 0; transform: translateY(calc(10svh + 12px)); }
-      to { opacity: 1; transform: translateY(10svh); }
-    }
-  </style>
+  <link rel="stylesheet" href="home.css">
 </head>
 
 <body>
@@ -316,97 +25,135 @@
 
   <main id="top">
     <section class="hero" aria-labelledby="page-title">
-      <div>
+      <div class="title-page">
         <p class="eyebrow"><span>Computational aesthetics · generative art</span><span>computer vision · computer graphics</span></p>
         <h1 id="page-title">I study how machines <span class="accent accent--understand">understand</span> and <span class="accent accent--create">create</span> beauty.</h1>
       </div>
-      <div class="intro">
-        <p class="intro-name">Ruixiang Jiang</p>
-        <p class="intro-description">PhD candidate at The Hong Kong Polytechnic University, working across generative AI, visual understanding, and the aesthetics of images.</p>
-        <nav class="intro-links" aria-label="External profiles">
-          <a href="https://scholar.google.com/citations?user=e34K_QoAAAAJ">Google Scholar</a>
-          <a href="https://github.com/songrise">GitHub</a>
-          <a href="data/CV.pdf">CV</a>
-          <a href="mailto:rui-x.jiang@connect.polyu.hk">Email</a>
-        </nav>
-      </div>
+        <div class="intro">
+          <p class="intro-name">Ruixiang Jiang</p>
+          <p class="intro-description">PhD candidate at The Hong Kong Polytechnic University, working across generative AI, visual understanding, and the aesthetics of images.</p>
+          <nav class="intro-links" aria-label="External profiles">
+            <a href="https://scholar.google.com/citations?user=e34K_QoAAAAJ">Google Scholar</a>
+            <a href="https://github.com/songrise">GitHub</a>
+            <a href="data/CV.pdf">CV</a>
+            <a href="mailto:rui-x.jiang@connect.polyu.hk">Email</a>
+          </nav>
+        </div>
       <a class="scroll-cue" href="#publications">Scroll to publications <span aria-hidden="true">↓</span></a>
     </section>
 
     <section class="research" id="publications" aria-labelledby="research-title">
-      <div class="archive-divider" aria-hidden="true"></div>
+      <div class="archive-divider" aria-hidden="true"><img src="images/bookish/tailpiece.webp" width="720" height="240" alt="" loading="lazy"></div>
       <div class="research-head">
         <h2 id="research-title">Publications</h2>
         <p class="eyebrow">2023 — 2026</p>
       </div>
 
       <article class="publication reveal">
-        <time class="pub-number" datetime="2026-05-28">May / 2026</time>
-        <div><h3>Before the Shutter</h3><p class="paper-title">Before the Shutter: Aesthetic and Actionable Portrait Photography Planning in 3D Scenes</p><p class="venue">arXiv 2026 · Ruixiang Jiang, Chang Wen Chen</p></div>
-        <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/before-the-shutter.svg" alt="Abstract lens and perspective planes for Before the Shutter"></div><p class="summary">An agentic system for planning human pose, camera, and lighting for portrait photography in a 3D environment.</p><div class="publication-links"><a href="https://arxiv.org/abs/2605.30318">arXiv</a><a href="https://github.com/songrise/Before-the-Shutter">GitHub</a></div></div>
+        <div class="paper-illustration"><img src="images/papers/before-the-shutter.webp" width="960" height="720" alt="A muse, camera and sun symbolize coordinated pose, viewpoint and lighting." loading="lazy" decoding="async"></div>
+        <div class="publication-copy">
+          <time class="pub-number" datetime="2026-05-28">May / 2026</time>
+          <h3>Before the Shutter</h3><p class="paper-title">Before the Shutter: Aesthetic and Actionable Portrait Photography Planning in 3D Scenes</p><p class="venue">arXiv 2026 · Ruixiang Jiang, Chang Wen Chen</p>
+          <p class="summary">An agentic system for planning human pose, camera, and lighting for portrait photography in a 3D environment.</p><div class="publication-links"><a href="https://arxiv.org/abs/2605.30318">arXiv</a><a href="https://github.com/songrise/Before-the-Shutter">GitHub</a></div>
+        </div>
       </article>
       <article class="publication reveal">
-        <time class="pub-number" datetime="2026-04-09">Apr / 2026</time>
-        <div><h3>SemJudge</h3><p class="paper-title">On Semiotic-Grounded Interpretive Evaluation of Generative Art</p><p class="venue">ACM MM 2026 · Ruixiang Jiang, Changwen Chen</p></div>
-        <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/sem-judge.svg" alt="Abstract signs and interpretive layers for SemJudge"></div><p class="summary">A semiotics-theoretic framework for evaluating art interpretation through Peirce's semiosis.</p><div class="publication-links"><a href="https://arxiv.org/abs/2604.08641">arXiv</a><a href="https://github.com/songrise/SemJudge">GitHub</a></div></div>
+        <div class="paper-illustration"><img src="images/papers/sem-judge-oracle.webp" width="960" height="720" alt="A Delphic oracle interprets a painting of Icarus, with a fallen feather and wax drops in the foreground." loading="lazy" decoding="async"></div>
+        <div class="publication-copy">
+          <time class="pub-number" datetime="2026-04-09">Apr / 2026</time>
+          <h3>SemJudge</h3><p class="paper-title">On Semiotic-Grounded Interpretive Evaluation of Generative Art</p><p class="venue">ACM MM 2026 · Ruixiang Jiang, Changwen Chen</p>
+          <p class="summary">A semiotics-theoretic framework for evaluating art interpretation through Peirce's semiosis.</p><div class="publication-links"><a href="https://arxiv.org/abs/2604.08641">arXiv</a><a href="https://github.com/songrise/SemJudge">GitHub</a></div>
+        </div>
       </article>
       <article class="publication reveal">
-        <time class="pub-number" datetime="2025-08-27">Aug / 2025</time>
-        <div><h3>DiffArtist</h3><p class="paper-title">DiffArtist: Towards Structure and Appearance Controllable Image Stylization</p><p class="venue">ACM MM 2025 · Ruixiang Jiang, Changwen Chen</p></div>
-        <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/diff-artist.svg" alt="Abstract structural stylization collage for DiffArtist"></div><p class="summary">A controllable diffusion approach that uses image structure as a material for non-representational art.</p><div class="publication-links"><a href="https://dl.acm.org/doi/10.1145/3746027.3755010">Paper</a><a href="https://github.com/songrise/artist">GitHub</a><a href="https://diffusionartist.github.io/">Project</a></div></div>
+        <div class="paper-illustration"><img src="images/papers/diff-artist-sculpture-etching-v2.webp" width="960" height="720" alt="Hephaestus chisels a statue's form from marble while winged Iris paints ornament onto the same figure." loading="lazy" decoding="async"></div>
+        <div class="publication-copy">
+          <time class="pub-number" datetime="2025-08-27">Aug / 2025</time>
+          <h3>DiffArtist</h3><p class="paper-title">DiffArtist: Towards Structure and Appearance Controllable Image Stylization</p><p class="venue">ACM MM 2025 · Ruixiang Jiang, Changwen Chen</p>
+          <p class="summary">A controllable diffusion approach that uses image structure as a material for non-representational art.</p><div class="publication-links"><a href="https://dl.acm.org/doi/10.1145/3746027.3755010">Paper</a><a href="https://github.com/songrise/artist">GitHub</a><a href="https://diffusionartist.github.io/">Project</a></div>
+        </div>
       </article>
       <article class="publication reveal">
-        <time class="pub-number" datetime="2025-09-02">Sep / 2025</time>
-        <div><h3>ArtCoT</h3><p class="paper-title">Multimodal LLMs Can Reason about Aesthetics in Zero-Shot</p><p class="venue">ACM MM 2025 · Ruixiang Jiang, Changwen Chen</p></div>
-        <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/artcot.svg" alt="Abstract reasoning frame for ArtCoT"></div><p class="summary">A reasoning framework that interprets visual aesthetics beyond surface-level appeal.</p><div class="publication-links"><a href="https://arxiv.org/abs/2501.09012">Paper</a><a href="https://github.com/songrise/MLLM4Art">GitHub</a><a href="https://huggingface.co/datasets/Ruixiang/FineArtBench">Data</a></div></div>
+        <div class="paper-illustration"><img src="images/papers/artcot-paper-v2.webp" width="960" height="720" alt="Ariadne guides a thread from computation toward the visible artwork." loading="lazy" decoding="async"></div>
+        <div class="publication-copy">
+          <time class="pub-number" datetime="2025-09-02">Sep / 2025</time>
+          <h3>ArtCoT</h3><p class="paper-title">Multimodal LLMs Can Reason about Aesthetics in Zero-Shot</p><p class="venue">ACM MM 2025 · Ruixiang Jiang, Changwen Chen</p>
+          <p class="summary">A reasoning framework that interprets visual aesthetics beyond surface-level appeal.</p><div class="publication-links"><a href="https://arxiv.org/abs/2501.09012">Paper</a><a href="https://github.com/songrise/MLLM4Art">GitHub</a><a href="https://huggingface.co/datasets/Ruixiang/FineArtBench">Data</a></div>
+        </div>
       </article>
       <article class="publication reveal">
-        <time class="pub-number" datetime="2023-11-28">Nov / 2023</time>
-        <div><h3>MoPE</h3><p class="paper-title">MoPE: Mixture of Prompt Experts for Parameter-Efficient and Scalable Multimodal Fusion</p><p class="venue">TMM 2025 · Ruixiang Jiang, Lingbo Liu, Changwen Chen</p></div>
-        <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/mope.svg" alt="Abstract prompt experts converging for MoPE"></div><p class="summary">Prompt tuning for multimodal fusion that preserves task-specific cues through selective conditioning.</p><div class="publication-links"><a href="https://github.com/songrise/ConditionalPrompt">GitHub</a><a href="https://arxiv.org/abs/2312.03734">arXiv</a></div></div>
+        <div class="paper-illustration"><img src="images/papers/mope.webp" width="960" height="720" alt="An image guides a selector among theatrical experts, inserting a small prompt ribbon into an intact book." loading="lazy" decoding="async"></div>
+        <div class="publication-copy">
+          <time class="pub-number" datetime="2023-11-28">Nov / 2023</time>
+          <h3>MoPE</h3><p class="paper-title">MoPE: Mixture of Prompt Experts for Parameter-Efficient and Scalable Multimodal Fusion</p><p class="venue">TMM 2025 · Ruixiang Jiang, Lingbo Liu, Changwen Chen</p>
+          <p class="summary">Prompt tuning for multimodal fusion that preserves task-specific cues through selective conditioning.</p><div class="publication-links"><a href="https://github.com/songrise/ConditionalPrompt">GitHub</a><a href="https://arxiv.org/abs/2312.03734">arXiv</a></div>
+        </div>
       </article>
       <article class="publication reveal">
-        <time class="pub-number" datetime="2023-08-10">Aug / 2023</time>
-        <div><h3>CLIP-Count</h3><p class="paper-title">CLIP-Count: Towards Text-Guided Zero-Shot Object Counting</p><p class="venue">ACM MM 2023 · Ruixiang Jiang, Lingbo Liu, Changwen Chen</p></div>
-        <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/clip-count.svg" alt="Abstract repeated forms for CLIP-Count"></div><p class="summary">Open-vocabulary object counting from arbitrary text prompts, without category-specific training.</p><div class="publication-links"><a href="https://github.com/songrise/CLIP-Count">GitHub</a><a href="https://arxiv.org/abs/2305.07304">arXiv</a><a href="https://dl.acm.org/doi/10.1145/3581783.3611789">Paper</a></div></div>
+        <div class="paper-illustration"><img src="images/papers/clip-count.webp" width="960" height="720" alt="Hermes selects pomegranates through a scroll; five marked fruits are distinguished from two pears." loading="lazy" decoding="async"></div>
+        <div class="publication-copy">
+          <time class="pub-number" datetime="2023-08-10">Aug / 2023</time>
+          <h3>CLIP-Count</h3><p class="paper-title">CLIP-Count: Towards Text-Guided Zero-Shot Object Counting</p><p class="venue">ACM MM 2023 · Ruixiang Jiang, Lingbo Liu, Changwen Chen</p>
+          <p class="summary">Open-vocabulary object counting from arbitrary text prompts, without category-specific training.</p><div class="publication-links"><a href="https://github.com/songrise/CLIP-Count">GitHub</a><a href="https://arxiv.org/abs/2305.07304">arXiv</a><a href="https://dl.acm.org/doi/10.1145/3581783.3611789">Paper</a></div>
+        </div>
       </article>
       <article class="publication reveal">
-        <time class="pub-number" datetime="2023-08-21">Aug / 2023</time>
-        <div><h3>AvatarCraft</h3><p class="paper-title">AvatarCraft: Transforming Text into Neural Human Avatars with Parameterized Shape and Pose Control</p><p class="venue">ICCV 2023 · Ruixiang Jiang et al.</p></div>
-        <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/avatar-craft.svg" alt="Abstract geometric avatar for AvatarCraft"></div><p class="summary">A text-to-avatar pipeline with explicit control over neural human shape and pose.</p><div class="publication-links"><a href="https://avatar-craft.github.io">Project</a><a href="https://github.com/songrise/avatarcraft">GitHub</a><a href="https://arxiv.org/abs/2303.17606">arXiv</a><a href="https://openaccess.thecvf.com/content/ICCV2023/html/Jiang_AvatarCraft_Transforming_Text_into_Neural_Human_Avatars_with_Parameterized_Shape_ICCV_2023_paper.html">Paper</a></div></div>
+        <div class="paper-illustration"><img src="images/papers/avatar-craft-complete.webp" width="960" height="720" alt="A scroll guides the creation of a robed figure whose surface becomes a neural lattice, alongside a poseable mannequin." loading="lazy" decoding="async"></div>
+        <div class="publication-copy">
+          <time class="pub-number" datetime="2023-08-21">Aug / 2023</time>
+          <h3>AvatarCraft</h3><p class="paper-title">AvatarCraft: Transforming Text into Neural Human Avatars with Parameterized Shape and Pose Control</p><p class="venue">ICCV 2023 · Ruixiang Jiang et al.</p>
+          <p class="summary">A text-to-avatar pipeline with explicit control over neural human shape and pose.</p><div class="publication-links"><a href="https://avatar-craft.github.io">Project</a><a href="https://github.com/songrise/avatarcraft">GitHub</a><a href="https://arxiv.org/abs/2303.17606">arXiv</a><a href="https://openaccess.thecvf.com/content/ICCV2023/html/Jiang_AvatarCraft_Transforming_Text_into_Neural_Human_Avatars_with_Parameterized_Shape_ICCV_2023_paper.html">Paper</a></div>
+        </div>
       </article>
       <article class="publication reveal">
-        <time class="pub-number" datetime="2022-12-15">Dec / 2022</time>
-        <div><h3>NeRF-Art</h3><p class="paper-title">NeRF-Art: Text-Driven Neural Radiance Fields Stylization</p><p class="venue">TVCG 2023 · Can Wang, Ruixiang Jiang et al.</p></div>
-        <div class="publication-side"><div class="teaser teaser--art"><img src="images/teasers/nerf-art.svg" alt="Abstract stylized radiance field for NeRF-Art"></div><p class="summary">Text-driven stylization for neural radiance fields, with flexible artistic control over 3D objects.</p><div class="publication-links"><a href="https://cassiepython.github.io/nerfart/index.html">Project</a><a href="https://github.com/cassiePython/NeRF-Art">GitHub</a><a href="https://arxiv.org/abs/2212.08070">arXiv</a><a href="https://ieeexplore.ieee.org/abstract/document/10144678">Paper</a></div></div>
+        <div class="paper-illustration"><img src="images/papers/nerf-art-proteus.webp" width="960" height="720" alt="Proteus reshapes and paints a Pegasus sculpture; a mirror shows the transformed form from another viewpoint." loading="lazy" decoding="async"></div>
+        <div class="publication-copy">
+          <time class="pub-number" datetime="2022-12-15">Dec / 2022</time>
+          <h3>NeRF-Art</h3><p class="paper-title">NeRF-Art: Text-Driven Neural Radiance Fields Stylization</p><p class="venue">TVCG 2023 · Can Wang, Ruixiang Jiang et al.</p>
+          <p class="summary">Text-driven stylization for neural radiance fields, with flexible artistic control over 3D objects.</p><div class="publication-links"><a href="https://cassiepython.github.io/nerfart/index.html">Project</a><a href="https://github.com/cassiePython/NeRF-Art">GitHub</a><a href="https://arxiv.org/abs/2212.08070">arXiv</a><a href="https://ieeexplore.ieee.org/abstract/document/10144678">Paper</a></div>
+        </div>
       </article>
     </section>
   </main>
 
   <footer class="site-footer"><span>Ruixiang Jiang</span><span>Last update Jul 2026</span></footer>
   <script>
-    const items = document.querySelectorAll('.reveal');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-      items.forEach((item) => item.classList.add('is-visible'));
-    } else {
+    const scrollCue = document.querySelector('.scroll-cue');
+    const header = document.querySelector('.site-header');
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // Keep the navigation usable without JavaScript or IntersectionObserver.
+    if ('IntersectionObserver' in window) {
+      const headerObserver = new IntersectionObserver(([entry]) => {
+        const pastTitle = !entry.isIntersecting && entry.boundingClientRect.bottom <= 82;
+        header.classList.toggle('is-visible', pastTitle);
+      }, { rootMargin: '-82px 0px 0px 0px' });
+      header.classList.add('is-managed');
+      headerObserver.observe(scrollCue);
+    }
+
+    // Hide items only after an observer is ready; no-script content stays visible.
+    if (!motion.matches && 'IntersectionObserver' in window) {
       const observer = new IntersectionObserver((entries, activeObserver) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            activeObserver.unobserve(entry.target);
+        entries.forEach(({ target, isIntersecting }) => {
+          if (isIntersecting) {
+            target.classList.remove('is-pending');
+            target.classList.add('is-visible');
+            activeObserver.unobserve(target);
           }
         });
       }, { threshold: 0.12 });
-      items.forEach((item) => observer.observe(item));
+      document.querySelectorAll('.reveal').forEach(item => {
+        observer.observe(item);
+        item.classList.add('is-pending');
+      });
+      motion.addEventListener('change', ({ matches }) => {
+        if (matches) {
+          observer.disconnect();
+          document.querySelectorAll('.is-pending').forEach(item => item.classList.remove('is-pending'));
+        }
+      });
     }
-
-    const header = document.querySelector('.site-header');
-    const scrollCue = document.querySelector('.scroll-cue');
-    const headerObserver = new IntersectionObserver(([entry]) => {
-      header.classList.toggle('is-visible', !entry.isIntersecting);
-    }, { threshold: 0 });
-    headerObserver.observe(scrollCue);
   </script>
 </body>
 </html>
