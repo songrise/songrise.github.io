@@ -1,6 +1,6 @@
 # Homepage material assets
 
-Generated with the built-in imagegen tool on 2026-09-22. Original PNGs are retained in originals/; the homepage loads only the WebP versions. Bookplate and tailpiece preserve alpha. Original generated illustrations are decorative, not scientific diagrams.
+Paper, bookplate, and tailpiece were generated with the built-in imagegen tool on 2026-09-22. Their original PNGs are retained in originals/; the homepage loads the WebP versions. Bookplate and tailpiece preserve alpha. Original generated illustrations are decorative, not scientific diagrams.
 
 ## Final prompts
 
@@ -17,3 +17,7 @@ Use case: stylized-concept. Asset type: restrained horizontal chapter tailpiece 
 
 Sharp resize with Lanczos default; WebP quality 85, alphaQuality 100. Paper width 768px; bookplate width 560px; tailpiece width 720px. The page blends the paper lightly with #F2EBDD. Bookplate uses multiply blending to integrate pale engraved highlights into the paper. No original assets are removed.
 
+
+## Code-generated print textures
+
+`illustration-fiber-overlay.png` is a transparent 960 × 720 edge texture. The reliable CSS gradient keeps publication illustrations visible; this overlay adds a lightly irregular fiber fade and scales with each image, including on mobile. `ink-print-display.png` and `ink-print-accent.png` are seamless 256 × 256 colored ink tiles that give the homepage headline and section titles visible but restrained changes in ink density. Body text is left untextured for legibility.
