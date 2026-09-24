@@ -159,9 +159,10 @@ h1 { color: #484139; filter: url(#statement-ink); font-size: clamp(54px, calc(5.
   pointer-events: none;
   background: linear-gradient(to bottom, transparent, var(--line) 18%, var(--line) 82%, transparent);
 }
-.intro-name { color: #3a3731; font-family: 'IM Fell English', 'EB Garamond', Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.3; margin: 0 0 18px; }
-.intro-description { color: var(--muted); margin: 0; }
+.intro-name { color: #3a3731; filter: url(#name-ink); font-family: 'IM Fell English', 'EB Garamond', Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.3; margin: 0 0 18px; }
+.intro-description { color: var(--muted); filter: url(#bio-ink); font-family: 'EB Garamond 12', 'EB Garamond', Georgia, serif; margin: 0; }
 .intro-links { display: flex; flex-wrap: nowrap; gap: 8px 12px; margin-top: 23px; font-size: 17px; }
+.intro-links a { filter: url(#link-ink); }
 .intro-links a, .publication-links a { display: inline-block; padding: 4px 0; }
 .intro-links a { white-space: nowrap; }
 .scroll-cue { position: absolute; bottom: 38px; right: 0; color: var(--accent); font-size: 17px; font-weight: 500; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: .32em; transition: opacity .25s ease, visibility .25s ease; white-space: nowrap; background-image: none; }
@@ -305,6 +306,7 @@ h2 { color: var(--display-ink); filter: url(#archive-ink); font-family: 'IM Fell
   .eyebrow span + span::before { content: none; }
   h1 { font-size: clamp(42px, calc(9vw + 2px), 56px); line-height: 1.15; letter-spacing: -.025em; }
   .intro { margin-top: 0; margin-bottom: -20px; padding-top: 48px; font-size: 17px; }
+  .intro::before { display: none; }
   .intro-name { font-size: 24px; }
   .intro-links { gap: 8px 20px; margin-top: 18px; }
   .scroll-cue { bottom: 30px; font-size: 15px; }
@@ -335,6 +337,9 @@ h2 { color: var(--display-ink); filter: url(#archive-ink); font-family: 'IM Fell
   .intro { font-size: 22px; }
   .intro-name { font-size: 35px; margin-bottom: 20px; }
   .intro-links { margin-top: 25px; }
+  .paper-title { font-size: 22px; }
+  .summary { font-size: 19px; }
+  .venue, .publication-links { font-size: 18px; }
 }
 @media (min-width: 861px) and (max-width: 1100px) {
   .intro { font-size: 21px; }
