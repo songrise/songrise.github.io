@@ -290,9 +290,12 @@ h2 { color: var(--display-ink); font-family: 'IM Fell English', 'EB Garamond', G
 @media (max-width: 760px) {
   :root { --content: calc(100% - 44px); }
   body { font-size: 19px; }
-  .site-header { font-size: 14px; gap: 14px; }
-  .site-header > a { max-width: 155px; line-height: 1.45; }
-  .header-actions { gap: 16px; }
+  .site-header { font-size: clamp(12px, 3.3vw, 14px); gap: 8px; min-height: 48px; }
+  .site-header.is-managed { padding: 5px 0; }
+  .site-header > a { max-width: none; line-height: 1.2; white-space: nowrap; }
+  .site-header .slash { margin: 0 2px; }
+  .header-actions { gap: 8px; }
+  .header-actions a { padding: 4px 0; white-space: nowrap; }
   .hero { width: var(--content); padding: 60px 0 110px; gap: 48px; }
   .hero .eyebrow { font-size: 16px; }
   .eyebrow span { display: block; }
@@ -309,6 +312,7 @@ h2 { color: var(--display-ink); font-family: 'IM Fell English', 'EB Garamond', G
   .research-head .eyebrow { font-size: 12px; margin-bottom: 8px; }
   .research-head h2 { font-size: clamp(42px, 10vw, 50px); }
   .publication { gap: 21px; padding: 48px 0 58px; }
+  .publication:not(:last-of-type) { padding-bottom: 78px; }
   .publication:not(:last-of-type)::after {
     bottom: -12px;
     height: 24px;

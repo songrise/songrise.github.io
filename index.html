@@ -210,8 +210,7 @@
       document.querySelector('#publications'),
       ...articles
     ];
-    const settleRangeDown = 90;
-    const settleRangeUp = 70;
+    const settleRange = 120;
     const settleDuration = 440;
     let touchStartY = 0;
     let swipeInProgress = false;
@@ -240,7 +239,6 @@
       }
       const nearest = distances.reduce((best, distance) =>
         Math.abs(distance) < Math.abs(best) ? distance : best, Infinity);
-      const settleRange = scrollDirection < 0 ? settleRangeUp : settleRangeDown;
       if (Math.abs(nearest) <= 8 || Math.abs(nearest) >= settleRange) return;
 
       const startY = window.scrollY;
