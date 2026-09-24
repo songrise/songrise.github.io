@@ -17,6 +17,34 @@
 </head>
 
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="statement-ink" x="-10%" y="-25%" width="120%" height="150%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.45" numOctaves="2" seed="7" result="fine"/>
+        <feDisplacementMap in="SourceGraphic" in2="fine" scale="3" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+        <feGaussianBlur in="rough" stdDeviation="2.2" result="blur"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="2" result="coarse"/>
+        <feDisplacementMap in="blur" in2="coarse" scale="7" xChannelSelector="R" yChannelSelector="B" result="spread"/>
+        <feComponentTransfer in="spread" result="halo"><feFuncA type="linear" slope="0.24"/></feComponentTransfer>
+        <feColorMatrix in="fine" type="matrix" result="ink-density"
+          values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .65 0 0 0 .55"/>
+        <feComposite in="rough" in2="ink-density" operator="in" result="uneven-ink"/>
+        <feMerge><feMergeNode in="halo"/><feMergeNode in="uneven-ink"/></feMerge>
+      </filter>
+      <filter id="statement-ink-soft" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="fine"/>
+        <feDisplacementMap in="SourceGraphic" in2="fine" scale="1.2" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+        <feGaussianBlur in="rough" stdDeviation="0.7" result="blur"/>
+        <feComponentTransfer in="blur" result="halo"><feFuncA type="linear" slope="0.25"/></feComponentTransfer>
+        <feMerge><feMergeNode in="halo"/><feMergeNode in="rough"/></feMerge>
+      </filter>
+      <filter id="archive-ink" x="-5%" y="-12%" width="110%" height="124%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="blur"/>
+        <feComponentTransfer in="blur" result="halo"><feFuncA type="linear" slope="0.18"/></feComponentTransfer>
+        <feMerge><feMergeNode in="halo"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+  </svg>
   <header class="site-header">
     <a href="#top"><span class="brand-name">Ruixiang Jiang</span> <span class="slash">/</span> PhD Candidate</a>
     <nav class="header-actions" aria-label="Site navigation">
