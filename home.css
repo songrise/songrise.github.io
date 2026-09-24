@@ -197,7 +197,18 @@ h2 { color: var(--display-ink); font-size: clamp(42px, 4.1vw, 58px); line-height
 .summary { border-left: 2px solid var(--accent); color: var(--display-ink); font-size: 19px; font-weight: 500; line-height: 1.4; margin: 18px 0 15px; padding-left: 15px; }
 .venue { color: var(--muted); font-size: 17px; line-height: 1.45; margin: 0; }
 .publication-links { border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; font-size: 17px; gap: 4px 24px; margin-top: 24px; padding-top: 11px; }
-.publication-links a::after { content: ' ↗'; font-size: .9em; }
+.publication-links a::after {
+  content: '';
+  display: inline-block;
+  width: .75em;
+  height: .75em;
+  margin-left: .3em;
+  vertical-align: .02em;
+  background: url('images/bookish/external-link-arrow.svg') center / contain no-repeat;
+  transition: transform .2s ease;
+}
+.publication-links a:hover::after,
+.publication-links a:focus-visible::after { transform: translate(2px, -2px); }
 .site-footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 15px; margin-top: 72px; padding: 20px 0 34px; }
 .reveal { transition: opacity .88s ease, transform .88s cubic-bezier(.2, .75, .25, 1); }
 .reveal.is-pending { opacity: 0; transform: translateY(24px); }

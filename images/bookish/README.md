@@ -21,3 +21,5 @@ Sharp resize with Lanczos default; WebP quality 85, alphaQuality 100. Paper widt
 ## Code-generated print textures
 
 `illustration-fiber-overlay.png` is a transparent 960 × 720 edge texture. The reliable CSS gradient keeps publication illustrations visible; this overlay adds a lightly irregular fiber fade and scales with each image, including on mobile. `ink-print-display.png` and `ink-print-accent.png` are seamless 256 × 256 colored ink tiles that give the homepage headline and section titles visible but restrained changes in ink density. Body text is left untextured for legibility.
+
+Regenerate or verify these code-generated textures with `python src/generate_print_assets.py` or `python src/generate_print_assets.py --check`.
