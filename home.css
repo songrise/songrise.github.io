@@ -26,6 +26,20 @@
   font-display: swap;
   src: url('fonts/eb-garamond-latin-medium-italic.woff2') format('woff2');
 }
+@font-face {
+  font-family: 'IM Fell English';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/im-fell-english-regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IM Fell English';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/im-fell-english-italic.ttf') format('truetype');
+}
 
 :root {
   --paper: #f2ebdd;
@@ -34,6 +48,8 @@
   --muted: #6a6156;
   --accent: #92574c;
   --line: #d2c8b7;
+  --line-primary: #b8a894;
+  --line-secondary: #e1d8ca;
   --content: min(1240px, calc(100% - 80px));
 }
 
@@ -44,8 +60,13 @@ body {
   min-width: 320px;
   color: var(--ink);
   background-color: var(--paper);
-  background-image: linear-gradient(rgba(242, 235, 221, .52), rgba(242, 235, 221, .52)), url('images/bookish/paper.webp');
-  background-size: auto, 640px 640px;
+  background-image:
+    radial-gradient(ellipse at 50% 40%, transparent 62%, rgba(120, 90, 60, .05) 100%),
+    radial-gradient(ellipse at 78% 18%, rgba(138, 108, 72, .025), transparent 65%),
+    linear-gradient(rgba(242, 235, 221, .44), rgba(242, 235, 221, .44)),
+    url('images/bookish/paper.webp');
+  background-size: 100% 100%, 100% 100%, auto, 640px 640px;
+  background-attachment: fixed, fixed, scroll, scroll;
   font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
   font-size: 20px;
   line-height: 1.6;
@@ -78,6 +99,7 @@ img { display: block; max-width: 100%; height: auto; }
   width: var(--content);
 }
 .site-header > a { color: var(--ink); font-weight: 500; }
+.brand-name { font-family: 'IM Fell English', 'EB Garamond', Georgia, serif; font-weight: 400; }
 .site-header.is-managed {
   left: 50%;
   margin: 0;
@@ -98,7 +120,7 @@ img { display: block; max-width: 100%; height: auto; }
 .hero, .research, .site-footer { margin: 0 auto; width: var(--content); }
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  grid-template-columns: minmax(0, 1fr) minmax(380px, 390px);
   align-items: end;
   gap: clamp(56px, 7vw, 144px);
   width: min(1680px, calc(100% - 128px));
@@ -108,20 +130,30 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .title-page { min-width: 0; }
 .eyebrow { color: var(--muted); font-size: 16px; line-height: 1.6; margin: 0 0 20px; }
+.hero .eyebrow { color: var(--display-ink); font-size: 18px; font-weight: 500; letter-spacing: .01em; }
 .eyebrow span + span::before { content: ' · '; }
 h1 { color: var(--display-ink); font-size: clamp(54px, calc(5.5vw + 2px), 102px); font-weight: 500; line-height: 1.11; letter-spacing: -.035em; margin: 0; max-width: 1020px; padding-bottom: .22em; text-wrap: balance; }
 .accent { color: var(--accent); font-style: italic; }
 .accent { animation: accent-enter 1.3s cubic-bezier(.22, 1, .36, 1) both; }
-.accent--understand { animation-delay: .3s; }
-.accent--create { animation-delay: .56s; }
-.intro { animation: intro-enter .9s cubic-bezier(.22, 1, .36, 1) .56s both; }
+.accent--understand { animation-delay: .5s; }
+.accent--create { animation-delay: .76s; }
+.intro { animation: intro-enter .9s cubic-bezier(.22, 1, .36, 1) .76s both; }
 @keyframes accent-enter { from { opacity: 0; } to { opacity: 1; } }
 @keyframes intro-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-.intro { border-left: 1px solid var(--line); padding-left: 28px; margin-bottom: 6px; }
-.intro-name { font-size: 32px; font-weight: 500; line-height: 1.3; margin: 0 0 18px; }
+.intro { padding-left: 28px; margin-bottom: 6px; position: relative; }
+.intro::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 1px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--line) 18%, var(--line) 82%, transparent);
+}
+.intro-name { color: #3a3731; font-family: 'IM Fell English', 'EB Garamond', Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.3; margin: 0 0 18px; }
 .intro-description { color: var(--muted); margin: 0; }
-.intro-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 23px; font-size: 17px; }
+.intro-links { display: flex; flex-wrap: nowrap; gap: 8px 12px; margin-top: 23px; font-size: 17px; }
 .intro-links a, .publication-links a { display: inline-block; padding: 4px 0; }
+.intro-links a { white-space: nowrap; }
 .scroll-cue { position: absolute; bottom: 38px; right: 0; color: var(--accent); font-size: 17px; font-weight: 500; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: .32em; transition: opacity .25s ease, visibility .25s ease; white-space: nowrap; background-image: none; }
 .scroll-cue span { color: var(--accent); font-size: 20px; margin-left: 12px; }
 .scroll-cue.is-hidden, .site-header.is-visible + main .scroll-cue { opacity: 0; pointer-events: none; visibility: hidden; }
@@ -135,7 +167,7 @@ h1 { color: var(--display-ink); font-size: clamp(54px, calc(5.5vw + 2px), 102px)
 .archive-divider img { width: 180px; opacity: .78; }
 .research-head { border-bottom: 1px solid var(--line); padding: 20px 0 30px; text-align: center; }
 .research-head .eyebrow { font-size: 14px; letter-spacing: .12em; margin: 0 0 10px; text-transform: uppercase; }
-h2 { color: var(--display-ink); font-size: clamp(42px, 4.1vw, 58px); line-height: 1.1; font-weight: 500; letter-spacing: -.025em; margin: 0; padding-bottom: .22em; }
+h2 { color: var(--display-ink); font-family: 'IM Fell English', 'EB Garamond', Georgia, serif; font-size: clamp(42px, 4.1vw, 58px); line-height: 1.1; font-weight: 400; letter-spacing: -.015em; margin: 0; padding-bottom: .22em; }
 .publication { align-items: center; counter-increment: publication; display: grid; gap: clamp(48px, 6vw, 94px); grid-template-columns: minmax(0, 1fr) minmax(0, .87fr); padding: 64px 0 70px; position: relative; }
 .publication:not(:last-of-type)::after {
   content: '';
@@ -143,8 +175,8 @@ h2 { color: var(--display-ink); font-size: clamp(42px, 4.1vw, 58px); line-height
   inset: auto 0 -15px;
   height: 30px;
   pointer-events: none;
-  opacity: .68;
-  background-image: url('images/bookish/publication-ornament.svg'), linear-gradient(to right, transparent, var(--line)), linear-gradient(to left, transparent, var(--line));
+  opacity: .9;
+  background-image: url('images/bookish/publication-ornament.svg'), linear-gradient(to right, transparent, var(--line-primary)), linear-gradient(to left, transparent, var(--line-primary));
   background-repeat: no-repeat;
   background-position: center, left center, right center;
   background-size: 96px auto, calc(50% - 62px) 1px, calc(50% - 62px) 1px;
@@ -178,26 +210,36 @@ h2 { color: var(--display-ink); font-size: clamp(42px, 4.1vw, 58px); line-height
 .publication-copy { min-width: 0; }
 .pub-number { align-items: center; color: var(--accent); display: flex; font-size: 15px; gap: 11px; letter-spacing: .09em; margin-bottom: 15px; text-transform: uppercase; }
 .pub-number::before { content: counter(publication, upper-roman) ' ·'; }
-.pub-number::after { background: var(--line); content: ''; flex: 1; height: 1px; }
-.publication h3 { color: var(--display-ink); font-size: clamp(34px, 3.4vw, 48px); font-weight: 500; letter-spacing: -.025em; line-height: 1.12; margin: 0 0 calc(13px - .2em); padding-bottom: .2em; }
+.pub-number::after { background: var(--line-secondary); content: ''; flex: 1; height: 1px; }
+.publication h3 { color: var(--display-ink); font-family: 'IM Fell English', 'EB Garamond', Georgia, serif; font-size: clamp(34px, 3.4vw, 48px); font-weight: 400; letter-spacing: -.015em; line-height: 1.12; margin: 0 0 calc(13px - .2em); padding-bottom: .2em; }
 /* Uneven ink density on large type; small reading text stays crisp. */
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
-  .title-page h1, .title-page .accent, .research-head h2, .publication h3 {
+  .title-page h1, .title-page .display-ink, .title-page .accent, .research-head h2, .publication h3 {
     color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+  .title-page .display-ink, .title-page .accent, .research-head h2, .publication h3 {
     background-image: url('images/bookish/ink-print-display.png');
     background-size: 192px 192px;
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: transparent;
+  }
+  .title-page .display-ink, .title-page .accent {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding-right: .18em;
+    margin-right: -.18em;
   }
   .title-page .accent { background-image: url('images/bookish/ink-print-accent.png'); }
 }
 
 .paper-title { color: var(--display-ink); font-size: 21px; font-style: italic; font-weight: 400; line-height: 1.3; margin: 0 0 18px; }
-.summary { border-left: 2px solid var(--accent); color: var(--display-ink); font-size: 19px; font-weight: 500; line-height: 1.4; margin: 18px 0 15px; padding-left: 15px; }
+.summary { color: var(--muted); font-size: 18px; font-weight: 400; line-height: 1.5; margin: 0 0 15px 1.3em; position: relative; }
+.summary::before { content: '¶'; color: var(--accent); font-family: Georgia, serif; left: -1.3em; position: absolute; }
 .venue { color: var(--muted); font-size: 17px; line-height: 1.45; margin: 0; }
-.publication-links { border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; font-size: 17px; gap: 4px 24px; margin-top: 24px; padding-top: 11px; }
-.publication-links a::after {
+.author-self { text-decoration: underline; text-decoration-color: #c9b8a5; text-decoration-thickness: 1px; text-underline-offset: .2em; }
+.publication-links { border-top: 1px solid var(--line-secondary); display: flex; flex-wrap: wrap; font-size: 17px; gap: 4px 24px; margin-top: 24px; padding-top: 11px; }
+.intro-links a::after, .publication-links a::after {
   content: '';
   display: inline-block;
   width: .75em;
@@ -207,9 +249,10 @@ h2 { color: var(--display-ink); font-size: clamp(42px, 4.1vw, 58px); line-height
   background: url('images/bookish/external-link-arrow.svg') center / contain no-repeat;
   transition: transform .2s ease;
 }
-.publication-links a:hover::after,
-.publication-links a:focus-visible::after { transform: translate(2px, -2px); }
+.intro-links a:hover::after, .intro-links a:focus-visible::after,
+.publication-links a:hover::after, .publication-links a:focus-visible::after { transform: translate(2px, -2px); }
 .site-footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 15px; margin-top: 72px; padding: 20px 0 34px; }
+.site-footer span:first-child { font-family: 'IM Fell English', 'EB Garamond', Georgia, serif; }
 .reveal { transition: opacity .88s ease, transform .88s cubic-bezier(.2, .75, .25, 1); }
 .reveal.is-pending { opacity: 0; transform: translateY(24px); }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
@@ -217,11 +260,12 @@ h2 { color: var(--display-ink); font-size: clamp(42px, 4.1vw, 58px); line-height
 @media (max-width: 1100px) {
   .publication { gap: 40px; padding: 54px 0 60px; }
   .publication h3 { font-size: clamp(32px, 3.7vw, 42px); }
-  .hero { width: calc(100% - 80px); grid-template-columns: minmax(0, 1fr) 260px; gap: 40px; }
+  .hero { width: calc(100% - 80px); grid-template-columns: minmax(0, 1fr) 350px; gap: 40px; }
   .hero .eyebrow span { display: block; }
   .hero .eyebrow span + span::before { content: none; }
-  .intro { padding-left: 22px; font-size: 19px; }
+  .intro { font-size: 19px; }
   .intro-name { font-size: 28px; }
+  .intro-links { font-size: 16px; gap: 8px; }
 }
 @media (max-width: 860px) {
   .publication { display: flex; flex-direction: column; align-items: stretch; gap: 26px; }
@@ -230,7 +274,18 @@ h2 { color: var(--display-ink); font-size: clamp(42px, 4.1vw, 58px); line-height
   .hero { grid-template-columns: minmax(0, 1fr); align-content: center; gap: 40px; padding: 70px 0 116px; }
   .title-page { max-width: 680px; }
   h1 { font-size: clamp(40px, calc(7vw + 2px), 62px); }
-  .intro { border-left: 0; border-top: 1px solid var(--line); padding: 24px 0 0; max-width: 540px; margin: 0; }
+  .intro { max-width: 540px; margin: 0; padding: 28px 0 0; }
+  .intro-links { flex-wrap: wrap; font-size: 17px; gap: 8px 20px; }
+  .intro::before {
+    inset: 0 0 auto;
+    width: auto;
+    height: 24px;
+    opacity: .68;
+    background-image: url('images/bookish/publication-ornament.svg'), linear-gradient(to right, transparent, var(--line)), linear-gradient(to left, transparent, var(--line));
+    background-repeat: no-repeat;
+    background-position: center, left center, right center;
+    background-size: 72px auto, calc(50% - 50px) 1px, calc(50% - 50px) 1px;
+  }
 }
 @media (max-width: 760px) {
   :root { --content: calc(100% - 44px); }
@@ -238,13 +293,13 @@ h2 { color: var(--display-ink); font-size: clamp(42px, 4.1vw, 58px); line-height
   .site-header { font-size: 14px; gap: 14px; }
   .site-header > a { max-width: 155px; line-height: 1.45; }
   .header-actions { gap: 16px; }
-  .hero { width: var(--content); padding: 60px 0 110px; gap: 34px; }
-  .eyebrow { font-size: 15px; }
+  .hero { width: var(--content); padding: 60px 0 110px; gap: 48px; }
+  .hero .eyebrow { font-size: 16px; }
   .eyebrow span { display: block; }
   .eyebrow span + span::before { content: none; }
-  h1 { font-size: clamp(38px, calc(8.7vw + 2px), 54px); line-height: 1.15; letter-spacing: -.025em; }
-  .intro { margin-top: 0; }
-  .intro-name { font-size: 26px; }
+  h1 { font-size: clamp(42px, calc(9vw + 2px), 56px); line-height: 1.15; letter-spacing: -.025em; }
+  .intro { margin-top: 0; margin-bottom: -20px; padding-top: 48px; font-size: 17px; }
+  .intro-name { font-size: 24px; }
   .intro-links { gap: 8px 20px; margin-top: 18px; }
   .scroll-cue { bottom: 30px; font-size: 15px; }
   .research { padding-top: 24px; }
@@ -263,9 +318,20 @@ h2 { color: var(--display-ink); font-size: clamp(42px, 4.1vw, 58px); line-height
   .paper-illustration { max-width: 480px; }
   .publication h3 { font-size: clamp(32px, 8vw, 39px); }
   .paper-title { font-size: 20px; }
-  .summary { font-size: 19px; }
+  .summary { font-size: 17px; }
   .publication-links { margin-top: 20px; }
   .site-footer { margin-top: 40px; font-size: 14px; }
+}
+@media (min-width: 861px) {
+  .hero .eyebrow { font-size: 20px; margin-bottom: 22px; }
+  .hero h1 { font-size: clamp(59px, calc(6.05vw + 2px), 112px); max-width: 1120px; }
+  .intro { font-size: 22px; }
+  .intro-name { font-size: 35px; margin-bottom: 20px; }
+  .intro-links { margin-top: 25px; }
+}
+@media (min-width: 861px) and (max-width: 1100px) {
+  .intro { font-size: 21px; }
+  .intro-name { font-size: 31px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
