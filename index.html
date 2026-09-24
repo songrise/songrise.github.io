@@ -201,6 +201,97 @@
         }
       });
     }
+
+    // A small post-scroll nudge gives mobile articles a resting place without
+    // changing native touch or trackpad momentum while the user is scrolling.
+    const mobileReading = window.matchMedia('(max-width: 760px)');
+    const articles = [...document.querySelectorAll('.publication')];
+    const settleTargets = [
+      document.querySelector('#publications'),
+      ...articles
+    ];
+    const settleRangeDown = 90;
+    const settleRangeUp = 70;
+    const settleDuration = 440;
+    let touchStartY = 0;
+    let swipeInProgress = false;
+    let touchReleased = false;
+    let settleTimer;
+    let settleFrame;
+    let scrollDirection = 1;
+
+    function cancelSettle() {
+      clearTimeout(settleTimer);
+      if (settleFrame !== undefined) cancelAnimationFrame(settleFrame);
+      settleFrame = undefined;
+      swipeInProgress = false;
+      touchReleased = false;
+    }
+
+    function settleNearArticle() {
+      swipeInProgress = false;
+      if (!mobileReading.matches || motion.matches) return;
+
+      const offset = header.getBoundingClientRect().height + 16;
+      const distances = settleTargets.map(target => target.getBoundingClientRect().top - offset);
+      if (scrollDirection < 0) {
+        const bottomEdge = window.innerHeight - 32;
+        distances.push(...articles.map(article => article.getBoundingClientRect().bottom - bottomEdge));
+      }
+      const nearest = distances.reduce((best, distance) =>
+        Math.abs(distance) < Math.abs(best) ? distance : best, Infinity);
+      const settleRange = scrollDirection < 0 ? settleRangeUp : settleRangeDown;
+      if (Math.abs(nearest) <= 8 || Math.abs(nearest) >= settleRange) return;
+
+      const startY = window.scrollY;
+      const startTime = performance.now();
+      const overshoot = nearest + Math.sign(nearest) * Math.min(5, Math.abs(nearest) * 0.08);
+      function animateSettle(now) {
+        const progress = Math.min((now - startTime) / settleDuration, 1);
+        // Settle slightly past the target, then ease back by at most 5px.
+        const outward = progress < 0.78;
+        const phase = outward ? progress / 0.78 : (progress - 0.78) / 0.22;
+        const eased = (1 - Math.cos(Math.PI * phase)) / 2;
+        const displacement = outward
+          ? overshoot * eased
+          : overshoot + (nearest - overshoot) * eased;
+        window.scrollTo({ top: startY + displacement, behavior: 'instant' });
+        settleFrame = progress < 1 ? requestAnimationFrame(animateSettle) : undefined;
+      }
+      settleFrame = requestAnimationFrame(animateSettle);
+    }
+
+    function scheduleSettle() {
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(settleNearArticle, 180);
+    }
+
+    window.addEventListener('touchstart', event => {
+      cancelSettle();
+      swipeInProgress = false;
+      touchReleased = false;
+      touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+    window.addEventListener('touchmove', event => {
+      const gesture = touchStartY - event.touches[0].clientY;
+      if (Math.abs(gesture) > 10) {
+        swipeInProgress = true;
+        scrollDirection = Math.sign(gesture);
+      }
+    }, { passive: true });
+    window.addEventListener('touchend', () => {
+      touchReleased = true;
+      if (swipeInProgress) scheduleSettle();
+    }, { passive: true });
+    window.addEventListener('scroll', () => {
+      if (swipeInProgress && touchReleased) scheduleSettle();
+    }, { passive: true });
+    window.addEventListener('wheel', event => {
+      cancelSettle();
+      if (event.deltaY) scrollDirection = Math.sign(event.deltaY);
+      if (mobileReading.matches && !motion.matches) scheduleSettle();
+    }, { passive: true });
+    motion.addEventListener('change', cancelSettle);
   </script>
 </body>
 </html>
