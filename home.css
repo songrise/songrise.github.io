@@ -306,7 +306,7 @@ h2 { color: var(--display-ink); filter: url(#archive-ink); font-family: 'IM Fell
   .eyebrow span + span::before { content: none; }
   h1 { font-size: clamp(42px, calc(9vw + 2px), 56px); line-height: 1.15; letter-spacing: -.025em; }
   .intro { margin-top: 0; margin-bottom: -20px; padding-top: 48px; font-size: 17px; }
-  .intro::before { display: none; }
+  .intro::before { content: none; }
   .intro-name { font-size: 24px; }
   .intro-links { gap: 8px 20px; margin-top: 18px; }
   .scroll-cue { bottom: 30px; font-size: 15px; }
